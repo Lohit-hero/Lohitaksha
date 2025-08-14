@@ -107,11 +107,12 @@
 <body id="top">
   <canvas id="bg"></canvas>
 
-    <header class="nav">
+  <!-- NAV -->
+  <header class="nav">
     <div class="wrap">
       <div class="brand">Lohitaksha<span class="dot">.</span></div>
       <nav class="menu" id="menu">
-        <a href="#about">About Me</a>
+        <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
@@ -414,86 +415,62 @@
     </div>
   </section>
 
-<section id="publications" class="reveal glowing-box">
-  <h2>Publications & Books</h2>
-  <ul>
-    <li>Review (Elsevier): <a href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank">Eicosanoid signaling in neuroinflammation</a></li>
-    <li>Book: <a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
-    <li>Book: <a href="https://amzn.eu/d/6rVi2BG" target="_blank"><em>Brainwaves of The Bold</em></a> (Amazon, 2025)</li>
-    <li>Book: <a href="https://amzn.eu/d/89t4GpK" target="_blank"><em>It’s Your Life: Make It Happen</em></a> (Amazon, 2025)</li>
-    <li>In preparation: <em>The Quantum Revolution</em> — CRC Press</li>
-  </ul>
-</section>
-
-<section id="contact" class="reveal glowing-box">
+<section id="contact">
   <h2>Contact</h2>
-  <p>
-    <strong>Email (IITK):</strong> <a href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a><br>
-    <strong>Email:</strong> <a href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a><br>
-    <strong>Phone:</strong> <a href="tel:+919989927436">+91 99899 27436</a><br>
-    <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/lohithaksha-den" target="_blank">/in/lohithaksha-den</a><br>
-    <strong>Website:</strong> <a href="https://lohithaksha-fiard" target="_blank">lohithaksha-fiard</a><br>
-    <strong>Podcast:</strong> <a href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank">Apple</a> · <a href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank">Spotify</a>
-  </p>
+
+  <div class="two-columns">
+    <!-- LEFT -->
+    <div class="panel column-left" aria-labelledby="contact-heading">
+      <div class="contact-line">Email (IITK): <a class="link-blue" href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a></div>
+      <div class="contact-line">Email: <a class="link-blue" href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a></div>
+      <div class="contact-line">Phone: <a class="link-cyan" href="tel:+919989927436">+91 99899 27436</a></div>
+
+      <div class="contact-line">LinkedIn: <a class="link-blue" href="https://linkedin.com/in/lohithaksha-den" target="_blank" rel="noopener noreferrer">/in/lohithaksha-den</a></div>
+
+      <!-- Replace the URL below with your real website (I left an example). -->
+      <div class="contact-line">Website: <a class="link-purple" href="https://lohithaksha.com" target="_blank" rel="noopener noreferrer">lohithaksha-fiard</a></div>
+
+      <div class="contact-line">Podcast: <a class="link-purple" href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank" rel="noopener noreferrer">Apple</a> · <a class="link-purple" href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank" rel="noopener noreferrer">Spotify</a></div>
+
+      <a class="back-btn" id="backToAboutBtn" href="#about">Back to About</a>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel column-right" aria-labelledby="pubs-heading">
+      <h3 style="font-family:'Baloo 2', 'Poppins', sans-serif;margin-top:0;margin-bottom:14px;color:#fff;font-size:28px;">Publications &amp; Books</h3>
+      <ul class="pubs" id="pubs-list">
+        <li>Review (Elsevier): <a class="link-purple" href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank" rel="noopener noreferrer">Eicosanoid signaling in neuroinflammation</a></li>
+        <li>Book: <a class="link-purple" href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank" rel="noopener noreferrer"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
+        <li>Book: <a class="link-purple" href="https://amzn.eu/d/6rVi2BG" target="_blank" rel="noopener noreferrer"><em>Brainwaves of The Bold</em></a> (Amazon, 2025)</li>
+        <li>Book: <a class="link-purple" href="https://amzn.eu/d/89t4GpK" target="_blank" rel="noopener noreferrer"><em>It’s Your Life: Make It Happen</em></a> (Amazon, 2025)</li>
+        <li>In preparation: <em>The Quantum Revolution</em> — CRC Press</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-<style>
-/* Glowing Box Styles */
-.glowing-box {
-  background: rgba(0,0,0,0.5);
-  border-radius: 15px;
-  padding: 25px 30px;
-  margin: 40px auto;
-  max-width: 800px;
-  border: 2px solid rgba(0,255,213,0.6);
-  box-shadow: 0 0 15px rgba(0,255,213,0.4), 0 0 30px rgba(0,255,213,0.2) inset;
-  transition: 0.6s ease;
-  animation: glowPulse 2.5s infinite alternate;
-}
-
-.glowing-box:hover {
-  box-shadow: 0 0 25px rgba(0,255,213,0.8), 0 0 50px rgba(0,255,213,0.4) inset;
-}
-
-.glowing-box h2 {
-  text-align: center;
-  color: #00ffd5;
-  margin-bottom: 15px;
-  text-shadow: 0 0 8px #00ffd5;
-}
-
-.glowing-box ul {
-  list-style: '▹ ';
-  padding-left: 1.3rem;
-  color: #fff;
-}
-
-.glowing-box li a {
-  color: #00ffd5;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.glowing-box li a:hover {
-  color: #fff;
-  text-shadow: 0 0 8px #00ffd5;
-}
-
-.glowing-box p, .glowing-box li {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #fff;
-}
-
-/* Glow Pulse Animation */
-@keyframes glowPulse {
-  0% { box-shadow: 0 0 10px rgba(0,255,213,0.3), 0 0 20px rgba(0,255,213,0.1) inset; }
-  50% { box-shadow: 0 0 25px rgba(0,255,213,0.6), 0 0 50px rgba(0,255,213,0.3) inset; }
-  100% { box-shadow: 0 0 10px rgba(0,255,213,0.3), 0 0 20px rgba(0,255,213,0.1) inset; }
-}
-</style>
+<script>
+  // Back button: if #about exists, smooth-scroll. Otherwise fallback to top.
+  document.getElementById('backToAboutBtn').addEventListener('click', function(e){
+    var target = document.querySelector('#about');
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      // let the link function as normal (href="#about") or scroll to top
+      // keep default behavior (it will add #about to URL). If you prefer smooth top-scroll:
+      // window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+</script>
+</body>
+</html>
+  <footer>
+    © <span id="year"></span> Lohitaksha Koppada • Single-page portfolio with smooth scroll, animated reveals & particle background.
+  </footer>
 
   <a href="#top" class="btn top" id="topBtn" aria-label="Back to top">↑</a>
+
 <script>
   // ===== Active link highlighting
   const links=[...document.querySelectorAll('.menu a')];
@@ -509,16 +486,19 @@
     });
   },{root:null, rootMargin:'-40% 0px -55% 0px', threshold:0});
   sections.forEach(s=>s && navObs.observe(s));
+
   // ===== Reveal on scroll
   const rev=document.querySelectorAll('.reveal');
   const ro=new IntersectionObserver((es)=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target);} });
   },{threshold:.12});
   rev.forEach(el=>ro.observe(el));
+
   // ===== Year + Back-to-top
   year.textContent=new Date().getFullYear();
   const topBtn=document.getElementById('topBtn');
   window.addEventListener('scroll',()=>{ topBtn.classList.toggle('show', window.scrollY>600) });
+
   // ===== Particles (embedded, lightweight)
   const c=document.getElementById('bg'), x=c.getContext('2d');
   let W,H,pts=[];
@@ -554,4 +534,4 @@
   addEventListener('resize', resize); resize(); step();
 </script>
 </body>
-</html>
+</html>: update the code
