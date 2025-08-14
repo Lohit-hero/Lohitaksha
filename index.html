@@ -121,7 +121,7 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   border:1px solid var(--border); border-radius:var(--radius);
   padding:22px; 
   box-shadow:0 0 8px rgba(0,217,255,.1); /* Subtle initial glow */
-  transition:transform .2s ease, box-shadow .2s ease; will-change:transform;
+  transition:transform .2s ease, box-shadow .2s ease;
 }
 .card:hover{
   transform: translateY(-3px) scale(1.01); /* Removed the bending effect */
@@ -881,17 +881,6 @@ function magnetic(el, strength=0.25){
 }
 $$('.btn, header.nav .menu a').forEach(el=>magnetic(el, .22));
 
-/* =============== CARD TILT =============== */
-$$('.card').forEach(card=>{
-  card.addEventListener('mousemove', e=>{
-    const r = card.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    const rx = ((y / r.height) - 0.5) * -8;
-    const ry = ((x / r.width) - 0.5) * 8;
-    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
-  });
-  card.addEventListener('mouseleave', ()=> card.style.transform = '');
-});
 
 /* =============== BACK TO TOP VISIBILITY =============== */
 const backToTopBtn = document.getElementById('backToTopBtn');
