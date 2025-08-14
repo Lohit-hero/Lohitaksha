@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lohitaksha Koppada — Portfolio</title>
+<meta name="description" content="Portfolio of Lohitaksha Koppada — Materials Science, Quantum/Computational Modeling, Machine Learning, and Scientific Writing." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+/* ------------------ THEME TOKENS ------------------ */
+:root{
+  --bg:#070b16;
+  --bg-2:#0b1022;
+  --panel:#0d1226;
+  --text:#e7edf7;
+  --muted:#a1abc0;
+  --accent:#00d9ff;
+  --accent2:#ff00c8;
+  --accent3:#69ff97;
+  --border:rgba(255,255,255,.08);
+  --ring:rgba(0,217,255,.35);
+  --shadow:rgba(0,0,0,.6);
+  --radius:18px;
+}
+@media (prefers-color-scheme: light){
+  :root{ --text:#0d1324; --muted:#495168; --panel:#eef3ff; --bg:#f6f8ff; --bg-2:#eef3ff; --border:rgba(13,19,36,.08); --shadow:rgba(0,0,0,.1)}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--text); background:var(--bg);
+  font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.65; overflow-x:hidden;
+}
+
+/* ------------- DYNAMIC BACKGROUND LAYERS ------------- */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-6;
+  background:radial-gradient(1200px 600px at 10% 10%, rgba(0,217,255,.15), transparent 60%),
+             radial-gradient(1200px 600px at 90% 20%, rgba(255,0,200,.15), transparent 60%),
+             radial-gradient(1200px 700px at 50% 110%, rgba(105,255,151,.14), transparent 60%),
+             linear-gradient(180deg, var(--bg), var(--bg-2));
+  filter: saturate(110%);
+}
+.noise{
+  position:fixed; inset:-100px; z-index:-1; pointer-events:none; opacity:.04;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+  animation: drift 35s linear infinite;
+}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-140px,-140px,0)}}
+
+/* Canvas layers */
+#bg-stars,#bg-shapes,#bg-ribbons{
+  position:fixed; inset:0; z-index:-5; display:block;
+}
+#bg-shapes{z-index:-4}
+#bg-ribbons{z-index:-3}
+
+/* ------------- LAYOUT HELPERS ------------- */
+.wrap{max-width:1200px; margin:0 auto; padding:0 20px}
+.grid{display:grid; gap:20px}
+.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:980px){.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.cols-2,.cols-3{grid-template-columns:1fr}}
+
+/* ------------- NAVBAR ------------- */
+header.nav{
+  position:sticky; top:0; z-index:20;
+  backdrop-filter: blur(12px);
+  background:linear-gradient(180deg, rgba(10,14,25,.55), rgba(10,14,25,.25) 60%, transparent);
+  border-bottom:1px solid var(--border);
+}
+header.nav .bar{height:68px; display:flex; align-items:center; justify-content:space-between}
+.brand{font-weight:800; letter-spacing:.3px; display:flex; gap:6px; align-items:center}
+.brand .dot{color:var(--accent)}
+nav.menu{display:flex; gap:18px}
+nav.menu a{
+  color:var(--text); text-decoration:none; font-weight:700; opacity:.9;
+  padding:10px 8px; position:relative; transition:opacity .2s ease;
+}
+nav.menu a:hover{opacity:1}
+nav.menu a::after{
+  content:""; position:absolute; left:50%; bottom:6px; height:2px; width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:all .25s ease; transform:translateX(-50%);
+}
+nav.menu a:hover::after, nav.menu a.active::after{width:70%}
+
+/* ------------- HERO ------------- */
+.hero{padding:74px 0 28px}
+.hero h1{margin:0 0 10px; font-size:clamp(2rem, 4.8vw, 3.8rem); line-height:1.12}
+.muted{color:var(--muted)}
+/* glitch effect for name */
+.glitch{position:relative; text-shadow:0 0 10px rgba(0,217,255,.5)}
+.glitch::before,.glitch::after{content:attr(data-text); position:absolute; inset:0}
+.glitch::before{left:2px; text-shadow:-2px 0 var(--accent2); clip-path:inset(0 0 48% 0); animation:glTop 1.9s infinite linear alternate-reverse}
+.glitch::after{left:-2px; text-shadow:2px 0 var(--accent); clip-path:inset(52% 0 0 0); animation:glBot 1.5s infinite linear alternate-reverse}
+@keyframes glTop{0%{transform:translateY(0)}100%{transform:translateY(-1.5px)}}
+@keyframes glBot{0%{transform:translateY(0)}100%{transform:translateY(1.5px)}}
+
+/* hero CTA buttons */
+.btn{
+  display:inline-block; border:none; cursor:pointer; user-select:none;
+  padding:14px 26px; border-radius:999px; font-weight:800; letter-spacing:.3px;
+  background:linear-gradient(45deg,var(--accent),var(--accent2)); color:#09101f;
+  box-shadow:0 0 0 0 transparent; transition:transform .15s ease, box-shadow .15s ease, filter .2s ease;
+}
+.btn:hover{transform:translateY(-4px) scale(1.06); box-shadow:0 0 28px var(--ring)}
+.btn.ghost{background:transparent; color:var(--text); border:1.5px solid var(--border)}
+.btn.ghost:hover{box-shadow:0 0 18px var(--ring); filter:brightness(1.15)}
+
+/* ------------- SECTION DECOR ------------- */
+.section{padding:26px 0}
+.section h2{
+  margin:0 0 16px; font-size:clamp(1.4rem, 3.2vw, 2rem); letter-spacing:.3px;
+  background: linear-gradient(90deg, var(--text), var(--accent), var(--accent2), var(--text));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:200% 100%; animation:shimmer 6s linear infinite;
+}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.section-divider{
+  height:4px; margin:50px 0; border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+  box-shadow:0 0 18px var(--ring); animation:dividerGlow 3s infinite alternate;
+}
+@keyframes dividerGlow{0%{opacity:.65}100%{opacity:1}}
+
+/* ------------- CARDS, CHIPS, TIMELINE ------------- */
+.card{
+  background:linear-gradient(135deg, rgba(0,217,255,.06), rgba(255,0,200,.06));
+  border:1px solid var(--border); border-radius:var(--radius);
+  padding:22px; box-shadow:0 10px 28px var(--shadow);
+  transition:transform .2s ease, box-shadow .2s ease; will-change:transform;
+}
+.card:hover{transform:perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-3px);
+  box-shadow:0 14px 40px var(--shadow), 0 0 24px rgba(0,217,255,.25)}
+.chip,.tag{
+  display:inline-block; padding:6px 12px; border-radius:999px; font-weight:700;
+  background:rgba(255,255,255,.06); border:1px solid var(--border);
+  transition:transform .18s ease, box-shadow .18s ease, background .2s ease;
+}
+.chip:hover,.tag:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 0 16px var(--ring); background:rgba(255,255,255,.09)}
+
+.timeline{position:relative; padding-left:28px}
+.timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent), var(--accent2))}
+.timeline .t{position:relative; margin:0 0 18px}
+.timeline .t::before{
+  content:""; position:absolute; left:-22px; top:.2em; width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 10px var(--ring)
+}
+
+/* ------------- REVEAL ON SCROLL ------------- */
+.reveal{opacity:0; transform:translateY(24px) scale(.98); transition:opacity .8s ease, transform .8s ease}
+.reveal.show{opacity:1; transform:none}
+
+/* ------------- FOOTER + BACK TO TOP ------------- */
+.footer{padding:40px 0; text-align:center; color:var(--muted)}
+.footer .socials{display:flex; gap:12px; justify-content:center; margin-top:8px}
+.footer .socials a{width:36px; height:36px; display:grid; place-items:center; border-radius:10px;
+  text-decoration:none; color:var(--text); background:rgba(255,255,255,.06); border:1px solid var(--border);
+  transition:transform .18s ease, box-shadow .18s ease}
+.footer .socials a:hover{transform:translateY(-3px); box-shadow:0 0 14px var(--ring)}
+.top{position:fixed; right:18px; bottom:18px; z-index:25; width:40px; height:40px; display:grid; place-items:center;
+  border-radius:50%; text-decoration:none; color:#0b0f19; font-weight:800; background:linear-gradient(45deg,var(--accent),var(--accent2));
+  transform:translateY(80px); opacity:0; transition:transform .2s ease, opacity .2s ease}
+.top.show{transform:translateY(0); opacity:1}
+
+/* ------------- ACCESSIBILITY / REDUCED MOTION ------------- */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{animation:none !important; transition:none !important}
+  .reveal{opacity:1 !important; transform:none !important}
+}
+</style>
+</head>
+<body id="top">
+<canvas id="bg-stars"></canvas>
+<canvas id="bg-shapes"></canvas>
+<canvas id="bg-ribbons"></canvas>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- ==================== NAVBAR ==================== -->
+<header class="nav">
+  <div class="wrap bar">
+    <div class="brand" aria-label="Brand">
+      <span>Lohitaksha</span><span class="dot">•</span>
+    </div>
+    <nav class="menu" id="menu" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero wrap">
+  <h1 class="glitch" data-text="Hey! I'm Lohitaksha Koppada">
+    Hey! I'm <span style="color:var(--accent)">Lohitaksha Koppada</span>
+  </h1>
+  <p class="muted reveal" style="max-width:840px; font-size:1.15rem;">
+    M.Tech (Materials Science & Engineering) — IIT Kanpur • Founder of F.I.A.R.D. • Research in Materials Science, Quantum/Computational Modeling & Machine Learning • Science Communicator & Writer
+  </p>
+  <div class="reveal" style="margin:22px 0 6px">
+    <a class="btn" href="cv.pdf" download aria-label="Download CV">⬇️ Download CV</a>
+    <a class="btn ghost" href="#projects" style="margin-left:12px">Explore My Work</a>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="section wrap reveal">
+  <h2>About Me</h2>
+  <div class="card">
+    <p>
+      I’m driven by curiosity: turning tough scientific problems into elegant, testable models and useful tools.
+      I love building end-to-end research pipelines — from literature and hypothesis to simulation, data, and deployment —
+      and I write about the journey so others can learn faster than I did.
+    </p>
+    <p class="muted">
+      Focus areas: <span class="chip">Materials Informatics</span> <span class="chip">Quantum/DFT</span>
+      <span class="chip">Computational Thermodynamics</span> <span class="chip">ML for Science</span>
+      <span class="chip">Scientific Writing</span>
+    </p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects" class="section wrap reveal">
+  <h2>Projects — Underway & Accomplished</h2>
+  <div class="grid cols-3">
+    <article class="card">
+      <h3>Inorganic Compound Property Predictor</h3>
+      <p class="muted">Tree-based & attention models mapping composition → bandgap, formation energy. Robust feature sets & model comparison.</p>
+      <div><span class="tag">Python</span> <span class="tag">XGBoost</span> <span class="tag">LightGBM</span> <span class="tag">Scikit-learn</span></div>
+    </article>
+    <article class="card">
+      <h3>RAG-powered Research Assistant</h3>
+      <p class="muted">Retrieval-augmented QA for papers & notes with semantic chunking, citations, and graph-aware reranking.</p>
+      <div><span class="tag">Vector DB</span> <span class="tag">Embeddings</span> <span class="tag">RAG</span></div>
+    </article>
+    <article class="card">
+      <h3>Scientific Writing Hub</h3>
+      <p class="muted">Guides, templates, and checklists to ship papers faster. Tone & structure assistants for abstracts and methods.</p>
+      <div><span class="tag">Docs</span> <span class="tag">UX Writing</span> <span class="tag">Automation</span></div>
+    </article>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== SKILLS ==================== -->
+<section id="skills" class="section wrap reveal">
+  <h2>Skills</h2>
+  <div class="grid cols-3">
+    <div class="card">
+      <h3>Modeling & Simulation</h3>
+      <p class="muted">DFT, MD, CALPHAD, phase diagrams, mesoscale modeling.</p>
+      <div><span class="chip">VASP</span> <span class="chip">LAMMPS</span> <span class="chip">Thermo-Calc</span></div>
+    </div>
+    <div class="card">
+      <h3>ML for Science</h3>
+      <p class="muted">Feature engineering, model selection, uncertainty, experiment design.</p>
+      <div><span class="chip">PyTorch</span> <span class="chip">sklearn</span> <span class="chip">Optuna</span></div>
+    </div>
+    <div class="card">
+      <h3>Data & Engineering</h3>
+      <p class="muted">Pipelines, versioning, APIs, dashboards, reproducibility.</p>
+      <div><span class="chip">Pandas</span> <span class="chip">FastAPI</span> <span class="chip">Docker</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== EXPERIENCE ==================== -->
+<section id="experience" class="section wrap reveal">
+  <h2>Experience</h2>
+  <div class="timeline">
+    <div class="t card">
+      <h3>Founder — F.I.A.R.D.</h3>
+      <p class="muted">Built a micro-org for fast, high-quality research output and learning programs.</p>
+    </div>
+    <div class="t card">
+      <h3>Graduate Research — IIT Kanpur</h3>
+      <p class="muted">M.Tech in Materials Science & Engineering. Projects in informatics & computational modeling.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== EDUCATION ==================== -->
+<section id="education" class="section wrap reveal">
+  <h2>Education</h2>
+  <div class="timeline">
+    <div class="t card">
+      <h3>IIT Kanpur — M.Tech, Materials Science & Engineering</h3>
+      <p class="muted">Thesis focus on data-driven materials design and simulation workflows.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== ACHIEVEMENTS ==================== -->
+<section id="achievements" class="section wrap reveal">
+  <h2>Achievements</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <h3>Publications & Writing</h3>
+      <p class="muted">Science articles, guides, and explainers — crafted for clarity and practical value.</p>
+    </div>
+    <div class="card">
+      <h3>Community & Teaching</h3>
+      <p class="muted">Workshops on research methods, coding for scientists, and paper-writing bootcamps.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="section wrap reveal">
+  <h2>Contact</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <h3>Reach Out</h3>
+      <p>Email: <a href="mailto:lohitaksha.koppada123@gmail.com">lohitaksha.koppada123@gmail.com</a><br>
+         Alt: <a href="mailto:sitarama.lohitaksha@gmail.com">sitarama.lohitaksha@gmail.com</a></p>
+      <p class="muted">GitHub: <a href="https://github.com/Lohitaksha" target="_blank">github.com/Lohitaksha</a><br>
+         LinkedIn: <a href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank">/in/lohitaksha-den/</a></p>
+    </div>
+    <form class="card" onsubmit="event.preventDefault(); alert('Thanks! I will get back to you.');">
+      <h3>Quick Message</h3>
+      <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+        <input aria-label="Your name" required placeholder="Name" style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)">
+        <input aria-label="Your email" required type="email" placeholder="Email" style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)">
+      </div>
+      <textarea aria-label="Your message" required placeholder="Message" rows="4" style="margin-top:12px;width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text)"></textarea>
+      <div style="margin-top:12px"><button class="btn" type="submit">Send</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <p>© <span id="year"></span> Lohitaksha — Portfolio</p>
+  <div class="socials">
+    <a href="mailto:lohitaksha.koppada123@gmail.com" aria-label="Email 1">📧</a>
+    <a href="mailto:sitarama.lohitaksha@gmail.com" aria-label="Email 2">📧</a>
+    <a href="https://github.com/Lohitaksha" target="_blank" aria-label="GitHub">🐙</a>
+    <a href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank" aria-label="LinkedIn">🔗</a>
+  </div>
+</footer>
+
+<a href="#top" class="top" id="backToTopBtn" aria-label="Back to top">↑</a>
+
+<script>
+/* =============== UTIL =============== */
+const $ = (q,root=document)=>root.querySelector(q);
+const $$ = (q,root=document)=>[...root.querySelectorAll(q)];
+const clamp = (n, min, max)=>Math.max(min, Math.min(max, n));
+
+/* =============== YEAR + ACTIVE NAV =============== */
+$('#year').textContent = new Date().getFullYear();
+(function(){
+  const links = [...$$('header.nav .menu a')];
+  const targets = links.map(a=> $(a.getAttribute('href'))).filter(Boolean);
+  function onScroll(){
+    const y = window.scrollY + 120;
+    let active = -1;
+    targets.forEach((sec,i)=>{ if(sec.offsetTop <= y) active = i; });
+    links.forEach((a,i)=> a.classList.toggle('active', i===active));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
+
+/* =============== BACKGROUND: STARS =============== */
+const starCanvas = document.getElementById('bg-stars');
+const sctx = starCanvas.getContext('2d');
+let SW, SH;
+const STARS=[], STAR_COUNT=160, LINK_DIST=140;
+function sizeStars(){ SW = starCanvas.width = innerWidth; SH = starCanvas.height = innerHeight; }
+function initStars(){
+  STARS.length=0;
+  for(let i=0;i<STAR_COUNT;i++){
+    STARS.push({x:Math.random()*SW, y:Math.random()*SH, r:Math.random()*1.5+0.5, vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35});
+  }
+}
+function drawStars(){
+  sctx.clearRect(0,0,SW,SH);
+  for(const s of STARS){
+    s.x+=s.vx; s.y+=s.vy;
+    if(s.x<0) s.x=SW; if(s.x>SW) s.x=0;
+    if(s.y<0) s.y=SH; if(s.y>SH) s.y=0;
+    sctx.beginPath(); sctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    sctx.fillStyle='rgba(255,255,255,0.9)'; sctx.fill();
+  }
+  for(let i=0;i<STARS.length;i++){
+    for(let j=i+1;j<STARS.length;j++){
+      const dx=STARS[i].x-STARS[j].x, dy=STARS[i].y-STARS[j].y;
+      const d=Math.hypot(dx,dy);
+      if(d<LINK_DIST){
+        sctx.beginPath();
+        sctx.moveTo(STARS[i].x,STARS[i].y);
+        sctx.lineTo(STARS[j].x,STARS[j].y);
+        sctx.strokeStyle=`rgba(255,255,255,${1-d/LINK_DIST})`;
+        sctx.lineWidth=.6; sctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawStars);
+}
+sizeStars(); initStars(); drawStars();
+addEventListener('resize', ()=>{ sizeStars(); initStars(); });
+
+/* =============== BACKGROUND: FLOATING SHAPES =============== */
+const shapeCanvas = document.getElementById('bg-shapes');
+const hctx = shapeCanvas.getContext('2d');
+let HW, HH;
+const SHAPES=[], SHAPE_COUNT=60;
+function sizeShapes(){ HW=shapeCanvas.width=innerWidth; HH=shapeCanvas.height=innerHeight; }
+function initShapes(){
+  SHAPES.length=0;
+  for(let i=0;i<SHAPE_COUNT;i++){
+    SHAPES.push({x:Math.random()*HW, y:Math.random()*HH, s:Math.random()*12+6, a:Math.random()*Math.PI*2, va:(Math.random()-0.5)*0.01, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, sides:[3,4,6][Math.floor(Math.random()*3)]});
+  }
+}
+function poly(ctx,x,y,r,sides,rot=0){
+  ctx.beginPath();
+  for(let i=0;i<sides;i++){
+    const ang=rot+i*2*Math.PI/sides;
+    const px=x+Math.cos(ang)*r, py=y+Math.sin(ang)*r;
+    i?ctx.lineTo(px,py):ctx.moveTo(px,py);
+  }
+  ctx.closePath();
+}
+function drawShapes(){
+  hctx.clearRect(0,0,HW,HH);
+  for(const p of SHAPES){
+    p.x+=p.vx; p.y+=p.vy; p.a+=p.va;
+    if(p.x<-50)p.x=HW+50; if(p.x>HW+50)p.x=-50;
+    if(p.y<-50)p.y=HH+50; if(p.y>HH+50)p.y=-50;
+    hctx.save(); hctx.globalAlpha=.08; hctx.strokeStyle='#00d9ff';
+    poly(hctx,p.x,p.y,p.s,p.sides,p.a); hctx.stroke(); hctx.restore();
+  }
+  requestAnimationFrame(drawShapes);
+}
+sizeShapes(); initShapes(); drawShapes();
+addEventListener('resize', ()=>{ sizeShapes(); initShapes(); });
+
+/* =============== BACKGROUND: RIBBON FIELDS (bezier flow) =============== */
+const ribbon = document.getElementById('bg-ribbons');
+const rctx = ribbon.getContext('2d');
+let RW, RH; let t=0;
+function sizeRib(){ RW=ribbon.width=innerWidth; RH=ribbon.height=innerHeight; }
+function ribbonNoise(x,y,seed=0){ return Math.sin((x*0.002 + y*0.002) + seed) * 0.8; }
+function drawRibbons(){
+  rctx.clearRect(0,0,RW,RH);
+  rctx.globalAlpha = .12;
+  for(let i=0;i<6;i++){
+    const seed = t*0.002 + i*2.1;
+    rctx.beginPath();
+    for(let x=0; x<=RW; x+=12){
+      const y = RH*0.2 + i*RH*0.12 + Math.sin(x*0.004 + seed)*30 + ribbonNoise(x, i*120, seed)*28;
+      x===0 ? rctx.moveTo(x,y) : rctx.lineTo(x,y);
+    }
+    rctx.strokeStyle = i%2 ? '#ff00c8' : '#00d9ff';
+    rctx.lineWidth = 2;
+    rctx.stroke();
+  }
+  t+=1;
+  requestAnimationFrame(drawRibbons);
+}
+sizeRib(); drawRibbons();
+addEventListener('resize', sizeRib);
+
+/* =============== TYPEWRITER TAGLINE =============== */
+(function(){
+  const el = document.querySelector('.hero .muted');
+  if(!el) return;
+  const txt = el.textContent.trim();
+  el.dataset.fulltext = txt; el.textContent = '';
+  let i=0;
+  function type(){ if(i<=txt.length){ el.textContent = txt.slice(0,i++); setTimeout(type, 18);} }
+  type();
+})();
+
+/* =============== INTERSECTION REVEAL + STAGGER =============== */
+$$('.reveal').forEach(sec=>{
+  const obs = new IntersectionObserver((entries,o)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const t = entry.target;
+        t.classList.add('show');
+        [...t.children].forEach((c,idx)=>{ c.style.transitionDelay = `${idx*60}ms`; c.classList.add('show'); });
+        o.unobserve(t);
+      }
+    });
+  }, {threshold:0.12});
+  obs.observe(sec);
+});
+
+/* =============== MAGNETIC HOVER (buttons + nav) =============== */
+function magnetic(el, strength=0.25){
+  const rect = ()=> el.getBoundingClientRect();
+  el.addEventListener('mousemove', e=>{
+    const r = rect();
+    const mx = e.clientX - (r.left + r.width/2);
+    const my = e.clientY - (r.top + r.height/2);
+    el.style.transform = `translate(${mx*strength}px, ${my*strength}px)`;
+  });
+  el.addEventListener('mouseleave', ()=>{ el.style.transform = 'translate(0,0)'; });
+}
+$$('.btn, header.nav .menu a').forEach(el=>magnetic(el, .22));
+
+/* =============== CARD TILT =============== */
+$$('.card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const rx = ((y / r.height) - 0.5) * -8;
+    const ry = ((x / r.width) - 0.5) * 8;
+    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+  });
+  card.addEventListener('mouseleave', ()=> card.style.transform = '');
+});
+
+/* =============== BACK TO TOP VISIBILITY =============== */
+const backToTopBtn = document.getElementById('backToTopBtn');
+if(backToTopBtn){ addEventListener('scroll', ()=> backToTopBtn.classList.toggle('show', scrollY>300)); }
+
+/* =============== KEYBOARD FOCUS RINGS =============== */
+(() => {
+  let mouse = false;
+  addEventListener('mousedown', ()=> mouse=true);
+  addEventListener('keydown', ()=> mouse=false);
+  document.body.classList.toggle('no-mouse', mouse);
+})();
+</script>
+</body>
+</html>
