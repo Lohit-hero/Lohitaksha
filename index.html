@@ -203,27 +203,58 @@
     </header>
 
     <!-- HERO -->
-    <section class="hero">
-        <h1>Hey! I'm <span style="color:var(--accent)">Lohitaksha Koppada</span></h1>
-        <p class="muted" style="max-width:780px">
-            M.Tech (Materials Science & Engineering) from IIT Kanpur | Founder of F.I.A.R.D. | Researcher in Materials Science, Quantum/Computational Modeling, and Machine Learning | Science Communicator & Writer
-        </p>
-        <div style="margin:16px 0 0">
-            <!-- Replace cv.pdf with your actual file name in the repo -->
-            <a class="btn" href="cv.pdf" download>⬇️ Download CV</a>
-            <a class="btn ghost" href="#experience" style="margin-left:10px">Explore My Work</a>
-        </div>
-       <section id="preview">
-    <h2>Showcase of Projects & Publications</h2>
-    <div style="margin: 18px 0 0; display: flex; flex-direction: column; gap: 12px;">
-        <span class="chip">It's your Life: Make it Happen</span>
-        <span class="chip">Brainwaves Of The Bold: Harnessing the Power of the Mind for Effective Leadership</span>
-        <span class="chip">Studies on Shell Confined Atoms</span>
-        <span class="chip">Eicosanoid signaling in neuroinflammation associated with Alzheimer's disease, Elsevier Publication (EJP, 2024)</span>
-        <span class="chip">CSIR-NET-JRF (December-2024): AIR 37</span>
-        <span class="chip">GATE 2025: AIR 727</span>
+<section class="hero" style="text-align:center; padding:80px 20px; background:#0b0f19; color:#e8ecf1;">
+    <!-- Hero Heading -->
+    <h1 style="font-size:3rem; margin-bottom:20px;">
+        Hey! I'm <span style="color:var(--accent)">Lohitaksha Koppada</span>
+    </h1>
+
+    <!-- Bio / Tagline -->
+    <p class="muted" style="max-width:780px; margin:0 auto; font-size:1.25rem; line-height:1.8;">
+        M.Tech (Materials Science & Engineering) from IIT Kanpur | Founder of F.I.A.R.D. | Researcher in Materials Science, Quantum/Computational Modeling, and Machine Learning | Science Communicator & Writer
+    </p>
+
+    <!-- Action Buttons -->
+    <div style="margin-top:30px;">
+        <a href="cv.pdf" download 
+           style="text-decoration:none; margin:0 12px; padding:14px 28px; background:linear-gradient(45deg, #7c5cff, #00ffd5); color:#fff; border-radius:12px; font-weight:600; font-size:1rem; transition: transform 0.3s, box-shadow 0.3s;">
+           ⬇️ Download CV
+        </a>
+        <a href="#experience" 
+           style="text-decoration:none; margin:0 12px; padding:14px 28px; background:linear-gradient(45deg, #00ffd5, #7c5cff); color:#000; border-radius:12px; font-weight:600; font-size:1rem; transition: transform 0.3s, box-shadow 0.3s; display:inline-flex; align-items:center; gap:8px;">
+           Explore My Work
+           <span style="font-size:1.2rem; animation: bounce 1.5s infinite;">⬇️</span>
+        </a>
     </div>
+
+    <!-- Showcase of Projects & Publications -->
+    <section id="preview" style="margin-top:60px;">
+        <h2 style="font-size:2rem; margin-bottom:20px;">Showcase of Projects & Publications</h2>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:0 auto; max-width:900px;">
+            <span class="chip">It's your Life: Make it Happen</span>
+            <span class="chip">Brainwaves Of The Bold: Harnessing the Power of the Mind for Effective Leadership</span>
+            <span class="chip">Studies on Shell Confined Atoms</span>
+            <span class="chip">Eicosanoid signaling in neuroinflammation associated with Alzheimer's disease, Elsevier Publication (EJP, 2024)</span>
+            <span class="chip">CSIR-NET-JRF (December-2024): AIR 37</span>
+            <span class="chip">GATE 2025: AIR 727</span>
+        </div>
     </section>
+</section>
+
+<!-- Button Hover and Arrow Animation -->
+<style>
+    .hero a:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 255, 213, 0.4), 0 8px 20px rgba(124, 92, 255, 0.4);
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-6px); }
+        60% { transform: translateY(-3px); }
+    }
+</style>
+
 
     <!-- ABOUT -->
 <section id="about" class="reveal">
