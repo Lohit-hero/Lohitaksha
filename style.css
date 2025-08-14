@@ -1,0 +1,66 @@
+
+:root{
+  --bg:#0b0f19; --text:#e0e8f0; --muted:#8e94a8;
+  --accent:#00d9ff; --accent2:#ff00c8; --ring: rgba(0, 217, 255, 0.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden}
+
+/* Moving gradient layer */
+body::before{
+  content:""; position:fixed; inset:0; z-index:-4;
+  background:linear-gradient(-45deg, #07111f, #13162e, #0b0f19, #13162e);
+  background-size: 300% 300%;
+  animation: gradientMove 18s ease infinite;
+}
+@keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* Star & shapes canvases */
+#bg-stars, #bg-shapes{position:fixed; inset:0; z-index:-3; display:block}
+#bg-shapes{z-index:-2;}
+
+/* Headings shimmer */
+h2{
+  position:relative; font-weight:800;
+  background: linear-gradient(90deg, var(--text), var(--accent), var(--accent2), var(--text));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:200% 100%; animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
+/* Glitch name */
+.glitch{position:relative; text-shadow: 0 0 8px rgba(0,217,255,0.6);}
+.glitch::before,.glitch::after{content:attr(data-text); position:absolute; left:0; top:0; width:100%;}
+.glitch::before{left:2px; text-shadow:-2px 0 var(--accent2); clip-path: inset(0 0 40% 0); animation:glTop 2s infinite linear alternate-reverse}
+.glitch::after{left:-2px; text-shadow:2px 0 var(--accent); clip-path: inset(60% 0 0 0); animation:glBot 1.6s infinite linear alternate-reverse}
+@keyframes glTop{0%{transform:translateY(0)}100%{transform:translateY(-2px)}}
+@keyframes glBot{0%{transform:translateY(0)}100%{transform:translateY(2px)}}
+
+/* Chips / tags glow */
+.chip, .tag{transition: transform .2s ease, box-shadow .2s ease; will-change: transform}
+.chip:hover, .tag:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 0 18px rgba(0,217,255,.35)}
+
+/* Cards tilt & glow */
+.card{transition:transform .2s ease, box-shadow .2s ease; will-change: transform; background:linear-gradient(135deg, rgba(0,217,255,.07), rgba(255,0,200,.07)); border:1px solid rgba(0,217,255,.15)}
+.card:hover{transform:perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-3px); box-shadow:0 12px 38px rgba(0,0,0,.55), 0 0 24px rgba(0,217,255,.25)}
+
+/* Buttons magnetic look */
+.btn{display:inline-block; background:linear-gradient(45deg,var(--accent),var(--accent2)); color:#0b0f19; padding:14px 28px; border-radius:999px; font-weight:800; letter-spacing:.3px; transition:transform .15s ease, box-shadow .15s ease}
+.btn:hover{transform:translateY(-4px) scale(1.06); box-shadow:0 0 28px rgba(0,217,255,.6)}
+
+/* Reveal animations */
+.reveal{opacity:0; transform: translateY(24px) scale(.98); transition:opacity .8s ease, transform .8s ease}
+.reveal.show{opacity:1; transform:none}
+
+/* Animated section dividers */
+.section-divider{height:4px; background:linear-gradient(90deg,var(--accent),var(--accent2)); box-shadow:0 0 18px rgba(0,217,255,.35); margin:50px 0; animation:dividerGlow 3s infinite alternate}
+@keyframes dividerGlow{0%{opacity:.6}100%{opacity:1}}
+
+/* Navbar underline animation */
+header.nav nav.menu a{position:relative; overflow:hidden}
+header.nav nav.menu a::after{content:""; position:absolute; left:50%; bottom:0; height:2px; width:0; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:all .25s ease; transform:translateX(-50%)}
+header.nav nav.menu a:hover::after, header.nav nav.menu a.active::after{width:80%}
+
+/* Parallax container (opt-in) */
+[data-parallax]{will-change: transform}
