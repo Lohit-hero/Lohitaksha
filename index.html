@@ -414,37 +414,85 @@
     </div>
   </section>
 
-<<section id="publications" class="reveal">
-    <h2>Publications & Books</h2>
-    <div class="card">
-      <ul style="list-style:'▹ '; padding-left:1.1rem">
-        <li>Review (Elsevier): <a href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank">Eicosanoid signaling in neuroinflammation</a></li>
-        <li>Book: <a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
-        <li>Book: <a href="https://amzn.eu/d/6rVi2BG" target="_blank"><em>Brainwaves of The Bold</em></a> (Amazon, 2025)</li>
-        <li>Book: <a href="https://amzn.eu/d/89t4GpK" target="_blank"><em>It’s Your Life: Make It Happen</em></a> (Amazon, 2025)</li>
-        <li>In preparation: <em>The Quantum Revolution</em> — CRC Press</li>
-      </ul>
-    </div>
-  </section>
-    <section id="contact" class="reveal">
-    <h2>Contact</h2>
-    <div class="card">
-      <p>
-        <strong>Email (IITK):</strong> <a href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a><br>
-        <strong>Email:</strong> <a href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a><br>
-        <strong>Phone:</strong> <a href="tel:+919989927436">+91 99899 27436</a><br>
-        <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/lohithaksha-den" target="_blank">/in/lohithaksha-den</a><br>
-        <strong>Website:</strong> <a href="https://lohithaksha-fiard" target="_blank">lohithaksha-fiard</a><br>
-        <strong>Podcast:</strong> <a href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank">Apple</a> · <a href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank">Spotify</a>
-      </p>
-      <div style="margin-top:20px;">
-        <a href="#about" class="btn">Back to About</a>
-      </div>
-    </div>
-  </section>
-  <footer>
-    © <span id="year"></span> Lohitaksha Koppada • Single-page portfolio with smooth scroll, animated reveals & particle background.
-  </footer>
+<section id="publications" class="reveal glowing-box">
+  <h2>Publications & Books</h2>
+  <ul>
+    <li>Review (Elsevier): <a href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank">Eicosanoid signaling in neuroinflammation</a></li>
+    <li>Book: <a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
+    <li>Book: <a href="https://amzn.eu/d/6rVi2BG" target="_blank"><em>Brainwaves of The Bold</em></a> (Amazon, 2025)</li>
+    <li>Book: <a href="https://amzn.eu/d/89t4GpK" target="_blank"><em>It’s Your Life: Make It Happen</em></a> (Amazon, 2025)</li>
+    <li>In preparation: <em>The Quantum Revolution</em> — CRC Press</li>
+  </ul>
+</section>
+
+<section id="contact" class="reveal glowing-box">
+  <h2>Contact</h2>
+  <p>
+    <strong>Email (IITK):</strong> <a href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a><br>
+    <strong>Email:</strong> <a href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a><br>
+    <strong>Phone:</strong> <a href="tel:+919989927436">+91 99899 27436</a><br>
+    <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/lohithaksha-den" target="_blank">/in/lohithaksha-den</a><br>
+    <strong>Website:</strong> <a href="https://lohithaksha-fiard" target="_blank">lohithaksha-fiard</a><br>
+    <strong>Podcast:</strong> <a href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank">Apple</a> · <a href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank">Spotify</a>
+  </p>
+</section>
+
+<style>
+/* Glowing Box Styles */
+.glowing-box {
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
+  padding: 25px 30px;
+  margin: 40px auto;
+  max-width: 800px;
+  border: 2px solid rgba(0,255,213,0.6);
+  box-shadow: 0 0 15px rgba(0,255,213,0.4), 0 0 30px rgba(0,255,213,0.2) inset;
+  transition: 0.6s ease;
+  animation: glowPulse 2.5s infinite alternate;
+}
+
+.glowing-box:hover {
+  box-shadow: 0 0 25px rgba(0,255,213,0.8), 0 0 50px rgba(0,255,213,0.4) inset;
+}
+
+.glowing-box h2 {
+  text-align: center;
+  color: #00ffd5;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #00ffd5;
+}
+
+.glowing-box ul {
+  list-style: '▹ ';
+  padding-left: 1.3rem;
+  color: #fff;
+}
+
+.glowing-box li a {
+  color: #00ffd5;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.glowing-box li a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #00ffd5;
+}
+
+.glowing-box p, .glowing-box li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #fff;
+}
+
+/* Glow Pulse Animation */
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 10px rgba(0,255,213,0.3), 0 0 20px rgba(0,255,213,0.1) inset; }
+  50% { box-shadow: 0 0 25px rgba(0,255,213,0.6), 0 0 50px rgba(0,255,213,0.3) inset; }
+  100% { box-shadow: 0 0 10px rgba(0,255,213,0.3), 0 0 20px rgba(0,255,213,0.1) inset; }
+}
+</style>
+
   <a href="#top" class="btn top" id="topBtn" aria-label="Back to top">↑</a>
 <script>
   // ===== Active link highlighting
