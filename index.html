@@ -416,31 +416,53 @@
   </section>
 
 <section id="contact">
-    <h2>Contact</h2>
-    <div class="two-columns">
-        <div class="column">
-            <p>Email (IITK): <a href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a></p>
-            <p>Email: <a href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a></p>
-            <p>Phone: <a href="tel:+919989927436">+91 99899 27436</a></p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/lohithaksha-den" target="_blank">/in/lohithaksha-den</a></p>
-            <p>Website: <a href="https://lohithaksha-fiard" target="_blank">lohithaksha-fiard</a></p>
-            <p>Podcast: <a href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank">Apple</a> · 
-                <a href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank">Spotify</a>
-            </p>
-        </div>
-        <div class="column">
-            <h3>Publications & Books</h3>
-            <ul>
-                <li>Review (Elsevier): <a href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank">Eicosanoid signaling in neuroinflammation</a></li>
-                <li>Book: <a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
-                <li>Book: <a href="https://amzn.eu/d/6rVi2BG" target="_blank"><em>Brainwaves of The Bold</em></a> (Amazon, 2025)</li>
-                <li>Book: <a href="https://amzn.eu/d/89t4GpK" target="_blank"><em>It’s Your Life: Make It Happen</em></a> (Amazon, 2025)</li>
-                <li>In preparation: <em>The Quantum Revolution</em> — CRC Press</li>
-            </ul>
-        </div>
+  <h2>Contact</h2>
+
+  <div class="two-columns">
+    <!-- LEFT -->
+    <div class="panel column-left" aria-labelledby="contact-heading">
+      <div class="contact-line">Email (IITK): <a class="link-blue" href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a></div>
+      <div class="contact-line">Email: <a class="link-blue" href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a></div>
+      <div class="contact-line">Phone: <a class="link-cyan" href="tel:+919989927436">+91 99899 27436</a></div>
+
+      <div class="contact-line">LinkedIn: <a class="link-blue" href="https://linkedin.com/in/lohithaksha-den" target="_blank" rel="noopener noreferrer">/in/lohithaksha-den</a></div>
+
+      <!-- Replace the URL below with your real website (I left an example). -->
+      <div class="contact-line">Website: <a class="link-purple" href="https://lohithaksha.com" target="_blank" rel="noopener noreferrer">lohithaksha-fiard</a></div>
+
+      <div class="contact-line">Podcast: <a class="link-purple" href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank" rel="noopener noreferrer">Apple</a> · <a class="link-purple" href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank" rel="noopener noreferrer">Spotify</a></div>
+
+      <a class="back-btn" id="backToAboutBtn" href="#about">Back to About</a>
     </div>
+
+    <!-- RIGHT -->
+    <div class="panel column-right" aria-labelledby="pubs-heading">
+      <h3 style="font-family:'Baloo 2', 'Poppins', sans-serif;margin-top:0;margin-bottom:14px;color:#fff;font-size:28px;">Publications &amp; Books</h3>
+      <ul class="pubs" id="pubs-list">
+        <li>Review (Elsevier): <a class="link-purple" href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank" rel="noopener noreferrer">Eicosanoid signaling in neuroinflammation</a></li>
+        <li>Book: <a class="link-purple" href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank" rel="noopener noreferrer"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
+        <li>Book: <a class="link-purple" href="https://amzn.eu/d/6rVi2BG" target="_blank" rel="noopener noreferrer"><em>Brainwaves of The Bold</em></a> (Amazon, 2025)</li>
+        <li>Book: <a class="link-purple" href="https://amzn.eu/d/89t4GpK" target="_blank" rel="noopener noreferrer"><em>It’s Your Life: Make It Happen</em></a> (Amazon, 2025)</li>
+        <li>In preparation: <em>The Quantum Revolution</em> — CRC Press</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
+<script>
+  // Back button: if #about exists, smooth-scroll. Otherwise fallback to top.
+  document.getElementById('backToAboutBtn').addEventListener('click', function(e){
+    var target = document.querySelector('#about');
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    } else {
+      // let the link function as normal (href="#about") or scroll to top
+      // keep default behavior (it will add #about to URL). If you prefer smooth top-scroll:
+      // window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+</script>
 </body>
 </html>
   <footer>
