@@ -267,26 +267,53 @@
         </div>
     </section>
 
-    <section id="projects">
+   <style>
+.projects-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.projects-column {
+    flex: 1;
+    min-width: 350px;
+}
+
+.projects-column h3 {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.details-body {
+    margin-top: 10px;
+    padding-left: 15px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: var(--accent2);
+    color: #fff;
+    padding: 4px 8px;
+    margin: 3px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+</style>
+
+<section id="projects">
     <h2>Projects — Underway & Accomplished</h2>
-    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+    <div class="projects-container">
 
-        <!-- Column 1: Underway Projects -->
-        <div style="flex: 1; min-width: 300px;">
+        <!-- Underway Projects -->
+        <div class="projects-column">
             <h3>Underway Projects</h3>
-
             <!-- Book Project -->
             <details>
-                <summary>
-                    <div class="summary-title">
-                        <span>Book Project — The Quantum Revolution: A Journey into the Microscopic World</span>
-                        <span class="summary-meta">Lead Author: Lohitaksha Koppada • CRC Press • In Preparation</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>Book Project — The Quantum Revolution: A Journey into the Microscopic World</summary>
                 <div class="details-body">
                     <ul>
-                        <li>Lead author of a two-volume advanced Quantum Mechanics series for graduate-level students.</li>
+                        <li>Lead author of a two-volume advanced Quantum Mechanics series for graduate students.</li>
                         <li>Developing comprehensive coverage of fundamental and advanced quantum mechanics concepts.</li>
                         <li>Including solved examples and computational exercises for deep understanding.</li>
                         <li>Curating latest research trends in quantum theory for practical insights.</li>
@@ -302,13 +329,7 @@
 
             <!-- M.Tech Project -->
             <details>
-                <summary>
-                    <div class="summary-title">
-                        <span>M.Tech Project — Hydrogen Embrittlement in Fe-30Mn-8Al-1C Steel</span>
-                        <span class="summary-meta">Guide: Dr. Heena Khanchandani, IIT Kanpur • Dec 2025–Present</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>M.Tech Project — Hydrogen Embrittlement in Fe-30Mn-8Al-1C Steel</summary>
                 <div class="details-body">
                     <ul>
                         <li>Investigating mechanical and microstructural evolution under hydrogen exposure.</li>
@@ -329,19 +350,12 @@
             </details>
         </div>
 
-        <!-- Column 2: Accomplished Projects -->
-        <div style="flex: 1; min-width: 300px;">
+        <!-- Accomplished Projects -->
+        <div class="projects-column">
             <h3>Accomplished Projects</h3>
-
             <!-- Master's Project I -->
             <details open>
-                <summary>
-                    <div class="summary-title">
-                        <span>Master’s Project — I<sup>st</sup> Phase: Screened Coulomb Potentials & Confined Hydrogen Atom</span>
-                        <span class="summary-meta">Guide: Prof. Kalidas Sen, UoH • Aug–Dec 2024</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>Master’s Project — I Phase: Screened Coulomb Potentials & Confined Hydrogen Atom</summary>
                 <div class="details-body">
                     <ul>
                         <li>Literature survey on theoretical treatment of screened Coulomb potentials.</li>
@@ -358,15 +372,9 @@
                 </div>
             </details>
 
-            <!-- Master's Project II -->
+            <!-- Master’s Project II -->
             <details>
-                <summary>
-                    <div class="summary-title">
-                        <span>Master’s Project — II<sup>nd</sup> Phase: Plasma & Spatially Confined Hydrogen Atom — Comparison Theorem & Statistical Complexity</span>
-                        <span class="summary-meta">Guide: Prof. Kalidas Sen, UoH • Dec 2024–Mar 2025</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>Master’s Project — II Phase: Plasma & Spatially Confined Hydrogen Atom</summary>
                 <div class="details-body">
                     <ul>
                         <li>Investigated electronic properties of confined hydrogen atoms under screened Coulomb potentials.</li>
@@ -384,13 +392,7 @@
 
             <!-- Review Article -->
             <details>
-                <summary>
-                    <div class="summary-title">
-                        <span>Collaborative Review Article: "Eicosanoid Signaling in Neuroinflammation Associated with Alzheimer's Disease"</span>
-                        <span class="summary-meta">Guide: Prof. Reddanna Pallu, UoH • May 2022–Jan 2023</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>Collaborative Review Article: "Eicosanoid Signaling in Neuroinflammation"</summary>
                 <div class="details-body">
                     <ul>
                         <li>Led review on eicosanoid signaling in Alzheimer's neuroinflammation.</li>
@@ -406,15 +408,9 @@
                 </div>
             </details>
 
-            <!-- Collaborative Summer Project -->
+            <!-- Summer Projects and Internship -->
             <details>
-                <summary>
-                    <div class="summary-title">
-                        <span>Collaborative Summer Project: Eicosanoids & Their Bio Signaling</span>
-                        <span class="summary-meta">Guide: Prof. Reddanna Pallu, UoH • Apr–Aug 2021</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>Collaborative Summer Project: Eicosanoids & Their Bio Signaling</summary>
                 <div class="details-body">
                     <ul>
                         <li>Explored biochemical pathways of eicosanoids and their roles in neuroinflammation.</li>
@@ -430,15 +426,8 @@
                 </div>
             </details>
 
-            <!-- Summer Internship -->
             <details>
-                <summary>
-                    <div class="summary-title">
-                        <span>Summer Internship: Understanding Bio-signaling Pathways</span>
-                        <span class="summary-meta">Guide: Late Prof. Lakshmipati, Kakatiya University • May–Jul 2022</span>
-                    </div>
-                    <span class="chev">▶</span>
-                </summary>
+                <summary>Summer Internship: Understanding Bio-signaling Pathways</summary>
                 <div class="details-body">
                     <ul>
                         <li>Studied intricate biosignaling pathways regulating physiological processes.</li>
@@ -454,6 +443,7 @@
         </div>
     </div>
 </section>
+
         
     <!-- SKILLS -->
     <section id="skills" class="reveal">
