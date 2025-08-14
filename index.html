@@ -693,6 +693,55 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </section>
 
+<style>
+/* New Contact Section styles */
+.contact-links {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.contact-link-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.contact-link-item:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: drop-shadow(0 0 10px var(--ring));
+}
+.contact-link-item .icon-box {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .08);
+  margin-bottom: 8px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 8px rgba(0, 217, 255, .1); /* Subtle initial glow */
+}
+.contact-link-item:hover .icon-box {
+  background: linear-gradient(45deg, var(--accent), var(--accent2));
+  box-shadow: 0 10px 28px var(--shadow), 0 0 24px rgba(0, 217, 255, .35); /* Increased glow on hover */
+}
+.contact-link-item .icon-box svg {
+  width: 32px;
+  height: 32px;
+  fill: var(--accent); /* Changed to a vibrant color */
+  transition: fill 0.2s ease;
+}
+.contact-link-item:hover .icon-box svg {
+  fill: #0d1226; /* Changed fill color on hover */
+}
+.contact-link-item span {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+</style>
+
 <section id="contact" class="section wrap reveal">
   <h2>Let's Connect</h2>
   <div class="grid cols-2">
