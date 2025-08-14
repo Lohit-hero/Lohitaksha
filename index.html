@@ -9,625 +9,681 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-    /*
-     *
-     * ELEGANT / MUTED THEME CSS WITH 2D CONSTELLATION BACKGROUND
-     *
-     */
+    /*
+     *
+     * CYBERPUNK TECH THEME CSS
+     *
+     */
 
-    :root {
-        --bg: #1a202c; /* Deep charcoal blue */
-        --card: rgba(45, 55, 72, 0.7); /* Semi-transparent darker card */
-        --muted: #a0a6b7;
-        --text: #e0e8f0; /* Soft off-white */
-        --accent: #4fd1c5; /* Soft teal */
-        --accent2: #f6ad55; /* Soft gold/orange */
-        --ring: rgba(79, 209, 197, 0.5); /* Semi-transparent teal */
-        --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        --glow: 0 0 10px var(--accent), 0 0 20px rgba(79, 209, 197, 0.6);
-        --glow-border: 0 0 4px var(--accent), inset 0 0 4px var(--accent);
-        --radius: 16px;
-    }
+    :root {
+        --bg: #0b0f19; /* Deeper, darker background */
+        --card: rgba(17, 24, 39, 0.8); /* Darker, semi-transparent card */
+        --muted: #8e94a8; /* Muted text for subtle details */
+        --text: #e0e8f0; /* Soft off-white text */
+        --accent: #00d9ff; /* Electric cyan */
+        --accent2: #ff00c8; /* Neon magenta */
+        --ring: rgba(0, 217, 255, 0.4);
+        --shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        --glow: 0 0 12px var(--accent), 0 0 24px rgba(0, 217, 255, 0.4);
+        --glow-border: 0 0 6px var(--accent), inset 0 0 6px var(--accent);
+        --radius: 12px;
+    }
 
-    /* GENERAL & TYPOGRAPHY */
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-        margin: 0;
-        color: var(--text);
-        font-family: 'Ofit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        line-height: 1.6;
-        background-color: var(--bg); /* Fallback color for the body */
-    }
-    .wrap { max-width: 1100px; margin: 0 ao; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
-    h1, h2, h3 { color: var(--text); }
-    h1 { font-size: 48px; margin: 0 0 10px; text-shadow: var(--glow); }
-    h2 { font-size: 36px; margin: 0 0 14px; }
-    h3 { font-size: 24px; margin: 6px 0 6px; }
-    .med { color: var(--med); }
-    a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
-    a:hover { color: var(--accent2); }
+    /* GENERAL & TYPOGRAPHY */
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+        margin: 0;
+        color: var(--text);
+        font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        line-height: 1.7;
+        background-color: var(--bg);
+        position: relative;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top left, var(--accent) 0%, transparent 20%),
+                    radial-gradient(circle at bottom right, var(--accent2) 0%, transparent 20%);
+        opacity: 0.05;
+        z-index: -2;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 8px rgba(0, 217, 255, 0.6);
+    }
+    h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        position: relative;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+    h2::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        border-radius: 2px;
+    }
+    h3 { font-size: 24px; margin: 6px 0 6px; }
+    .med { color: var(--med); }
+    a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+    a:hover { color: var(--accent2); }
 
-    /* NAVBAR */
-    header.nav {
-        position: sticky; top: 0; z-index: 1000;
-        backdrop-filter: saturate(180%) blur(15px);
-        background: rgba(26, 32, 44, 0.6);
-        border-bottom: 1px solid rgba(79, 209, 197, 0.1);
-    }
-    .brand { font-weight: 800; letter-spacing: 1px; font-size: 24px; }
-    .brand .dot { color: var(--accent); }
-    nav.menu a {
-        color: #e0e8f0; text-decoration: none; margin: 0 8px; font-weight: 600; font-size: 16px;
-        padding: 8px 10px; border-radius: 10px; display: inline-block;
-        transition: all 0.3s ease;
-    }
-    nav.menu a:hover, nav.menu a.active { color: var(--bg); background: var(--accent); box-shadow: var(--glow); }
+    /* NAVBAR */
+    header.nav {
+        position: sticky; top: 0; z-index: 1000;
+        backdrop-filter: saturate(180%) blur(20px);
+        background: rgba(11, 15, 25, 0.8);
+        border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+    }
+    .brand { font-weight: 800; letter-spacing: 1px; font-size: 24px; }
+    .brand .dot { color: var(--accent); }
+    nav.menu a {
+        color: var(--text);
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    nav.menu a::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 3px;
+        background: var(--accent);
+        box-shadow: var(--glow-border);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    nav.menu a:hover::after, nav.menu a.active::after {
+        width: 100%;
+    }
 
-    /* LAYOUT & COMPONENTS */
-    section { max-width: 1100px; margin: 0 auto; padding: 80px 18px; position: relative; z-index: 10; }
-    .hero { padding: 160px 18px 80px; }
-    .chip {
-        display: inline-block; padding: 8px 14px;
-        border: 1px solid rgba(79, 209, 197, 0.3); border-radius: 999px;
-        margin: 6px 8px 0 0; font-size: 14px;
-        background: rgba(79, 209, 197, 0.05); color: var(--accent);
-        text-shadow: 0 0 4px rgba(79, 209, 197, 0.6);
-    }
-    .btn {
-        display: inline-block; background: var(--accent); color: var(--bg);
-        text-decoration: none; font-weight: 800; padding: 12px 24px;
-        border-radius: var(--radius); box-shadow: var(--shadow), var(--glow);
-        transition: all 0.3s ease;
-    }
-    .btn.ghost {
-        background: transparent; color: var(--accent);
-        border: 1px solid var(--accent);
-        box-shadow: none;
-    }
-    .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow), var(--glow), 0 0 30px var(--accent); }
-    .btn.ghost:hover { box-shadow: var(--glow-border); }
+    /* LAYOUT & COMPONENTS */
+    section { max-width: 1100px; margin: 0 auto; padding: 80px 18px; position: relative; z-index: 10; }
+    .hero { padding: 160px 18px 80px; }
+    .chip {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid rgba(0, 217, 255, 0.3);
+        border-radius: 999px;
+        margin: 6px 8px 0 0;
+        font-size: 14px;
+        background: rgba(0, 217, 255, 0.05);
+        color: var(--accent);
+        text-shadow: 0 0 4px rgba(0, 217, 255, 0.6);
+        transition: background 0.3s, color 0.3s;
+    }
+    .chip:hover {
+        background: var(--accent);
+        color: var(--bg);
+        text-shadow: none;
+    }
+    .btn {
+        display: inline-block;
+        background: linear-gradient(45deg, var(--accent), var(--accent2));
+        color: var(--bg);
+        text-decoration: none;
+        font-weight: 800;
+        padding: 14px 30px;
+        border-radius: 999px; /* Pill-shaped */
+        box-shadow: var(--shadow), var(--glow);
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        border: none;
+    }
+    .btn.ghost {
+        background: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+        box-shadow: none;
+        background-clip: padding-box;
+    }
+    .btn:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: var(--shadow), var(--glow), 0 0 35px var(--accent);
+    }
+    .btn.ghost:hover {
+        box-shadow: var(--glow-border);
+        transform: translateY(-4px);
+    }
+    .grid { display: grid; gap: 24px; }
+    .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 900px) { .cols-2, .cols-3 { grid-template-columns: 1fr; } }
 
-    .grid { display: grid; gap: 24px; }
-    .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    @media (max-width: 900px) { .cols-2, .cols-3 { grid-template-columns: 1fr; } }
+    /* CARDS */
+    .card {
+        background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(255, 0, 200, 0.05));
+        border: 1px solid rgba(0, 217, 255, 0.1);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
+    }
+    .card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: var(--shadow), var(--glow);
+    }
+    .card::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: var(--radius);
+        background: linear-gradient(45deg, var(--accent), var(--accent2)) border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+    }
+    .card:hover::before {
+        opacity: 1;
+    }
+    .tag {
+        display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
+        padding: 6px 12px; border-radius: 999px;
+        background: rgba(246, 173, 85, 0.1); border: 1px dashed rgba(246, 173, 85, 0.4);
+        margin: 4px 6px 0 0; color: var(--accent2);
+    }
 
-    /* CARDS */
-    .card {
-        background: linear-gradient(180deg, rgba(79, 209, 197, 0.03), rgba(246, 173, 85, 0.03));
-        border: 1px solid rgba(79, 209, 197, 0.1);
-        border-radius: var(--radius); padding: 24px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        position: relative; overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow), var(--glow);
-    }
-    .card::before {
-        content: '';
-        position: absolute; inset: -2px;
-        border: 2px solid transparent;
-        border-radius: var(--radius);
-        background: linear-gradient(45deg, var(--accent), var(--accent2)) border-box;
-        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.4s ease-in-out;
-    }
-    .card:hover::before {
-        opacity: 1;
-    }
-    .tag {
-        display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
-        padding: 6px 12px; border-radius: 999px;
-        background: rgba(246, 173, 85, 0.1); border: 1px dashed rgba(246, 173, 85, 0.4);
-        margin: 4px 6px 0 0; color: var(--accent2);
-    }
+    /* DETAILS (collapsible) */
+    details {
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        border-radius: 14px; padding: 0;
+        background: rgba(0, 217, 255, 0.05);
+        box-shadow: 0 2px 8px rgba(0,0,0,.2);
+        transition: all 0.3s ease;
+    }
+    details + details { margin-top: 18px; }
+    details[open] { outline: 2px solid var(--ring); box-shadow: var(--glow-border); }
+    summary {
+        list-style: none; cursor: pointer; padding: 18px 24px; font-weight: 700;
+        display: flex; align-items: center; justify-content: space-between;
+        background: linear-gradient(180deg, rgba(0, 217, 255, 0.08), rgba(0, 217, 255, 0.02));
+        border-radius: 14px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .summary-title { display: flex; flex-direction: column; gap: 4px; }
+    .summary-meta { font-size: 14px; color: var(--muted); }
+    .chev { transition: transform 0.25s ease; }
+    details[open] .chev { transform: rotate(90deg); }
+    .details-body { padding: 18px 24px 24px; }
 
-    /* DETAILS (collapsible) */
-    details {
-        border: 1px solid rgba(79, 209, 197, 0.2);
-        border-radius: 14px; padding: 0;
-        background: rgba(79, 209, 197, 0.05);
-        box-shadow: 0 2px 8px rgba(0,0,0,.2);
-        transition: all 0.3s ease;
-    }
-    details + details { margin-top: 18px; }
-    details[open] { outline: 2px solid var(--ring); box-shadow: var(--glow-border); }
-    summary {
-        list-style: none; cursor: pointer; padding: 18px 24px; font-weight: 700;
-        display: flex; align-items: center; justify-content: space-between;
-        background: linear-gradient(180deg, rgba(79, 209, 197, 0.08), rgba(79, 209, 197, 0.02));
-        border-radius: 14px;
-    }
-    summary::-webkit-details-marker { display: none; }
-    .summary-title { display: flex; flex-direction: column; gap: 4px; }
-    .summary-meta { font-size: 14px; color: var(--muted); }
-    .chev { transition: transform 0.25s ease; }
-    details[open] .chev { transform: rotate(90deg); }
-    .details-body { padding: 18px 24px 24px; }
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 24px; }
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, var(--accent), var(--accent2));
+        opacity: 0.4;
+    }
+    .t-item { position: relative; margin: 0 0 24px 24px; }
+    .t-item::before {
+        content: "";
+        position: absolute;
+        left: -30px;
+        top: 8px;
+        width: 16px;
+        height: 16px;
+        background: var(--accent);
+        border-radius: 999px;
+        box-shadow: var(--glow), 0 0 0 8px rgba(0, 217, 255, 0.15);
+    }
+    .t-title { font-weight: 700; }
+    .t-meta { font-size: 14px; color: var(--muted); }
 
-    /* TIMELINE */
-    .timeline { position: relative; padding-left: 24px; }
-    .timeline::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: rgba(79, 209, 197, 0.2); }
-    .t-item { position: relative; margin: 0 0 24px 24px; }
-    .t-item::before {
-        content: ""; position: absolute; left: -30px; top: 8px; width: 14px; height: 14px;
-        background: var(--accent); border-radius: 999px;
-        box-shadow: var(--glow), 0 0 0 6px rgba(79, 209, 197, 0.15);
-    }
-    .t-title { font-weight: 700; }
-    .t-meta { font-size: 14px; color: var(--muted); }
+    /* REVEAL (More dramatic animation) */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.show { opacity: 1; transform: none; }
 
-    /* REVEAL (More dramatic animation) */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.show { opacity: 1; transform: none; }
+    /* PARTICLES (Canvas) */
+    canvas#bg { position: fixed; inset: 0; z-index: -10; }
 
-    /* PARTICLES (Canvas) */
-    canvas#bg { position: fixed; inset: 0; z-index: -10; }
+    /* Footer + top */
+    footer { padding: 30px 18px; text-align: center; color: var(--muted); border-top: 1px solid rgba(0, 217, 255, 0.1); position: relative; z-index: 10; }
+    footer a { color: var(--accent); text-decoration: none; }
+    .top {
+        position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.3s ease;
+        background: var(--accent); color: var(--bg);
+        border-radius: 50%; padding: 12px;
+        box-shadow: var(--glow), 0 0 10px rgba(0,0,0,0.5);
+    }
+    .top.show { opacity: 1; pointer-events: auto; }
 
-    /* Footer + top */
-    footer { padding: 30px 18px; text-align: center; color: var(--muted); border-top: 1px solid rgba(79, 209, 197, 0.1); position: relative; z-index: 10; }
-    footer a { color: var(--accent); text-decoration: none; }
-    .top {
-        position: fixed; right: 18px; bottom: 18px; z-index: 9999;
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.3s ease;
-        background: var(--accent); color: var(--bg);
-        border-radius: 50%; padding: 12px;
-        box-shadow: var(--glow), 0 0 10px rgba(0,0,0,0.5);
-    }
-    .top.show { opacity: 1; pointer-events: auto; }
+    /* Custom styles for Projects Section */
+    .projects-container { display: grid; gap: 40px; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 900px) { .projects-container { grid-template-columns: 1fr; } }
+
+    .projects-column h3 {
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+    }
+    details {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 10px 15px;
+    }
+    summary {
+        cursor: pointer;
+        font-weight: 600;
+        position: relative;
+        padding-left: 25px;
+    }
+    summary::before {
+        content: "▶";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease;
+    }
+    details[open] summary::before {
+        transform: translateY(-50%) rotate(90deg);
+    }
+    .details-body {
+        margin-top: 10px;
+        padding-left: 15px;
+    }
+    .tag {
+        display: inline-block;
+        background-color: rgba(255, 0, 200, 0.1);
+        color: var(--accent2);
+        padding: 4px 8px;
+        margin: 3px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+    }
 </style>
 </head>
 <body id="top">
-    <canvas id="bg"></canvas>
+    <canvas id="bg"></canvas>
 
-    <!-- NAV -->
-    <header class="nav">
-        <div class="wrap">
-            <div class="brand">Lohitaksha<span class="dot">.</span></div>
-            <nav class="menu" id="menu">
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#skills">Skills</a>
-                <a href="#education">Education</a>
-                <a href="#achievements">Achievements</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
-    </header>
+        <header class="nav">
+        <div class="wrap">
+            <div class="brand">Lohitaksha<span class="dot">.</span></div>
+            <nav class="menu" id="menu">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- HERO -->
-<section class="hero" style="text-align:center; padding:80px 20px; background:#0b0f19; color:#e8ecf1;">
-    <!-- Hero Heading -->
-    <h1 style="font-size:3rem; margin-bottom:20px;">
-        Hey! I'm <span style="color:var(--accent)">Lohitaksha Koppada</span>
-    </h1>
+    <section class="hero" style="text-align:center;">
+        <h1>
+        Hey! I'm <span style="color:var(--accent)">Lohitaksha Koppada</span>
+    </h1>
 
-    <!-- Bio / Tagline -->
-    <p class="muted" style="max-width:780px; margin:0 auto; font-size:1.25rem; line-height:1.8;">
-        M.Tech (Materials Science & Engineering) from IIT Kanpur | Founder of F.I.A.R.D. | Researcher in Materials Science, Quantum/Computational Modeling, and Machine Learning | Science Communicator & Writer
-    </p>
+        <p class="muted" style="max-width:780px; margin:0 auto; font-size:1.25rem; line-height:1.8;">
+        M.Tech (Materials Science & Engineering) from IIT Kanpur | Founder of F.I.A.R.D. | Researcher in Materials Science, Quantum/Computational Modeling, and Machine Learning | Science Communicator & Writer
+    </p>
 
-    <div style="margin:24px 0; text-align:center;">
-    <a class="btn" href="cv.pdf" download>⬇️ Download CV</a>
-    <a class="btn ghost" href="#experience" style="margin-left:15px">Explore My Work</a>
+    <div style="margin:24px 0; text-align:center;">
+    <a class="btn" href="cv.pdf" download>⬇️ Download CV</a>
+    <a class="btn ghost" href="#projects" style="margin-left:15px">Explore My Work</a>
 </div>
 
+   <section id="preview" style="margin-top:60px; text-align:center;">
+    <h2 style="font-size:2rem; margin-bottom:30px;">Showcase of Projects & Publications</h2>
 
-   <!-- Showcase of Projects & Publications -->
-<section id="preview" style="margin-top:60px; text-align:center;">
-    <h2 style="font-size:2rem; margin-bottom:30px;">Showcase of Projects & Publications</h2>
+        <h3 style="font-size:1.5rem; margin-bottom:15px; color:var(--accent);">Books</h3>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:30px; max-width:900px; margin-left:auto; margin-right:auto;">
+        <span class="chip">It's your Life: Make it Happen</span>
+        <span class="chip">Brainwaves Of The Bold</span>
+        <span class="chip">Studies on Shell Confined Atoms</span>
+    </div>
 
-    <!-- Books Section -->
-    <h3 style="font-size:1.5rem; margin-bottom:15px; color:var(--accent);">Books</h3>
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:30px; max-width:900px; margin-left:auto; margin-right:auto;">
-        <span class="chip">It's your Life: Make it Happen</span>
-        <span class="chip">Brainwaves Of The Bold</span>
-        <span class="chip">Studies on Shell Confined Atoms</span>
-    </div>
-
-    <!-- Achievements Section -->
-    <h3 style="font-size:1.5rem; margin-bottom:15px; color:var(--accent);">Achievements & Publications</h3>
-    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:900px; margin-left:auto; margin-right:auto;">
-        <span class="chip">Eicosanoid signaling in neuroinflammation associated with Alzheimer's disease, Elsevier Publication (EJP, 2024)</span>
-        <span class="chip">CSIR-NET-JRF (December-2024): AIR 37</span>
-        <span class="chip">GATE 2025: AIR 727</span>
-    </div>
+        <h3 style="font-size:1.5rem; margin-bottom:15px; color:var(--accent);">Achievements & Publications</h3>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:900px; margin-left:auto; margin-right:auto;">
+        <span class="chip">Eicosanoid signaling in neuroinflammation associated with Alzheimer's disease, Elsevier Publication (EJP, 2024)</span>
+        <span class="chip">CSIR-NET-JRF (December-2024): AIR 37</span>
+        <span class="chip">GATE 2025: AIR 727</span>
+    </div>
+</section>
 </section>
 
+    <section id="about" class="reveal">
+    <h2>About Me</h2>
+    <div class="card" style="text-align: justify; line-height: 1.6;">
+        <p>
+            Hey! I’m Lohitaksha — a passionate advocate for personal growth, meaningful connection, and the incredible potential that resides within each of us. My mission is to inspire and empower individuals to embrace life fully and take intentional steps toward creating the futures they envision.
+        </p>
+        <p>
+            That mission first came to life through FIARD (Fostering Insight, Ambition, Resilience, and Development), the global coaching platform I founded to help professionals, entrepreneurs, and students worldwide strengthen leadership, resilience, and mindset. At FIARD, I designed personalized growth programs blending evidence-based leadership strategies, neuroscience-backed mindset techniques, and practical goal systems — guiding clients to achieve lasting transformation and redefine what they believed possible.
+        </p>
+        <p>
+            It also took shape in Lohitaksha’s Den, my podcast — a dynamic space where curiosity leads the way. Through thoughtful conversations with diverse guests, we explore leadership, personal development, philosophy, innovation, and everyday wisdom. Each episode invites reflection, sparks curiosity, and fosters a community where learning is celebrated.
+        </p>
+        <p>
+            Both FIARD and my podcast became the foundation and inspiration for my books — It’s Your Life: Make It Happen, a practical and encouraging guide for navigating life with purpose and clarity, and Brainwaves of the Bold, a deep exploration of transformative leadership and inner courage that challenges readers to lead authentically and take bold action.
+        </p>
+        <p>
+            My academic journey has been equally meaningful — from leading a team as first author in publishing a peer-reviewed review article to delivering engaging presentations that ignite “light bulb” moments for others. These experiences have reinforced my belief in collaboration, perseverance, and the transformative power of communication.
+        </p>
+        <p>
+            At my core, I believe in the beauty of growth, the strength of human connection, and the limitless possibilities that unfold when we dare to believe in ourselves. Whether through coaching, writing, podcasting, speaking, or everyday conversations, I’m committed to fostering environments where authenticity, learning, and empowerment can thrive.
+        </p>
 
-    <!-- ABOUT -->
-<section id="about" class="reveal">
-    <h2>About Me</h2>
-    <div class="card" style="text-align: justify; line-height: 1.6;">
-        <p>
-            Hey! I’m Lohitaksha — a passionate advocate for personal growth, meaningful connection, and the incredible potential that resides within each of us. My mission is to inspire and empower individuals to embrace life fully and take intentional steps toward creating the futures they envision.
-        </p>
-        <p>
-            That mission first came to life through FIARD (Fostering Insight, Ambition, Resilience, and Development), the global coaching platform I founded to help professionals, entrepreneurs, and students worldwide strengthen leadership, resilience, and mindset. At FIARD, I designed personalized growth programs blending evidence-based leadership strategies, neuroscience-backed mindset techniques, and practical goal systems — guiding clients to achieve lasting transformation and redefine what they believed possible.
-        </p>
-        <p>
-            It also took shape in Lohitaksha’s Den, my podcast — a dynamic space where curiosity leads the way. Through thoughtful conversations with diverse guests, we explore leadership, personal development, philosophy, innovation, and everyday wisdom. Each episode invites reflection, sparks curiosity, and fosters a community where learning is celebrated.
-        </p>
-        <p>
-            Both FIARD and my podcast became the foundation and inspiration for my books — It’s Your Life: Make It Happen, a practical and encouraging guide for navigating life with purpose and clarity, and Brainwaves of the Bold, a deep exploration of transformative leadership and inner courage that challenges readers to lead authentically and take bold action.
-        </p>
-        <p>
-            My academic journey has been equally meaningful — from leading a team as first author in publishing a peer-reviewed review article to delivering engaging presentations that ignite “light bulb” moments for others. These experiences have reinforced my belief in collaboration, perseverance, and the transformative power of communication.
-        </p>
-        <p>
-            At my core, I believe in the beauty of growth, the strength of human connection, and the limitless possibilities that unfold when we dare to believe in ourselves. Whether through coaching, writing, podcasting, speaking, or everyday conversations, I’m committed to fostering environments where authenticity, learning, and empowerment can thrive.
-        </p>
-
-            <div style="margin-top:10px">
-                <span class="tag">Entrepreneurship</span>
-                <span class="tag">Leadership & Coaching</span>
-                <span class="tag">Podcasting</span>
-                <span class="tag">Innovation</span>
-                <span class="tag">Problem Solving</span>
-                <span class="tag">Collaboration</span>
-                <span class="tag">STEM Outreach</span>
-                <span class="tag">Machine Learning</span>
-                <span class="tag">Scientific Communication</span>
-                <span class="tag">Materials Science</span>
-                <span class="tag">Computational Modeling</span>
-                <span class="tag">Quantum Mechanics</span>
-                <span class="tag">Research & Development</span>
+            <div style="margin-top:10px">
+                <span class="tag">Entrepreneurship</span>
+                <span class="tag">Leadership & Coaching</span>
+                <span class="tag">Podcasting</span>
+                <span class="tag">Innovation</span>
+                <span class="tag">Problem Solving</span>
+                <span class="tag">Collaboration</span>
+                <span class="tag">STEM Outreach</span>
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Scientific Communication</span>
+                <span class="tag">Materials Science</span>
+                <span class="tag">Computational Modeling</span>
+                <span class="tag">Quantum Mechanics</span>
+                <span class="tag">Research & Development</span>
 
 
-            </div>
-        </div>
-    </section>
+            </div>
+        </div>
+    </section>
 
-   <style>
-.projects-container {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-}
+<section id="projects" class="reveal">
+    <h2>Projects — Underway & Accomplished</h2>
+    <div class="projects-container">
 
-.projects-column {
-    flex: 1;
-    min-width: 350px;
-}
+                <div class="projects-column">
+            <h3>Underway Projects</h3>
+            <details>
+                <summary>Book Project — The Quantum Revolution: A Journey into the Microscopic World</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Lead author of a two-volume advanced Quantum Mechanics series for graduate students.</li>
+                        <li>Developing comprehensive coverage of fundamental and advanced quantum mechanics concepts.</li>
+                        <li>Including solved examples and computational exercises for deep understanding.</li>
+                        <li>Curating latest research trends in quantum theory for practical insights.</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Quantum Mechanics</span>
+                        <span class="tag">Graduate-Level Reference Book</span>
+                        <span class="tag">Mathematical Rigor</span>
+                        <span class="tag">Computational Exercises</span>
+                    </div>
+                </div>
+            </details>
 
-.projects-column h3 {
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-}
+            <details>
+                <summary>M.Tech Project — Hydrogen Embrittlement in Fe-30Mn-8Al-1C Steel</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Investigating mechanical and microstructural evolution under hydrogen exposure.</li>
+                        <li>Conducting fracture toughness tests and hydrogen charging experiments.</li>
+                        <li>Performing XRF, SEM, and TEM microanalysis.</li>
+                        <li>Using computational modeling to simulate hydrogen interactions and predict fracture behavior.</li>
+                        <li>Developing mitigation strategies for high-Mn steels.</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Fe-30Mn-8Al-1C Steel</span>
+                        <span class="tag">Hydrogen Embrittlement</span>
+                        <span class="tag">Fracture Toughness</span>
+                        <span class="tag">XRF / SEM / TEM</span>
+                        <span class="tag">Computational Modeling</span>
+                        <span class="tag">Materials Science</span>
+                    </div>
+                </div>
+            </details>
+        </div>
 
-details {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    margin-bottom: 15px;
-    padding: 10px 15px;
-}
+                <div class="projects-column">
+            <h3>Accomplished Projects</h3>
 
-summary {
-    cursor: pointer;
-    font-weight: 600;
-    position: relative;
-    padding-left: 25px;
-}
+            <details open>
+                <summary>Master’s Project — Phase I: Investigating Screened Coulomb Potentials & Confined Hydrogen Atom</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Literature survey on theoretical treatment of screened Coulomb potentials.</li>
+                        <li>Explored Yukawa and Hulthén potentials on electronic structures.</li>
+                        <li>Analyzed effects on energy spectrum and chemical reactivity of confined hydrogen atoms.</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Python / NumPy / Matplotlib / Pandas</span>
+                        <span class="tag">Screened Coulomb Potentials</span>
+                        <span class="tag">Astrophysics / High-Energy Physics / Materials Science</span>
+                        <span class="tag">Confined H-Atom</span>
+                        <span class="tag">Quantum Mechanics</span>
+                    </div>
+                </div>
+            </details>
 
-summary::before {
-    content: "▶";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.3s ease;
-}
+            <details>
+                <summary>Master’s Project — Phase II: Plasma & Spatially Confined Hydrogen Atom</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Investigated electronic properties of confined hydrogen atoms under screened Coulomb potentials.</li>
+                        <li>Calculated Shannon entropy, disequilibrium, and statistical complexity to analyze electron distributions.</li>
+                        <li>Conducted detailed computational and numerical analysis for energy levels and screening effects.</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Python / NumPy / Matplotlib / Pandas</span>
+                        <span class="tag">Information Theory</span>
+                         <span class="tag">Screened Coulomb Potentials</span>
+                         <span class="tag">Confined H-Atom</span>
+                        <span class="tag">Comparison Theorem</span>
+                        <span class="tag">Astrophysics / High-Energy Physics / Materials Science</span>
+                    </div>
+                </div>
+            </details>
 
-details[open] summary::before {
-    transform: translateY(-50%) rotate(90deg);
-}
+            <details>
+                <summary>Collaborative Review Article: "Eicosanoid Signaling in Neuroinflammation"</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Led review on eicosanoid signaling in Alzheimer's neuroinflammation.</li>
+                        <li>Managed interdisciplinary contributions and ensured scientific rigor.</li>
+                        <li>Finalized and submitted manuscript to Elsevier (EJP, 2024).</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Scientific Writing</span>
+                        <span class="tag">Neuroscience</span>
+                        <span class="tag">Lipid Signaling</span>
+                        <span class="tag">Peer Review</span>
+                    </div>
+                </div>
+            </details>
 
-.details-body {
-    margin-top: 10px;
-    padding-left: 15px;
-}
+            <details>
+                <summary>Collaborative Summer Project: Eicosanoids & Their Bio Signaling in Neurodegenrative disorders</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Explored biochemical pathways of eicosanoids and their roles in neuroinflammation.</li>
+                        <li>Investigated involvement in neurodegenerative disorders and therapeutic possibilities.</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Eicosanoid Biosignaling</span>
+                        <span class="tag">Neuroinflammation</span>
+                        <span class="tag">Theoretical Eicosanoid Pathways in Alzheimer's</span>
+                        <span class="tag">Lipid Mediators</span>
+                        <span class="tag">Therapeutic Targets</span>
+                    </div>
+                </div>
+            </details>
 
-.tag {
-    display: inline-block;
-    background-color: var(--accent2);
-    color: #fff;
-    padding: 4px 8px;
-    margin: 3px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-}
-</style>
+            <details>
+                <summary>Summer Internship: Understanding Bio-signaling Pathways</summary>
+                <div class="details-body">
+                    <ul>
+                        <li>Studied intricate biosignaling pathways regulating physiological processes.</li>
+                        <li>Performed literature reviews on molecular mechanisms of signal transduction.</li>
+                        <li>Developed foundational knowledge of cellular communication and implications in disease progression.</li>
+                    </ul>
+                    <div>
+                        <span class="tag">Signal Transduction</span>
+                    </div>
+                </div>
+            </details>
 
-<section id="projects">
-    <h2>Projects — Underway & Accomplished</h2>
-    <div class="projects-container">
-
-        <!-- Underway Projects -->
-        <div class="projects-column">
-            <h3>Underway Projects</h3>
-            <details>
-                <summary>Book Project — The Quantum Revolution: A Journey into the Microscopic World</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Lead author of a two-volume advanced Quantum Mechanics series for graduate students.</li>
-                        <li>Developing comprehensive coverage of fundamental and advanced quantum mechanics concepts.</li>
-                        <li>Including solved examples and computational exercises for deep understanding.</li>
-                        <li>Curating latest research trends in quantum theory for practical insights.</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Quantum Mechanics</span>
-                        <span class="tag">Graduate-Level Reference Book</span>
-                        <span class="tag">Mathematical Rigor</span>
-                        <span class="tag">Computational Exercises</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>M.Tech Project — Hydrogen Embrittlement in Fe-30Mn-8Al-1C Steel</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Investigating mechanical and microstructural evolution under hydrogen exposure.</li>
-                        <li>Conducting fracture toughness tests and hydrogen charging experiments.</li>
-                        <li>Performing XRF, SEM, and TEM microanalysis.</li>
-                        <li>Using computational modeling to simulate hydrogen interactions and predict fracture behavior.</li>
-                        <li>Developing mitigation strategies for high-Mn steels.</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Fe-30Mn-8Al-1C Steel</span>
-                        <span class="tag">Hydrogen Embrittlement</span>
-                        <span class="tag">Fracture Toughness</span>
-                        <span class="tag">XRF / SEM / TEM</span>
-                        <span class="tag">Computational Modeling</span>
-                        <span class="tag">Materials Science</span>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <!-- Accomplished Projects -->
-        <div class="projects-column">
-            <h3>Accomplished Projects</h3>
-
-            <details open>
-                <summary>Master’s Project — Phase I: Investigating Screened Coulomb Potentials & Confined Hydrogen Atom</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Literature survey on theoretical treatment of screened Coulomb potentials.</li>
-                        <li>Explored Yukawa and Hulthén potentials on electronic structures.</li>
-                        <li>Analyzed effects on energy spectrum and chemical reactivity of confined hydrogen atoms.</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Python / NumPy / Matplotlib / Pandas</span>
-                        <span class="tag">Screened Coulomb Potentials</span>
-                        <span class="tag">Astrophysics / High-Energy Physics / Materials Science</span>
-                        <span class="tag">Confined H-Atom</span>
-                        <span class="tag">Quantum Mechanics</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>Master’s Project — Phase II: Plasma & Spatially Confined Hydrogen Atom</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Investigated electronic properties of confined hydrogen atoms under screened Coulomb potentials.</li>
-                        <li>Calculated Shannon entropy, disequilibrium, and statistical complexity to analyze electron distributions.</li>
-                        <li>Conducted detailed computational and numerical analysis for energy levels and screening effects.</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Python / NumPy / Matplotlib / Pandas</span>
-                        <span class="tag">Information Theory</span>
-                         <span class="tag">Screened Coulomb Potentials</span>
-                         <span class="tag">Confined H-Atom</span>
-                        <span class="tag">Comparison Theorem</span>
-                        <span class="tag">Astrophysics / High-Energy Physics / Materials Science</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>Collaborative Review Article: "Eicosanoid Signaling in Neuroinflammation"</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Led review on eicosanoid signaling in Alzheimer's neuroinflammation.</li>
-                        <li>Managed interdisciplinary contributions and ensured scientific rigor.</li>
-                        <li>Finalized and submitted manuscript to Elsevier (EJP, 2024).</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Scientific Writing</span>
-                        <span class="tag">Neuroscience</span>
-                        <span class="tag">Lipid Signaling</span>
-                        <span class="tag">Peer Review</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>Collaborative Summer Project: Eicosanoids & Their Bio Signaling in Neurodegenrative disorders</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Explored biochemical pathways of eicosanoids and their roles in neuroinflammation.</li>
-                        <li>Investigated involvement in neurodegenerative disorders and therapeutic possibilities.</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Eicosanoid Biosignaling</span>
-                        <span class="tag">Neuroinflammation</span>
-                        <span class="tag">Theoretical Eicosanoid Pathways in Alzheimer's</span>
-                        <span class="tag">Lipid Mediators</span>
-                        <span class="tag">Therapeutic Targets</span>
-                    </div>
-                </div>
-            </details>
-
-            <details>
-                <summary>Summer Internship: Understanding Bio-signaling Pathways</summary>
-                <div class="details-body">
-                    <ul>
-                        <li>Studied intricate biosignaling pathways regulating physiological processes.</li>
-                        <li>Performed literature reviews on molecular mechanisms of signal transduction.</li>
-                        <li>Developed foundational knowledge of cellular communication and implications in disease progression.</li>
-                    </ul>
-                    <div>
-                        <span class="tag">Signal Transduction</span>
-                    </div>
-                </div>
-            </details>
-
-        </div>
-    </div>
+        </div>
+    </div>
 </section>
-
-        
-    <!-- SKILLS -->
-    <section id="skills" class="reveal">
-        <h2>Skills</h2>
-        <div class="grid cols-3">
-            <div class="card">
-                <h3>Python Programming</h3>
-                <p><strong>Language & Data:</strong> Python syntax & data structures; NumPy, Pandas for data manipulation/analysis.</p>
-                <p><strong>Visualization:</strong> Matplotlib; plotting/graphing for insights.</p>
-            </div>
-            <div class="card">
-                <h3>Machine Learning (Basics)</h3>
-                <ul>
-                    <li>Foundational ML concepts, pipelines, and workflows.</li>
-                    <li>Linear & Logistic Regression (incl. multivariate logistic).</li>
-                </ul>
-                <p><strong>Libraries/Frameworks:</strong> Scikit-learn; Deep Learning with Keras & TensorFlow; PyTorch familiarity.</p>
-            </div>
-            <div class="card">
-                <h3>ML with Python — Tooling</h3>
-                <ul>
-                    <li>Jupyter workflows; data prep with NumPy/Pandas.</li>
-                    <li>Visualization with Matplotlib; modeling with Scikit-learn.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Supervised Learning</h3>
-                <ul>
-                    <li>Regression: Simple/Multiple/Polynomial/Non-linear; regularization & interpretability.</li>
-                    <li>Classification: Logistic Regression, k-NN, SVM, Naive Bayes, Decision Trees, Ensembles (Random Forest, XGBoost, AdaBoost, GB).</li>
-                    <li>Evaluation & Optimization: K-Fold/Time-split CV, Grid/Random search; bias-variance; confusion matrix, Precision/Recall/F1, ROC-AUC; MSE/RMSE/R².</li>
-                    <li>Kernel SVM (Polynomial, RBF); Probabilistic modeling with NB (Laplace, Gaussian); Handling missing/imbalanced data.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Unsupervised Learning</h3>
-                <ul>
-                    <li>K-Means (+ K-Means++), K-Medoids.</li>
-                    <li>DBSCAN (core/border/noise; Eps & MinPts).</li>
-                    <li>Hierarchical (Agglomerative/Divisive); Dendrograms; Linkages.</li>
-                    <li>Evaluation: Silhouette, Elbow, Inertia; Choosing K.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Recommender Systems</h3>
-                <ul>
-                    <li>Content-Based & Collaborative Filtering.</li>
-                    <li>User-item matrices; similarity metrics.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Programming & Systems</h3>
-                <p>C, C++, C#, Java; Docker & Kubernetes (basics for packaging/orchestration).</p>
-            </div>
-            <div class="card">
-                <h3>Scientific & Domain</h3>
-                <p>Nanoscience & Technology, Photonics, Materials Science; Quantum Mechanics.</p>
-            </div>
-            <div class="card">
-                <h3>Leadership & Presentation</h3>
-                <ul>
-                    <li><strong>Leadership:</strong> Led a team of four to author a peer-reviewed review article on "Eicosanoid signaling in neuroinflammation associated with Alzheimer's disease"; published in European Journal of Pharmacology, Elsevier (May 2024).</li>
-                    <li><strong>Presentation:</strong> Delivered research talk to Prof. George Perry (University of Texas) on Eicosanoids in Alzheimer’s with therapeutic strategies.</li>
-                    <li><strong>Communication:</strong> Podcast “Lohitaksha’s Den” — expert interviews; content research & development; networking with global guests.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        
+        <section id="skills" class="reveal">
+        <h2>Skills</h2>
+        <div class="grid cols-3">
+            <div class="card">
+                <h3>Python Programming</h3>
+                <p><strong>Language & Data:</strong> Python syntax & data structures; NumPy, Pandas for data manipulation/analysis.</p>
+                <p><strong>Visualization:</strong> Matplotlib; plotting/graphing for insights.</p>
+            </div>
+            <div class="card">
+                <h3>Machine Learning (Basics)</h3>
+                <ul>
+                    <li>Foundational ML concepts, pipelines, and workflows.</li>
+                    <li>Linear & Logistic Regression (incl. multivariate logistic).</li>
+                </ul>
+                <p><strong>Libraries/Frameworks:</strong> Scikit-learn; Deep Learning with Keras & TensorFlow; PyTorch familiarity.</p>
+            </div>
+            <div class="card">
+                <h3>ML with Python — Tooling</h3>
+                <ul>
+                    <li>Jupyter workflows; data prep with NumPy/Pandas.</li>
+                    <li>Visualization with Matplotlib; modeling with Scikit-learn.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Supervised Learning</h3>
+                <ul>
+                    <li>Regression: Simple/Multiple/Polynomial/Non-linear; regularization & interpretability.</li>
+                    <li>Classification: Logistic Regression, k-NN, SVM, Naive Bayes, Decision Trees, Ensembles (Random Forest, XGBoost, AdaBoost, GB).</li>
+                    <li>Evaluation & Optimization: K-Fold/Time-split CV, Grid/Random search; bias-variance; confusion matrix, Precision/Recall/F1, ROC-AUC; MSE/RMSE/R².</li>
+                    <li>Kernel SVM (Polynomial, RBF); Probabilistic modeling with NB (Laplace, Gaussian); Handling missing/imbalanced data.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Unsupervised Learning</h3>
+                <ul>
+                    <li>K-Means (+ K-Means++), K-Medoids.</li>
+                    <li>DBSCAN (core/border/noise; Eps & MinPts).</li>
+                    <li>Hierarchical (Agglomerative/Divisive); Dendrograms; Linkages.</li>
+                    <li>Evaluation: Silhouette, Elbow, Inertia; Choosing K.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Recommender Systems</h3>
+                <ul>
+                    <li>Content-Based & Collaborative Filtering.</li>
+                    <li>User-item matrices; similarity metrics.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Programming & Systems</h3>
+                <p>C, C++, C#, Java; Docker & Kubernetes (basics for packaging/orchestration).</p>
+            </div>
+            <div class="card">
+                <h3>Scientific & Domain</h3>
+                <p>Nanoscience & Technology, Photonics, Materials Science; Quantum Mechanics.</p>
+            </div>
+            <div class="card">
+                <h3>Leadership & Presentation</h3>
+                <ul>
+                    <li><strong>Leadership:</strong> Led a team of four to author a peer-reviewed review article on "Eicosanoid signaling in neuroinflammation associated with Alzheimer's disease"; published in European Journal of Pharmacology, Elsevier (May 2024).</li>
+                    <li><strong>Presentation:</strong> Delivered research talk to Prof. George Perry (University of Texas) on Eicosanoids in Alzheimer’s with therapeutic strategies.</li>
+                    <li><strong>Communication:</strong> Podcast “Lohitaksha’s Den” — expert interviews; content research & development; networking with global guests.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
 
-    <!-- ACHIEVEMENTS -->
-    <section id="achievements" class="reveal">
-        <h2>Achievements</h2>
-        <div>
-            <!-- Lead Author Review Article -->
-            <div class="card" style="margin-bottom: 24px;">
-                <h3>Lead Author, Published Review Article</h3>
-                <p>
-                    Led a collaborative review article titled "Eicosanoid signaling in neuroinflammation associated with Alzheimer’s disease," which was published in a peer-reviewed Elsevier journal, the European Journal of Pharmacology (May 2024; DOI: 10.1016/j.ejphar.2024.176694). I managed the research process, coordinated interdisciplinary contributions, and contributed significantly to the manuscript's writing.
-                </p>
-            </div>
-            <!-- Books -->
-            <div class="card" style="margin-bottom: 24px;">
-                <h3>Author of Three Books: Two Self-Help and One Academic</h3>
-                <p>
-                    <ul>
-                        <li><a href="https://amzn.eu/d/cFvnHTB" target="_blank">It's Your Life: Make it Happen</a> (Amazon, April 2025): A self-development book aimed at inspiring readers to take charge of their lives, overcome challenges, and achieve their personal and professional goals.</li>
-                        <li><a href="https://amzn.eu/d/jl3D5eO" target="_blank">Brainwaves of The Bold: Harnessing the Power of the Mind for Effective Leadership</a> (Amazon, May 2025): A transformative leadership book that empowers individuals to lead courageously and authentically.</li>
-                        <li><a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank">Studies on Shell Confined Atoms</a> (LAMBERT Academic Publishing, June 2025): Authored a book exploring quantum mechanical behavior of atoms under spatial confinement and screened Coulomb potentials, employing variational and numerical methods to analyze hydrogen atom with practical relevance to nanoscience and high-pressure physics.</li>
-                    </ul>
-                </p>
-            </div>
-            <!-- Academic Performer -->
-            <div class="card" style="margin-bottom: 24px;">
-                <h3>Highest Academic Performer</h3>
-                <p>
-                    Recognized for academic excellence, achieving the 1st rank in my cohort for two consecutive years (Years 4 and 5) in the Integrated Master’s program at the University of Hyderabad. Secured 2nd rank overall among combined Master’s and Integrated Master's students in the 5th year.
-                </p>
-            </div>
-            <!-- Competitive Exams -->
-            <div class="card" style="margin-bottom: 24px;">
-                <h3>Competitive Exam Success</h3>
-                <p>
-                    <ul>
-                        <li><strong>GATE 2025:</strong> Achieved AIR 727 in Chemical Sciences.</li>
-                        <li><strong>CSIR-NET-JRF (December 2024):</strong> Achieved AIR 37 in Assistant Professor and Admission to Ph.D. category.</li>
-                    </ul>
-                </p>
-            </div>
-            <!-- High School -->
-            <div class="card" style="margin-bottom: 24px;">
-                <h3>High School Achievements</h3>
-                <p>
-                    Featured in the school magazine for securing a position in the toppers list of the 10th-grade board exams (2018) at Jindal School.
-                </p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- EDUCATION -->
-    <section id="education" class="reveal">
-        <h2>Education</h2>
-        <div class="timeline">
-            <div class="t-item card">
-                <div class="t-title">IIT Kanpur — M.Tech, Materials Science & Engineering</div>
-                <div class="t-meta">2025 – Present</div>
-            </div>
-            <div class="t-item card">
-                <div class="t-title">University of Hyderabad — Integrated Master's (IMSc) Chemical Sciences</div>
-                <div class="t-meta">2020 – 2025</div>
-                <p>IMSc 1st rank holder (Years 4 & 5); strong CGPA across semesters.</p>
-            </div>
-            <div class="t-item card">
-                <div class="t-title">D.A.V. Public School — Class 12</div>
-                <div class="t-meta">Score: 94.2%</div>
-            </div>
-            <div class="t-item card">
-                <div class="t-title">Jindal School — Class 10</div>
-                <div class="t-meta">Score: 90.2%</div>
-            </div>
-        </div>
-    </section>
+        <section id="achievements" class="reveal">
+        <h2>Achievements</h2>
+        <div>
+                        <div class="card" style="margin-bottom: 24px;">
+                <h3>Lead Author, Published Review Article</h3>
+                <p>
+                    Led a collaborative review article titled "Eicosanoid signaling in neuroinflammation associated with Alzheimer’s disease," which was published in a peer-reviewed Elsevier journal, the European Journal of Pharmacology (May 2024; DOI: 10.1016/j.ejphar.2024.176694). I managed the research process, coordinated interdisciplinary contributions, and contributed significantly to the manuscript's writing.
+                </p>
+            </div>
+                        <div class="card" style="margin-bottom: 24px;">
+                <h3>Author of Three Books: Two Self-Help and One Academic</h3>
+                <p>
+                    <ul>
+                        <li><a href="https://amzn.eu/d/cFvnHTB" target="_blank">It's Your Life: Make it Happen</a> (Amazon, April 2025): A self-development book aimed at inspiring readers to take charge of their lives, overcome challenges, and achieve their personal and professional goals.</li>
+                        <li><a href="https://amzn.eu/d/jl3D5eO" target="_blank">Brainwaves of The Bold: Harnessing the Power of the Mind for Effective Leadership</a> (Amazon, May 2025): A transformative leadership book that empowers individuals to lead courageously and authentically.</li>
+                        <li><a href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank">Studies on Shell Confined Atoms</a> (LAMBERT Academic Publishing, June 2025): Authored a book exploring quantum mechanical behavior of atoms under spatial confinement and screened Coulomb potentials, employing variational and numerical methods to analyze hydrogen atom with practical relevance to nanoscience and high-pressure physics.</li>
+                    </ul>
+                </p>
+            </div>
+                        <div class="card" style="margin-bottom: 24px;">
+                <h3>Highest Academic Performer</h3>
+                <p>
+                    Recognized for academic excellence, achieving the 1st rank in my cohort for two consecutive years (Years 4 and 5) in the Integrated Master’s program at the University of Hyderabad. Secured 2nd rank overall among combined Master’s and Integrated Master's students in the 5th year.
+                </p>
+            </div>
+                        <div class="card" style="margin-bottom: 24px;">
+                <h3>Competitive Exam Success</h3>
+                <p>
+                    <ul>
+                        <li><strong>GATE 2025:</strong> Achieved AIR 727 in Chemical Sciences.</li>
+                        <li><strong>CSIR-NET-JRF (December 2024):</strong> Achieved AIR 37 in Assistant Professor and Admission to Ph.D. category.</li>
+                    </ul>
+                </p>
+            </div>
+                        <div class="card" style="margin-bottom: 24px;">
+                <h3>High School Achievements</h3>
+                <p>
+                    Featured in the school magazine for securing a position in the toppers list of the 10th-grade board exams (2018) at Jindal School.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+        <section id="education" class="reveal">
+        <h2>Education</h2>
+        <div class="timeline">
+            <div class="t-item card">
+                <div class="t-title">IIT Kanpur — M.Tech, Materials Science & Engineering</div>
+                <div class="t-meta">2025 – Present</div>
+            </div>
+            <div class="t-item card">
+                <div class="t-title">University of Hyderabad — Integrated Master's (IMSc) Chemical Sciences</div>
+                <div class="t-meta">2020 – 2025</div>
+                <p>IMSc 1st rank holder (Years 4 & 5); strong CGPA across semesters.</p>
+            </div>
+            <div class="t-item card">
+                <div class="t-title">D.A.V. Public School — Class 12</div>
+                <div class="t-meta">Score: 94.2%</div>
+            </div>
+            <div class="t-item card">
+                <div class="t-title">Jindal School — Class 10</div>
+                <div class="t-meta">Score: 90.2%</div>
+            </div>
+        </div>
+    </section>
 
     <!-- CONTACT -->
 <section id="contact" class="reveal">
