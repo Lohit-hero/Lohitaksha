@@ -90,15 +90,9 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
 
 /* ------------- HERO ------------- */
 .hero{padding:74px 0 28px}
-.hero h1{margin:0 0 10px; font-size:clamp(2rem, 4.8vw, 3.8rem); line-height:1.12}
+.hero h1{margin:0 0 10px; font-size:clamp(2.4rem, 6vw, 4.8rem); line-height:1.12; font-weight:800}
+.hero h1 .name{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
 .muted{color:var(--muted)}
-/* glitch effect for name */
-.glitch{position:relative; text-shadow:0 0 10px rgba(0,217,255,.5)}
-.glitch::before,.glitch::after{content:attr(data-text); position:absolute; inset:0}
-.glitch::before{left:2px; text-shadow:-2px 0 var(--accent2); clip-path:inset(0 0 48% 0); animation:glTop 1.9s infinite linear alternate-reverse}
-.glitch::after{left:-2px; text-shadow:2px 0 var(--accent); clip-path:inset(52% 0 0 0); animation:glBot 1.5s infinite linear alternate-reverse}
-@keyframes glTop{0%{transform:translateY(0)}100%{transform:translateY(-1.5px)}}
-@keyframes glBot{0%{transform:translateY(0)}100%{transform:translateY(1.5px)}}
 
 /* hero CTA buttons */
 .btn{
@@ -111,7 +105,7 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
 .btn.ghost{background:transparent; color:var(--text); border:1.5px solid var(--border)}
 .btn.ghost:hover{box-shadow:0 0 18px var(--ring); filter:brightness(1.15)}
 
-/* ------------- SECTION DECOR ------------- */
+/* ------------- SECTION HEADINGS ------------- */
 .section{padding:26px 0}
 .section h2{
   margin:0 0 16px; font-size:clamp(1.4rem, 3.2vw, 2rem); letter-spacing:.3px;
@@ -120,12 +114,6 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   background-size:200% 100%; animation:shimmer 6s linear infinite;
 }
 @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-.section-divider{
-  height:4px; margin:50px 0; border-radius:3px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
-  box-shadow:0 0 18px var(--ring); animation:dividerGlow 3s infinite alternate;
-}
-@keyframes dividerGlow{0%{opacity:.65}100%{opacity:1}}
 
 /* ------------- CARDS, CHIPS, TIMELINE ------------- */
 .card{
@@ -188,7 +176,6 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#achievements">Achievements</a>
       <a href="#contact">Contact</a>
@@ -197,19 +184,15 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
 </header>
 
 <section class="hero wrap">
-  <h1 class="glitch" data-text="Hey! I'm Lohitaksha Koppada">
-    Hey! I'm <span style="color:var(--accent)">Lohitaksha Koppada</span>
-  </h1>
+  <h1>Hey! I'm <span class="name">Lohitaksha Koppada</span></h1>
   <p class="muted reveal" style="max-width:840px; font-size:1.15rem;">
-    M.Tech (Materials Science & Engineering) — IIT Kanpur • Founder of F.I.A.R.D. • Research in Materials Science, Quantum/Computational Modeling & Machine Learning • Science Communicator & Writer
+    Integrated Master's Program (Chemical Sciences) — University of Hyderabad • Research in Computational Chemistry & Scientific Writing
   </p>
   <div class="reveal" style="margin:22px 0 6px">
     <a class="btn" href="cv.pdf" download aria-label="Download CV">⬇️ Download CV</a>
     <a class="btn ghost" href="#projects" style="margin-left:12px">Explore My Work</a>
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <section id="about" class="section wrap reveal">
   <h2>About Me</h2>
@@ -227,30 +210,47 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </section>
 
-<div class="section-divider"></div>
-
 <section id="projects" class="section wrap reveal">
-  <h2>Projects — Underway & Accomplished</h2>
-  <div class="grid cols-3">
-    <article class="card">
-      <h3>Master's Research Thesis (Published)</h3>
-      [cite_start]<p class="muted">Computed and analyzed energy spectra and information-theoretic measures to characterize quantum behavior, providing novel insights into quantum confinement effects[cite: 399].</p>
-      <div><span class="tag">Quantum Mechanics</span> <span class="tag">Computational Chemistry</span> <span class="tag">Python</span></div>
-    </article>
-    <article class="card">
-      <h3>Published Review Article</h3>
-      [cite_start]<p class="muted">Led a collaborative review article on "Eicosanoid signaling in neuroinflammation associated with Alzheimer’s disease," published in an Elsevier journal[cite: 401].</p>
-      <div><span class="tag">Neuroinflammation</span> <span class="tag">Alzheimer's Disease</span> <span class="tag">Scientific Writing</span></div>
-    </article>
-    <article class="card">
-      <h3>Authored Books</h3>
-      [cite_start]<p class="muted">Wrote three books: *It's Your Life: Make it Happen*, *Brainwaves of The Bold*, and *Studies on Shell Confined Atoms*[cite: 403, 405, 407].</p>
-      <div><span class="tag">Self-development</span> <span class="tag">Leadership</span> <span class="tag">Nanoscience</span></div>
-    </article>
+  <h2>Projects</h2>
+  <div class="grid cols-2">
+    <div>
+      <h3>Computational & Research Projects</h3>
+      <article class="card">
+        <h3>Plasma and Spatially Confined Hydrogen Atom</h3>
+        <p class="muted">A theoretical and computational investigation of confined hydrogen atoms, calculating energy levels and information-theoretic measures like Shannon entropy and statistical complexity.</p>
+        <div><span class="tag">Quantum Mechanics</span> <span class="tag">Computational Chemistry</span> <span class="tag">Python</span></div>
+      </article>
+      <article class="card">
+        <h3>Screened Coulomb Potentials</h3>
+        <p class="muted">An in-depth literature survey on screened Coulomb potentials and their application to confined hydrogen atoms, analyzing the effects of different potential models on electronic structure.</p>
+        <div><span class="tag">Computational Chemistry</span> <span class="tag">Physics</span> <span class="tag">Numerics</span></div>
+      </article>
+      <article class="card">
+        <h3>Eicosanoid Signaling Pathways</h3>
+        <p class="muted">Explored the biochemical pathways of eicosanoids and their role in neurodegenerative disorders like Alzheimer's and Parkinson's diseases through an intensive literature study.</p>
+        <div><span class="tag">Biochemistry</span> <span class="tag">Neuroscience</span></div>
+      </article>
+    </div>
+    <div>
+      <h3>Writing & Community Projects</h3>
+      <article class="card">
+        <h3>Review Article Publication</h3>
+        <p class="muted">Led an interdisciplinary team in writing a review article on "Eicosanoid Signaling in Neuroinflammation associated with Alzheimer's disease" which was published in a peer-reviewed Elsevier journal.</p>
+        <div><span class="tag">Neuroinflammation</span> <span class="tag">Scientific Writing</span></div>
+      </article>
+      <article class="card">
+        <h3>Authored Books</h3>
+        <p class="muted">Wrote three books: *It's Your Life: Make it Happen*, *Brainwaves of The Bold*, and *Studies on Shell Confined Atoms*.</p>
+        <div><span class="tag">Self-development</span> <span class="tag">Leadership</span> <span class="tag">Nanoscience</span></div>
+      </article>
+      <article class="card">
+        <h3>F.I.A.R.D. Founder</h3>
+        <p class="muted">Founded a micro-organization dedicated to fast, high-quality research output and learning programs.</p>
+        <div><span class="tag">Entrepreneurship</span> <span class="tag">Research</span></div>
+      </article>
+    </div>
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <section id="skills" class="section wrap reveal">
   <h2>Skills</h2>
@@ -273,55 +273,23 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<section id="experience" class="section wrap reveal">
-  <h2>Experience</h2>
-  <div class="timeline">
-    <div class="t card">
-      <h3>Master's Project: Phase II: Plasma and Spatially Confined Hydrogen Atom</h3>
-      [cite_start]<p class="muted">Conducted a theoretical and computational investigation of confined hydrogen atoms, calculating energy levels and information-theoretic measures like Shannon entropy and statistical complexity[cite: 237, 244, 247].</p>
-    </div>
-    <div class="t card">
-      <h3>Master's Project: Phase I: Investigating Screened Coulomb Potentials</h3>
-      [cite_start]<p class="muted">Conducted an in-depth literature survey on screened Coulomb potentials and their application to confined hydrogen atoms, analyzing the effects of different potential models on electronic structure[cite: 227, 228, 229].</p>
-    </div>
-    <div class="t card">
-      <h3>Collaborative Review Article Writing</h3>
-      [cite_start]<p class="muted">Led an interdisciplinary team in writing a review article on "Eicosanoid Signaling in Neuroinflammation associated with Alzheimer's disease" which was published in a peer-reviewed Elsevier journal[cite: 278, 281].</p>
-    </div>
-    <div class="t card">
-      <h3>Collaborative Summer Project on Eicosanoids</h3>
-      [cite_start]<p class="muted">Explored the biochemical pathways of eicosanoids and their role in neurodegenerative disorders like Alzheimer's and Parkinson's diseases[cite: 264, 266].</p>
-    </div>
-    <div class="t card">
-      <h3>Summer Internship: Understanding Biosignaling Pathways</h3>
-      [cite_start]<p class="muted">Engaged in an intensive study to understand the intricate biosignaling pathways that regulate physiological processes through comprehensive literature reviews[cite: 287, 288].</p>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
 <section id="education" class="section wrap reveal">
   <h2>Education</h2>
   <div class="timeline">
     <div class="t card">
-      <h3>Integrated Master's Program in Chemical Sciences — University of Hyderabad</h3>
-      <p class="muted">Master's (2025): 10th Sem: 9.05 CGPA, 9th Sem: 8.57 CGPA, 8th Sem: 8.28 CGPA, 7th Sem: 8.16 CGPA. [cite_start]Bachelor's (2023): 1st to 6th Sem: 8.06 CGPA[cite: 412, 413].</p>
+      <h3>University of Hyderabad — Integrated M.Sc, Chemical Sciences (2025)</h3>
+      <p class="muted">CGPA (Semester 7-10): 8.16, 8.28, 8.57, 9.05. CGPA (Bachelor's): 8.06.</p>
     </div>
     <div class="t card">
-      <h3>12th Grade — D.A.V. Public School, 2020</h3>
-      [cite_start]<p class="muted">Achieved 94.25%[cite: 414].</p>
+      <h3>D.A.V. Public School — 12th Grade (2020)</h3>
+      <p class="muted">Achieved 94.25%.</p>
     </div>
     <div class="t card">
-      <h3>10th Grade — Jindal School, 2018</h3>
-      [cite_start]<p class="muted">Achieved 90.2%[cite: 414].</p>
+      <h3>Jindal School — 10th Grade (2018)</h3>
+      <p class="muted">Achieved 90.2%.</p>
     </div>
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <section id="achievements" class="section wrap reveal">
   <h2>Achievements</h2>
@@ -336,8 +304,6 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
     </div>
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <section id="contact" class="section wrap reveal">
   <h2>Contact</h2>
