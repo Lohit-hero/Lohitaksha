@@ -11,20 +11,20 @@
 <style>
     /*
      *
-     * CYBERPUNK / NEON THEME CSS
+     * ELEGANT / MUTED THEME CSS WITH 2D CONSTELLATION BACKGROUND
      *
      */
 
     :root {
-        --bg: #03081c; /* Darker blue/purple */
-        --card: rgba(13, 17, 34, 0.7); /* Semi-transparent dark card */
+        --bg: #1a202c; /* Deep charcoal blue */
+        --card: rgba(45, 55, 72, 0.7); /* Semi-transparent darker card */
         --muted: #a0a6b7;
-        --text: #e0e5f2;
-        --accent: #39ff14; /* Neon green */
-        --accent2: #ff00ff; /* Neon magenta for highlights */
-        --ring: rgba(57, 255, 20, 0.5); /* Semi-transparent neon green */
+        --text: #e0e8f0; /* Soft off-white */
+        --accent: #4fd1c5; /* Soft teal */
+        --accent2: #f6ad55; /* Soft gold/orange */
+        --ring: rgba(79, 209, 197, 0.5); /* Semi-transparent teal */
         --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        --glow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+        --glow: 0 0 10px var(--accent), 0 0 20px rgba(79, 209, 197, 0.6);
         --glow-border: 0 0 4px var(--accent), inset 0 0 4px var(--accent);
         --radius: 16px;
     }
@@ -35,11 +35,9 @@
     body {
         margin: 0;
         color: var(--text);
-        background: radial-gradient(1200px 600px at 10% -10%, rgba(57, 255, 20, 0.1), transparent 60%),
-                    radial-gradient(1000px 500px at 110% 10%, rgba(255, 0, 255, 0.1), transparent 60%),
-                    var(--bg);
         font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
         line-height: 1.6;
+        background-color: var(--bg); /* Fallback color for the body */
     }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
     h1, h2, h3 { color: var(--text); }
@@ -54,27 +52,27 @@
     header.nav {
         position: sticky; top: 0; z-index: 1000;
         backdrop-filter: saturate(180%) blur(15px);
-        background: rgba(3, 8, 28, 0.6);
-        border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+        background: rgba(26, 32, 44, 0.6);
+        border-bottom: 1px solid rgba(79, 209, 197, 0.1);
     }
     .brand { font-weight: 800; letter-spacing: 1px; font-size: 24px; }
     .brand .dot { color: var(--accent); }
     nav.menu a {
-        color: #e0e5f2; text-decoration: none; margin: 0 8px; font-weight: 600; font-size: 16px;
+        color: #e0e8f0; text-decoration: none; margin: 0 8px; font-weight: 600; font-size: 16px;
         padding: 8px 10px; border-radius: 10px; display: inline-block;
         transition: all 0.3s ease;
     }
     nav.menu a:hover, nav.menu a.active { color: var(--bg); background: var(--accent); box-shadow: var(--glow); }
 
     /* LAYOUT & COMPONENTS */
-    section { max-width: 1100px; margin: 0 auto; padding: 80px 18px; }
+    section { max-width: 1100px; margin: 0 auto; padding: 80px 18px; position: relative; z-index: 10; }
     .hero { padding: 160px 18px 80px; }
     .chip {
         display: inline-block; padding: 8px 14px;
-        border: 1px solid rgba(57, 255, 20, 0.3); border-radius: 999px;
+        border: 1px solid rgba(79, 209, 197, 0.3); border-radius: 999px;
         margin: 6px 8px 0 0; font-size: 14px;
-        background: rgba(57, 255, 20, 0.05); color: var(--accent);
-        text-shadow: 0 0 4px rgba(57, 255, 20, 0.6);
+        background: rgba(79, 209, 197, 0.05); color: var(--accent);
+        text-shadow: 0 0 4px rgba(79, 209, 197, 0.6);
     }
     .btn {
         display: inline-block; background: var(--accent); color: var(--bg);
@@ -97,8 +95,8 @@
 
     /* CARDS */
     .card {
-        background: linear-gradient(180deg, rgba(57, 255, 20, 0.03), rgba(255, 0, 255, 0.03));
-        border: 1px solid rgba(57, 255, 20, 0.1);
+        background: linear-gradient(180deg, rgba(79, 209, 197, 0.03), rgba(246, 173, 85, 0.03));
+        border: 1px solid rgba(79, 209, 197, 0.1);
         border-radius: var(--radius); padding: 24px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         position: relative; overflow: hidden;
@@ -126,15 +124,15 @@
     .tag {
         display: inline-flex; align-items: center; gap: 6px; font-size: 13px;
         padding: 6px 12px; border-radius: 999px;
-        background: rgba(255, 0, 255, 0.1); border: 1px dashed rgba(255, 0, 255, 0.4);
+        background: rgba(246, 173, 85, 0.1); border: 1px dashed rgba(246, 173, 85, 0.4);
         margin: 4px 6px 0 0; color: var(--accent2);
     }
 
     /* DETAILS (collapsible) */
     details {
-        border: 1px solid rgba(57, 255, 20, 0.2);
+        border: 1px solid rgba(79, 209, 197, 0.2);
         border-radius: 14px; padding: 0;
-        background: rgba(57, 255, 20, 0.05);
+        background: rgba(79, 209, 197, 0.05);
         box-shadow: 0 2px 8px rgba(0,0,0,.2);
         transition: all 0.3s ease;
     }
@@ -143,7 +141,7 @@
     summary {
         list-style: none; cursor: pointer; padding: 18px 24px; font-weight: 700;
         display: flex; align-items: center; justify-content: space-between;
-        background: linear-gradient(180deg, rgba(57, 255, 20, 0.08), rgba(57, 255, 20, 0.02));
+        background: linear-gradient(180deg, rgba(79, 209, 197, 0.08), rgba(79, 209, 197, 0.02));
         border-radius: 14px;
     }
     summary::-webkit-details-marker { display: none; }
@@ -155,12 +153,12 @@
 
     /* TIMELINE */
     .timeline { position: relative; padding-left: 24px; }
-    .timeline::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: rgba(57, 255, 20, 0.2); }
+    .timeline::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: rgba(79, 209, 197, 0.2); }
     .t-item { position: relative; margin: 0 0 24px 24px; }
     .t-item::before {
         content: ""; position: absolute; left: -30px; top: 8px; width: 14px; height: 14px;
         background: var(--accent); border-radius: 999px;
-        box-shadow: var(--glow), 0 0 0 6px rgba(57, 255, 20, 0.15);
+        box-shadow: var(--glow), 0 0 0 6px rgba(79, 209, 197, 0.15);
     }
     .t-title { font-weight: 700; }
     .t-meta { font-size: 14px; color: var(--muted); }
@@ -170,13 +168,13 @@
     .reveal.show { opacity: 1; transform: none; }
 
     /* PARTICLES (Canvas) */
-    canvas#bg { position: fixed; inset: 0; z-index: -1; }
+    canvas#bg { position: fixed; inset: 0; z-index: -10; }
 
     /* Footer + top */
-    footer { padding: 30px 18px; text-align: center; color: var(--muted); border-top: 1px solid rgba(57, 255, 20, 0.1); }
+    footer { padding: 30px 18px; text-align: center; color: var(--muted); border-top: 1px solid rgba(79, 209, 197, 0.1); position: relative; z-index: 10; }
     footer a { color: var(--accent); text-decoration: none; }
     .top {
-        position: fixed; right: 18px; bottom: 18px; z-index: 999;
+        position: fixed; right: 18px; bottom: 18px; z-index: 9999;
         opacity: 0; pointer-events: none;
         transition: opacity 0.3s ease;
         background: var(--accent); color: var(--bg);
@@ -600,66 +598,200 @@
 
     <script>
         //
-        // JAVASCRIPT FOR PARTICLES AND SCROLL EFFECTS
+        // JAVASCRIPT FOR 2D CONSTELLATION ANIMATION (fixed & integrated)
         //
         const canvas = document.getElementById('bg');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: null, y: null, radius: 150 };
+        let constellationStars = [];
+        let mouse = { x: undefined, y: undefined };
+        const particleCount = 120;
+        const maxLineDistance = 180;
+        const repulsionRadius = 150;
+        const particleSpeed = 0.4;
 
-        // Set canvas size
+        // Data for real constellations: Orion and Ursa Major
+        const constellationsData = [
+            {
+                name: "Orion",
+                stars: [
+                    { x: 0.5, y: 0.1 },  // Betelgeuse (top-left)
+                    { x: 0.8, y: 0.1 },  // Bellatrix (top-right)
+                    { x: 0.35, y: 0.6 }, // Saiph (bottom-left)
+                    { x: 0.65, y: 0.6 }, // Rigel (bottom-right)
+                    { x: 0.55, y: 0.45 },// Alnitak (belt)
+                    { x: 0.5, y: 0.5 },  // Alnilam (belt)
+                    { x: 0.45, y: 0.55 } // Mintaka (belt)
+                ],
+                lines: [
+                    [0, 1], [0, 4], [1, 5], [4, 5], [5, 6], [2, 6], [3, 4]
+                ]
+            },
+            {
+                name: "Ursa Major",
+                stars: [
+                    { x: 0.2, y: 0.8 },  // Dubhe
+                    { x: 0.3, y: 0.75 }, // Merak
+                    { x: 0.4, y: 0.8 },  // Phecda
+                    { x: 0.5, y: 0.75 }, // Megrez
+                    { x: 0.55, y: 0.65 },// Alioth
+                    { x: 0.65, y: 0.6 }, // Mizar
+                    { x: 0.75, y: 0.55 } // Alkaid
+                ],
+                lines: [
+                    [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [0, 3]
+                ]
+            }
+        ];
+
+        // --- Canvas sizing and creation ---
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             canvas.style.display = 'block';
+
+            // Recreate constellationStars with positions scaled to the canvas
+            constellationStars = [];
+            constellationsData.forEach(constellation => {
+                constellation.stars.forEach(star => {
+                    constellationStars.push(new ConstellationStar(
+                        star.x * canvas.width,
+                        star.y * canvas.height
+                    ));
+                });
+            });
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Particle Class
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        });
+
+        window.addEventListener('mouseleave', function() {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+        // Particle Class (Stars)
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
+                this.size = Math.random() * 2 + 1; // Varying sizes
+                this.baseSize = this.size;
+                this.speedX = (Math.random() - 0.5) * particleSpeed;
+                this.speedY = (Math.random() - 0.5) * particleSpeed;
             }
             update() {
+                // Check if particle is too close to the mouse
+                if (mouse.x !== undefined && mouse.y !== undefined) {
+                    let dx = this.x - mouse.x;
+                    let dy = this.y - mouse.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < repulsionRadius && distance > 0) {
+                        let forceDirectionX = dx / distance;
+                        let forceDirectionY = dy / distance;
+                        let maxForce = (repulsionRadius - distance) / repulsionRadius;
+                        let directionX = forceDirectionX * maxForce * 2;
+                        let directionY = forceDirectionY * maxForce * 2;
+
+                        this.x += directionX;
+                        this.y += directionY;
+                    }
+                }
+
+                // Bounce at edges (simple)
+                if (this.x > canvas.width || this.x < 0) {
+                    this.speedX *= -1;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.speedY *= -1;
+                }
+
+                // Move the particle
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // Wrap particles around the screen
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                // Wrap particles to the other side for nicer distribution
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(57, 255, 20, 0.6)';
+
+                // Create a radial glow effect
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                gradient.addColorStop(0, 'rgba(79, 209, 197, 1)');
+                gradient.addColorStop(0.5, 'rgba(79, 209, 197, 0.7)');
+                gradient.addColorStop(1, 'rgba(79, 209, 197, 0)');
+                ctx.fillStyle = gradient;
+
+                ctx.fill();
+            }
+        }
+
+        // Constellation star class (golden)
+        class ConstellationStar {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = 3.0;
+                this.speedX = (Math.random() - 0.5) * (particleSpeed * 0.25);
+                this.speedY = (Math.random() - 0.5) * (particleSpeed * 0.25);
+            }
+            update() {
+                // gentle drift to feel alive
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // keep within small bounds of original canvas; wrap lightly
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
+                gradient.addColorStop(0, 'rgba(246, 173, 85, 1)');
+                gradient.addColorStop(0.5, 'rgba(246, 173, 85, 0.7)');
+                gradient.addColorStop(1, 'rgba(246, 173, 85, 0)');
+                ctx.fillStyle = gradient;
                 ctx.fill();
             }
         }
 
         function init() {
             particles = [];
-            let particleCount = Math.floor((canvas.width * canvas.height) / 10000);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
         }
         init();
 
-        // Connect particles
+        // Connect nearby particles with lines
         function connect() {
-            let opacityValue = 1;
+            // Draw regular background connections with a subtle glow
+            ctx.shadowColor = 'rgba(79, 209, 197, 1)';
+            ctx.shadowBlur = 8;
             for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let distance = Math.pow(particles[a].x - particles[b].x, 2) + Math.pow(particles[a].y - particles[b].y, 2);
-                    if (distance < (canvas.width / 8) * (canvas.height / 8)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = `rgba(57, 255, 20, ${opacityValue})`;
-                        ctx.lineWidth = 1;
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxLineDistance) {
+                        const opacity = 1 - (distance / maxLineDistance);
+                        ctx.strokeStyle = `rgba(79, 209, 197, ${opacity * 0.7})`;
+                        ctx.lineWidth = 1.0;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
                         ctx.lineTo(particles[b].x, particles[b].y);
@@ -667,16 +799,51 @@
                     }
                 }
             }
+            ctx.shadowBlur = 0;
+
+            // Draw the defined constellations with a brighter glow and a different color
+            ctx.shadowColor = 'rgba(246, 173, 85, 1)'; // Use accent2 for a golden glow
+            ctx.shadowBlur = 12; // Stronger glow
+
+            // Draw constellation lines using constellationStars array
+            let offset = 0;
+            constellationsData.forEach(constellation => {
+                constellation.lines.forEach(line => {
+                    const startStar = constellationStars[offset + line[0]];
+                    const endStar = constellationStars[offset + line[1]];
+
+                    if (startStar && endStar) {
+                        ctx.strokeStyle = 'rgba(246, 173, 85, 0.95)'; // Brighter golden lines
+                        ctx.lineWidth = 2; // Thicker lines
+                        ctx.beginPath();
+                        ctx.moveTo(startStar.x, startStar.y);
+                        ctx.lineTo(endStar.x, endStar.y);
+                        ctx.stroke();
+                    }
+                });
+                offset += constellation.stars.length;
+            });
+
+            ctx.shadowBlur = 0;
         }
 
         // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+            // Draw random particles
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
             }
+
+            // Draw constellation stars
+            for (let i = 0; i < constellationStars.length; i++) {
+                constellationStars[i].update();
+                constellationStars[i].draw();
+            }
+
             connect();
         }
 
@@ -709,7 +876,7 @@
             toggleTopButton();
         });
 
-        // Initial call to show elements in the viewport on load
+        // Initial call to start animation and show elements in the viewport on load
         window.onload = function() {
             animate();
             revealOnScroll();
