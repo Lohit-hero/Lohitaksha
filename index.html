@@ -214,18 +214,42 @@
         M.Tech (Materials Science & Engineering) from IIT Kanpur | Founder of F.I.A.R.D. | Researcher in Materials Science, Quantum/Computational Modeling, and Machine Learning | Science Communicator & Writer
     </p>
 
-    <!-- Action Buttons -->
-    <div style="margin-top:30px;">
-        <a href="cv.pdf" download 
-           style="text-decoration:none; margin:0 12px; padding:14px 28px; background:linear-gradient(45deg, #7c5cff, #00ffd5); color:#fff; border-radius:12px; font-weight:600; font-size:1rem; transition: transform 0.3s, box-shadow 0.3s;">
-           ⬇️ Download CV
-        </a>
-        <a href="#experience" 
-           style="text-decoration:none; margin:0 12px; padding:14px 28px; background:linear-gradient(45deg, #00ffd5, #7c5cff); color:#000; border-radius:12px; font-weight:600; font-size:1rem; transition: transform 0.3s, box-shadow 0.3s; display:inline-flex; align-items:center; gap:8px;">
-           Explore My Work
-           <span style="font-size:1.2rem; animation: bounce 1.5s infinite;">⬇️</span>
-        </a>
-    </div>
+    <div style="margin:24px 0; text-align:center;">
+    <a class="btn" href="cv.pdf" download>⬇️ Download CV</a>
+    <a class="btn ghost" href="#experience" style="margin-left:15px">Explore My Work</a>
+</div>
+
+<style>
+    .btn {
+        display: inline-block;
+        padding: 12px 26px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #fff;
+        background: linear-gradient(135deg, #7c5cff, #00ffd5);
+        box-shadow: 0 4px 12px rgba(124, 92, 255, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 20px rgba(124, 92, 255, 0.4);
+    }
+
+    .btn.ghost {
+        background: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+    }
+    .btn.ghost:hover {
+        background: var(--accent);
+        color: #fff;
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 20px rgba(124, 92, 255, 0.4);
+    }
+</style>
+
 
    <!-- Showcase of Projects & Publications -->
 <section id="preview" style="margin-top:60px; text-align:center;">
