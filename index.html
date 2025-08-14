@@ -1,82 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Lohitaksha | Portfolio</title>
-  
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0f19">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lohitaksha | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
-<header class="nav">
-  <a class="brand" href="index.html"><span class="logo-dot"></span> Lohitaksha</a>
-  <button class="nav-toggle" aria-label="Open Menu" id="navToggle">☰</button>
-  <nav class="links" id="navLinks">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="achievements.html">Achievements</a>
-    <a href="education.html">Education</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
-<canvas id="particles"></canvas>
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
 
+    <!-- Navigation -->
+    <header class="nav">
+        <div class="logo">Lohitaksha</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-  <main class="hero reveal">
-    <h1 class="glow-title">Hi, I'm <span>Lohitaksha</span></h1>
-    <p class="subtitle">Master's student in Chemical Sciences • Researcher • AI/ML Enthusiast</p>
-    <div class="cta">
-      <a class="btn btn-primary" href="about.html">About me</a>
-      <a class="btn btn-ghost" href="projects.html">See projects</a>
-    </div>
-    <div class="stats">
-      <div class="card glass">
-        <h3>GATE 2025</h3>
-        <p>AIR 727</p>
-      </div>
-      <div class="card glass">
-        <h3>CSIR NET 2025</h3>
-        <p>AIR 37 (AP & PhD)</p>
-      </div>
-      <div class="card glass">
-        <h3>Publications</h3>
-        <p>Elsevier 2024; Books 2025</p>
-      </div>
-    </div>
-  </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Hi, I'm <span class="highlight">Lohitaksha</span></h1>
+        <p class="subtitle">Master's Student in Chemical Sciences | Researcher | AI/ML Enthusiast</p>
+        <div class="cta">
+            <a href="#projects" class="btn">See My Work</a>
+            <a href="#contact" class="btn ghost">Contact Me</a>
+        </div>
+        <div class="stats">
+            <div class="stat-card">
+                <h3>GATE 2025</h3>
+                <p>AIR 727</p>
+            </div>
+            <div class="stat-card">
+                <h3>CSIR-NET 2025</h3>
+                <p>AIR 37</p>
+            </div>
+            <div class="stat-card">
+                <h3>Publications</h3>
+                <p>Elsevier 2024</p>
+            </div>
+        </div>
+    </section>
 
-  <section class="grid features reveal">
-    <article class="feature">
-      <h3>Quantum & Computation</h3>
-      <p>Confined hydrogen atoms, screened Coulomb potentials, and information-theoretic measures.</p>
-    </article>
-    <article class="feature">
-      <h3>ML & Data</h3>
-      <p>Scikit-learn, TensorFlow/Keras, clustering, model tuning, and visualization.</p>
-    </article>
-    <article class="feature">
-      <h3>Leadership & Communication</h3>
-      <p>Led a cross-disciplinary review; podcasting with global experts.</p>
-    </article>
-  </section>
+    <!-- About -->
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>
+            I am a resolute and results-oriented researcher with expertise in independently designing and executing complex projects in nanoscience, photonics, materials science, and computational chemistry. My work includes theoretical analysis and computational simulations on multi-electron systems, confined hydrogen atoms, and screened Coulomb potentials.
+        </p>
+    </section>
 
-  
-<footer class="footer">
-  <p>© 2025 Lohitaksha — Portfolio</p>
-  <div class="socials">
-    <a href="mailto:lohitaksha.koppada123@gmail.com" aria-label="Email">📧</a>
-    <a href="https://lohitakshakoppada.wixsite.com/lohitakshaden" target="_blank" rel="noopener">🔗</a>
-    <a href="https://lohitakshakoppada.wixsite.com/lohitaksha-fiard" target="_blank" rel="noopener">🌐</a>
-  </div>
-</footer>
+    <!-- Skills -->
+    <section id="skills" class="section">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">Python (NumPy, Pandas, Matplotlib)</div>
+            <div class="skill-card">Machine Learning (scikit-learn, TensorFlow/Keras)</div>
+            <div class="skill-card">Quantum Chemistry & Computational Physics</div>
+            <div class="skill-card">C, C++, Java, Fortran</div>
+            <div class="skill-card">Data Visualization</div>
+            <div class="skill-card">Leadership & Scientific Writing</div>
+        </div>
+    </section>
 
+    <!-- Projects -->
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Confined Hydrogen Atom</h3>
+                <p>Investigated Yukawa & Hulthén potentials, analyzing energy spectra and wavefunctions under confinement.</p>
+            </div>
+            <div class="project-card">
+                <h3>Plasma & Spatial Confinement</h3>
+                <p>Computed Shannon entropy, disequilibrium, and statistical complexity for various screening parameters.</p>
+            </div>
+            <div class="project-card">
+                <h3>Eicosanoids in Neuroinflammation</h3>
+                <p>Published review article in Elsevier on the role of eicosanoids in Alzheimer's disease.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <p>Email: <a href="mailto:lohitaksha.koppada123@gmail.com">lohitaksha.koppada123@gmail.com</a></p>
+        <p>Phone: +91 99899 27436</p>
+        <p>LinkedIn: <a href="https://linkedin.com/in/lohitaksha" target="_blank">linkedin.com/in/lohitaksha</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Lohitaksha | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
