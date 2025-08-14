@@ -415,29 +415,21 @@
     </div>
   </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-
+<section id="contact" class="reveal">
+  <h2>Contact & Publications</h2>
   <div class="two-columns">
-    <!-- LEFT -->
-    <div class="panel column-left" aria-labelledby="contact-heading">
+        <div class="panel column-left" aria-labelledby="contact-heading">
+      <h3 id="contact-heading" style="font-family:'Baloo 2', 'Poppins', sans-serif;margin-top:0;margin-bottom:14px;color:#fff;font-size:28px;">Contact Info</h3>
       <div class="contact-line">Email (IITK): <a class="link-blue" href="mailto:klohitaksha25@iitk.ac.in">klohitaksha25@iitk.ac.in</a></div>
       <div class="contact-line">Email: <a class="link-blue" href="mailto:lohithaksha.koppada123@gmail.com">lohithaksha.koppada123@gmail.com</a></div>
       <div class="contact-line">Phone: <a class="link-cyan" href="tel:+919989927436">+91 99899 27436</a></div>
-
       <div class="contact-line">LinkedIn: <a class="link-blue" href="https://linkedin.com/in/lohithaksha-den" target="_blank" rel="noopener noreferrer">/in/lohithaksha-den</a></div>
-
-      <!-- Replace the URL below with your real website (I left an example). -->
       <div class="contact-line">Website: <a class="link-purple" href="https://lohithaksha.com" target="_blank" rel="noopener noreferrer">lohithaksha-fiard</a></div>
-
       <div class="contact-line">Podcast: <a class="link-purple" href="https://podcasts.apple.com/in/podcast/lohitakshas-den/id1699553574" target="_blank" rel="noopener noreferrer">Apple</a> · <a class="link-purple" href="https://open.spotify.com/show/1RqDm9X3vFNhFvjkmo0VIe" target="_blank" rel="noopener noreferrer">Spotify</a></div>
-
       <a class="back-btn" id="backToAboutBtn" href="#about">Back to About</a>
     </div>
-
-    <!-- RIGHT -->
-    <div class="panel column-right" aria-labelledby="pubs-heading">
-      <h3 style="font-family:'Baloo 2', 'Poppins', sans-serif;margin-top:0;margin-bottom:14px;color:#fff;font-size:28px;">Publications &amp; Books</h3>
+        <div class="panel column-right" aria-labelledby="pubs-heading">
+      <h3 id="pubs-heading" style="font-family:'Baloo 2', 'Poppins', sans-serif;margin-top:0;margin-bottom:14px;color:#fff;font-size:28px;">Publications & Books</h3>
       <ul class="pubs" id="pubs-list">
         <li>Review (Elsevier): <a class="link-purple" href="https://doi.org/10.1016/j.ejphar.2024.176694" target="_blank" rel="noopener noreferrer">Eicosanoid signaling in neuroinflammation</a></li>
         <li>Book: <a class="link-purple" href="https://www.morebooks.shop/shop-ui/shop/product/9786208450908" target="_blank" rel="noopener noreferrer"><em>Studies on Shell Confined Atoms</em></a> (LAP, 2025)</li>
@@ -448,29 +440,10 @@
     </div>
   </div>
 </section>
-
-<script>
-  // Back button: if #about exists, smooth-scroll. Otherwise fallback to top.
-  document.getElementById('backToAboutBtn').addEventListener('click', function(e){
-    var target = document.querySelector('#about');
-    if(target){
-      e.preventDefault();
-      target.scrollIntoView({behavior:'smooth', block:'start'});
-    } else {
-      // let the link function as normal (href="#about") or scroll to top
-      // keep default behavior (it will add #about to URL). If you prefer smooth top-scroll:
-      // window.scrollTo({top:0, behavior:'smooth'});
-    }
-  });
-</script>
-</body>
-</html>
-  <footer>
+    <footer>
     © <span id="year"></span> Lohitaksha Koppada • Single-page portfolio with smooth scroll, animated reveals & particle background.
   </footer>
-
   <a href="#top" class="btn top" id="topBtn" aria-label="Back to top">↑</a>
-
 <script>
   // ===== Active link highlighting
   const links=[...document.querySelectorAll('.menu a')];
@@ -486,19 +459,16 @@
     });
   },{root:null, rootMargin:'-40% 0px -55% 0px', threshold:0});
   sections.forEach(s=>s && navObs.observe(s));
-
   // ===== Reveal on scroll
   const rev=document.querySelectorAll('.reveal');
   const ro=new IntersectionObserver((es)=>{
     es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); ro.unobserve(e.target);} });
   },{threshold:.12});
   rev.forEach(el=>ro.observe(el));
-
   // ===== Year + Back-to-top
   year.textContent=new Date().getFullYear();
   const topBtn=document.getElementById('topBtn');
   window.addEventListener('scroll',()=>{ topBtn.classList.toggle('show', window.scrollY>600) });
-
   // ===== Particles (embedded, lightweight)
   const c=document.getElementById('bg'), x=c.getContext('2d');
   let W,H,pts=[];
