@@ -502,16 +502,52 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
 </section>
 
 <script>
-  document.querySelectorAll('.collapsible-header').forEach(header => {
-    header.addEventListener('click', () => {
-      const details = header.nextElementSibling;
-      const icon = header.querySelector('.toggle-icon');
-      details.classList.toggle('show');
-      icon.classList.toggle('rotate');
+document.querySelectorAll('.collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const allDetails = document.querySelectorAll('.collapsible-details');
+    const allIcons = document.querySelectorAll('.toggle-icon');
+
+    const currentDetails = header.nextElementSibling;
+    const currentIcon = header.querySelector('.toggle-icon');
+
+    // Auto-close others
+    allDetails.forEach(details => {
+      if (details !== currentDetails) {
+        details.classList.remove('show');
+        details.style.maxHeight = null;
+      }
     });
+    allIcons.forEach(icon => {
+      if (icon !== currentIcon) icon.classList.remove('rotate');
+    });
+
+    // Toggle current
+    currentDetails.classList.toggle('show');
+    currentIcon.classList.toggle('rotate');
+
+    if (currentDetails.classList.contains('show')) {
+      currentDetails.style.maxHeight = currentDetails.scrollHeight + "px";
+      currentDetails.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      currentDetails.style.maxHeight = null;
+    }
   });
+});
 </script>
 
+<style>
+.collapsible-details {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.toggle-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+.toggle-icon.rotate {
+  transform: rotate(90deg);
+}
+</style>
 <section id="skills" class="section wrap reveal">
   <h2>Skills</h2>
   <div class="grid cols-2">
