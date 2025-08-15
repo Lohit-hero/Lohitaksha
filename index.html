@@ -645,30 +645,28 @@ h2{
 </footer>
 <a href="#top" class="top" id="toTop" aria-label="Back to top" data-nav>↑</a>
 
-<!-- ========= SCRIPTS ========= -->
 <script>
-/* Mini utils */
-const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
-const throttle=(fn,wait=16)=>{let t=0;return (...a)=>{const n=Date.now(); if(n-t>=wait){t=n;fn(...a)}}};
+// Collapsible toggle
+document.querySelectorAll('.collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const details = header.nextElementSibling;
+    const toggle = header.querySelector('.toggle');
 
-/* Preloader & staged reveal */
-window.addEventListener('load', ()=>{
-  document.body.classList.add('ready');
-  const p=document.getElementById('preloader'); if(p) p.classList.add('hide');
-});
+    // Toggle arrow rotation
+    toggle.classList.toggle('open');
 
-/* Smooth “page transition” for anchor clicks */
-document.querySelectorAll('[data-nav]').forEach(a=>{
-  a.addEventListener('click', e=>{
-    const href=a.getAttribute('href');
-    if(href && href.startsWith('#')){
-      e.preventDefault();
-      document.body.style.opacity='.85';
-      document.body.style.filter='blur(1px)';
-      setTimeout(()=>{ location.hash = href; document.body.style.opacity='1'; document.body.style.filter='none'; },120);
+    // Toggle detail visibility
+    if (details.classList.contains('show')) {
+      details.style.maxHeight = null;
+      details.classList.remove('show');
+    } else {
+      details.style.maxHeight = details.scrollHeight + "px";
+      details.classList.add('show');
     }
   });
 });
+</script>
+
 
 /* Active nav + back-to-top */
 const links=[...document.querySelectorAll('.menu a')];
