@@ -1,10 +1,10 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Lohitaksha Koppada — Cosmic Portfolio</title>
-<meta name="description" content="A cinematic, interactive portfolio with glass morphism, liquid motion, parallax constellations, morphing SVGs, hover-reveal cards, preloader, and page transitions — all in one file." />
+<title>Lohitaksha Koppada — Cosmic Portfolio (Slider-Revolution-level Effects)</title>
+<meta name="description" content="A cinematic, interactive portfolio with liquid motion, morphing SVGs, parallax constellations, hover-reveal cards, preloader, and page transitions — all in one file." />
 
 <style>
 /* ---------------------- Root + Base ---------------------- */
@@ -55,7 +55,7 @@ body.ready{opacity:1; transform:none; filter:none}
 canvas.stars{position:fixed; inset:0; z-index:-4}
 .shoots{position:fixed; inset:0; z-index:-3; overflow:hidden}
 
-/* Liquid blobs (gooey) */
+/* Liquid blobs (gooey / “liquid motion” vibe) */
 .liquid{
   z-index:-4; overflow:hidden; filter:url(#goo);
 }
@@ -82,25 +82,83 @@ canvas.stars{position:fixed; inset:0; z-index:-4}
 }
 @keyframes grain{to{transform:translate3d(-120px,-120px,0)}}
 
-/* ---------------------- Glass Morphism Cards ---------------------- */
-.card{
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:var(--radius);
-  padding:22px;
-  box-shadow:var(--shadow);
-  position:relative;
-  backdrop-filter: blur(14px) saturate(180%);
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-  transform-style:preserve-3d;
-  overflow:hidden;
-  transition:transform .22s ease, filter .22s ease, opacity 0.8s ease, transform 0.8s ease;
-  opacity:0; transform:translateY(30px);
+/* ---------------------- Preloader ---------------------- */
+.preloader{
+  position:fixed; inset:0; display:grid; place-items:center; background:radial-gradient(1200px 800px at 20% -10%,#0b1540 0%,#06091b 60%,#03040c 100%); z-index:9999;
+  transition:opacity .5s ease, visibility .5s ease; }
+.preloader.hide{opacity:0; visibility:hidden}
+.starspin{width:120px;height:120px;position:relative}
+.starspin:before,.starspin:after{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  border:3px dashed rgba(122,226,255,.6);
+  animation:spin 2.4s linear infinite;
 }
-.card.show{
-  opacity:1; transform:translateY(0);
-}
+.starspin:after{border-color:rgba(199,125,255,.6); animation-direction:reverse; transform:scale(.8)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-label{margin-top:14px; color:var(--muted); font-weight:800; letter-spacing:.2px}
 
+/* ---------------------- Nav ---------------------- */
+header.nav{position:sticky; top:0; z-index:10; border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(8,12,28,.6), rgba(8,12,28,.35) 60%, transparent);
+  backdrop-filter: blur(12px);}
+header .bar{height:70px; display:flex; align-items:center; justify-content:space-between}
+.brand{font-weight:900; letter-spacing:.2px; display:flex; align-items:center; gap:10px}
+.brand svg{width:22px;height:22px;filter:drop-shadow(0 0 10px var(--ring))}
+.menu{display:flex; gap:18px; flex-wrap:wrap}
+.menu a{color:var(--text); text-decoration:none; font-weight:900; padding:10px 8px; position:relative; opacity:.85; transition:.2s}
+.menu a:hover{opacity:1; transform:translateY(-1px)}
+.menu a::after{
+  content:""; position:absolute; left:50%; bottom:6px; height:2px; width:0;
+  background:linear-gradient(90deg,var(--accent),var(--acc2),var(--acc3));
+  transform:translateX(-50%); transition:width .25s ease; box-shadow:0 0 12px var(--ring)}
+.menu a:hover::after,.menu a.active::after{width:70%}
+
+/* ---------------------- Hero ---------------------- */
+.hero{padding:96px 0 8px}
+.hero h1{
+  margin:0 0 12px; font-size:clamp(2.6rem,6vw,5rem); line-height:1.06; font-weight:900;}
+.holo{
+  background:linear-gradient(90deg,#fff,var(--accent),var(--acc2),var(--acc3),#fff);
+  background-size:240% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:holo 8s linear infinite; text-shadow:0 10px 40px rgba(122,226,255,.18);}
+@keyframes holo{to{background-position:240% 50%}}
+.muted{color:var(--muted)}
+.typer{display:inline-block; border-right:2px solid var(--accent); white-space:nowrap; overflow:hidden}
+
+/* Morphing SVG badge (crossfade) */
+.morph-badge{display:inline-flex; gap:10px; align-items:center; margin:12px 0}
+.morph-badge svg{width:36px;height:36px}
+.morph-badge .shape1{opacity:1; transition:opacity .4s ease}
+.morph-badge .shape2{opacity:0; transition:opacity .4s ease}
+.morph-badge:hover .shape1{opacity:0}
+.morph-badge:hover .shape2{opacity:1}
+
+/* Buttons */
+.actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+.btn{
+  --mx:50%; --my:50%;
+  display:inline-grid; place-items:center; padding:14px 26px; border-radius:999px; font-weight:900; letter-spacing:.3px;
+  text-decoration:none; color:#041023; background:
+   radial-gradient(140px 100px at var(--mx) var(--my), rgba(255,255,255,.95), rgba(255,255,255,0) 60%),
+   linear-gradient(45deg,var(--accent),var(--acc2));
+  border:0; cursor:pointer; position:relative; isolation:isolate; transition:.15s;
+}
+.btn::after{
+  content:""; position:absolute; inset:-2px; border-radius:inherit; z-index:-1;
+  background: conic-gradient(from var(--d,0deg), rgba(122,226,255,.5), rgba(199,125,255,.4), rgba(77,242,185,.45), rgba(255,255,255,.25), rgba(122,226,255,.5));
+  filter: blur(18px); opacity:.45; transition:.2s}
+.btn:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 0 28px var(--ring)}
+.btn:hover::after{opacity:.8; --d:360deg}
+.btn.ghost{background:transparent; color:var(--text); border:1.5px solid var(--border)}
+.btn.ghost::after{display:none}
+
+/* ---------------------- Cards ---------------------- */
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--border); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow);
+  position:relative; transform-style:preserve-3d; transition:transform .22s ease, filter .22s ease;
+  overflow:hidden;
+}
 /* holographic border */
 .card::before{
   content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
@@ -110,14 +168,14 @@ canvas.stars{position:fixed; inset:0; z-index:-4}
 }
 @keyframes borderSpin{to{--a:360deg}}
 .card:hover{transform:translateY(-4px) scale(1.02); filter:brightness(1.06)}
-
-/* reveal hover */
+/* hover reveal overlay */
 .reveal-hover{
   position:absolute; inset:0; background:radial-gradient(400px 220px at var(--mx,50%) var(--my,50%), rgba(122,226,255,.12), transparent 70%);
   opacity:0; transition:opacity .25s ease; pointer-events:none;
 }
 .card:hover .reveal-hover{opacity:1}
 
+/* headings */
 h2{
   margin:0 0 16px; font-size:clamp(1.6rem,3.2vw,2.2rem);
   background:linear-gradient(90deg,var(--text),var(--accent),var(--acc2),var(--text));
@@ -125,7 +183,7 @@ h2{
   animation:holo 8s linear infinite;
 }
 
-/* Chips */
+/* chips/tags */
 .chip,.tag{
   display:inline-block; padding:6px 12px; border-radius:999px; font-weight:800;
   background:rgba(255,255,255,.06); border:1px solid var(--border);
@@ -133,14 +191,38 @@ h2{
 }
 .chip:hover,.tag:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 0 16px var(--ring); background:rgba(255,255,255,.09); letter-spacing:.3px}
 
+/* collapsible */
+.collapsible-header{cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px}
+.collapsible-header h3, .collapsible-header h4{margin:0; font-size:1.05rem}
+.toggle{transition:transform .3s ease}
+.toggle.open{transform:rotate(90deg)}
+.details{max-height:0; overflow:hidden; transition:max-height .45s ease, opacity .45s ease, filter .45s ease; opacity:0; filter:blur(2px)}
+.details.show{max-height:1000px; opacity:1; filter:blur(0); margin-top:8px}
+.details p,.details ul{color:var(--muted); margin:0 0 10px}
+.details ul{padding-left:18px}
+
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(26px) scale(.98); filter:blur(4px); transition:opacity .9s ease, transform .9s ease, filter .9s ease}
+.reveal.show{opacity:1; transform:none; filter:none}
+
+/* Footer + Top */
+.footer{padding:44px 0; text-align:center; color:var(--muted)}
+.top{
+  position:fixed; right:18px; bottom:18px; width:46px; height:46px; border-radius:50%;
+  display:grid; place-items:center; text-decoration:none; color:#071125; font-weight:900;
+  background:linear-gradient(45deg,var(--accent),var(--acc2),var(--acc3));
+  transform:translateY(80px); opacity:0; transition:.25s; box-shadow:0 0 18px var(--ring); z-index:20;
+}
+.top.show{transform:translateY(0); opacity:1}
+
 /* reduced motion */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important; transition:none !important}
-  .card{opacity:1 !important; transform:none !important}
+  .reveal{opacity:1 !important; transform:none !important; filter:none !important}
+  .typer{border:none}
 }
 </style>
 </head>
-<body>
 <body id="top">
 
 <!-- ========= Preloader ========= -->
