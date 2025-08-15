@@ -7,8 +7,11 @@
 <meta name="description" content="Portfolio of Lohitaksha Koppada — Materials Science, Quantum/Computational Modeling, Machine Learning, and Scientific Writing." />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
-/* ------------------ THEME TOKENS ------------------ */
+/* =========================================================
+   THEME TOKENS
+   ========================================================= */
 :root{
   --bg:#070b16;
   --bg-2:#0b1022;
@@ -18,14 +21,15 @@
   --accent:#00d9ff;
   --accent2:#ff00c8;
   --accent3:#69ff97;
-  --border:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.10);
   --ring:rgba(0,217,255,.35);
-  --shadow:rgba(0,0,0,.6);
+  --shadow:rgba(0,0,0,.55);
   --radius:18px;
 }
 @media (prefers-color-scheme: light){
-  :root{ --text:#0d1324; --muted:#495168; --panel:#eef3ff; --bg:#f6f8ff; --bg-2:#eef3ff; --border:rgba(13,19,36,.08); --shadow:rgba(0,0,0,.1)}
+  :root{ --text:#0d1324; --muted:#495168; --panel:#eef3ff; --bg:#f6f8ff; --bg-2:#eef3ff; --border:rgba(13,19,36,.10); --shadow:rgba(0,0,0,.12)}
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -34,30 +38,81 @@ body{
   line-height:1.65; overflow-x:hidden;
 }
 
-/* ------------- DYNAMIC BACKGROUND LAYERS ------------- */
-body::before{
-  content:""; position:fixed; inset:0; z-index:-6;
-  background:radial-gradient(1200px 600px at 10% 10%, rgba(0,217,255,.15), transparent 60%),
-              radial-gradient(1200px 600px at 90% 20%, rgba(255,0,200,.15), transparent 60%),
-              radial-gradient(1200px 700px at 50% 110%, rgba(105,255,151,.14), transparent 60%),
-              linear-gradient(180deg, var(--bg), var(--bg-2));
-  filter: saturate(110%);
+/* =========================================================
+   CINEMATIC BACKGROUND (CSS-ONLY — no <canvas>)
+   Layers: gradient field + animated conic + floating blobs + starlets
+   ========================================================= */
+.bg{
+  position:fixed; inset:0; z-index:-5; pointer-events:none; overflow:hidden;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(0,217,255,.16), transparent 60%),
+    radial-gradient(1200px 600px at 90% 20%, rgba(255,0,200,.16), transparent 60%),
+    radial-gradient(1200px 700px at 50% 110%, rgba(105,255,151,.14), transparent 60%),
+    linear-gradient(180deg, var(--bg), var(--bg-2));
+  filter:saturate(110%);
 }
+.bg::before{
+  /* slowly-rotating conic highlight */
+  content:""; position:absolute; inset:-20%;
+  background:
+    conic-gradient(from 0deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,0) 18%,
+      rgba(255,255,255,.05) 32%,
+      rgba(255,255,255,0) 60%,
+      rgba(255,255,255,.07)
+    );
+  animation:spin 40s linear infinite;
+  mix-blend-mode:overlay;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* floating “glass” blobs */
+.blob{
+  position:absolute; width:44vmax; height:44vmax; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, rgba(0,217,255,.35), rgba(255,0,200,.18) 48%, rgba(255,255,255,.06) 60%, rgba(0,0,0,0) 72%);
+  filter: blur(48px);
+  animation: float 22s ease-in-out infinite alternate;
+  transform: translate3d(0,0,0);
+  will-change: transform, opacity, filter;
+}
+.blob.b2{ left:60%; top:10%; animation-duration:26s; opacity:.9 }
+.blob.b3{ left:-10%; top:60%; animation-duration:28s; opacity:.8 }
+@keyframes float{
+  0%{ transform:translate3d(-4%, -2%, 0) scale(1) }
+  50%{ transform:translate3d(6%, 4%, 0) scale(1.06) }
+  100%{ transform:translate3d(10%, -4%, 0) scale(1.03) }
+}
+
+/* twinkling starlets with drifting parallax using box-shadow clones */
+.starfield, .starfield:before, .starfield:after{
+  position:absolute; inset:-200px; content:"";
+  background: radial-gradient(2px 2px at 50% 50%, rgba(255,255,255,.9), rgba(255,255,255,0));
+  box-shadow:
+    100px 80px rgba(255,255,255,.9), 220px 240px rgba(255,255,255,.8),
+    480px 120px rgba(255,255,255,.7), 760px 280px rgba(255,255,255,.8),
+    1040px 40px rgba(255,255,255,.9), 1320px 320px rgba(255,255,255,.8),
+    1600px 180px rgba(255,255,255,.85), 1880px 260px rgba(255,255,255,.75);
+  opacity:.5; animation: driftStar 60s linear infinite;
+}
+.starfield:before{ filter:blur(1px); animation-duration:90s; opacity:.35 }
+.starfield:after{ filter:blur(2px); animation-duration:120s; opacity:.25 }
+@keyframes driftStar{
+  from{ transform:translate3d(0,0,0) }
+  to{ transform:translate3d(-200px,-120px,0) }
+}
+
+/* film-grain */
 .noise{
-  position:fixed; inset:-100px; z-index:-1; pointer-events:none; opacity:.04;
+  position:fixed; inset:-100px; z-index:-4; pointer-events:none; opacity:.04;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
   animation: drift 35s linear infinite;
 }
 @keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-140px,-140px,0)}}
 
-/* Canvas layers */
-#bg-stars,#bg-shapes,#bg-ribbons{
-  position:fixed; inset:0; z-index:-5; display:block;
-}
-#bg-shapes{z-index:-4}
-#bg-ribbons{z-index:-3}
-
-/* ------------- LAYOUT HELPERS ------------- */
+/* =========================================================
+   LAYOUT
+   ========================================================= */
 .wrap{max-width:1200px; margin:0 auto; padding:0 20px}
 .grid{display:grid; gap:20px}
 .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -65,7 +120,9 @@ body::before{
 @media (max-width:980px){.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.cols-2,.cols-3{grid-template-columns:1fr}}
 
-/* ------------- NAVBAR ------------- */
+/* =========================================================
+   NAVBAR with glass blur + underline reveal
+   ========================================================= */
 header.nav{
   position:sticky; top:0; z-index:20;
   backdrop-filter: blur(12px);
@@ -77,63 +134,99 @@ header.nav .bar{height:68px; display:flex; align-items:center; justify-content:s
 .brand .dot{color:var(--accent)}
 nav.menu{display:flex; gap:18px}
 nav.menu a{
-  color:var(--text); text-decoration:none; font-weight:700; opacity:.9;
-  padding:10px 8px; position:relative; transition:opacity .2s ease;
+  color:var(--text); text-decoration:none; font-weight:800; opacity:.9;
+  padding:10px 8px; position:relative; transition:opacity .2s ease, transform .2s ease;
 }
-nav.menu a:hover{opacity:1}
+nav.menu a:hover{opacity:1; transform:translateY(-1px)}
 nav.menu a::after{
   content:""; position:absolute; left:50%; bottom:6px; height:2px; width:0;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:all .25s ease; transform:translateX(-50%);
+  transition:all .28s ease; transform:translateX(-50%);
+  box-shadow:0 0 12px var(--ring);
 }
-nav.menu a:hover::after, nav.menu a.active::after{width:70%}
+nav.menu a:hover::after, nav.menu a.active::after{width:72%}
 
-/* ------------- HERO ------------- */
-.hero{padding:74px 0 28px}
-.hero h1{margin:0 0 10px; font-size:clamp(2.4rem, 6vw, 4.8rem); line-height:1.12; font-weight:800}
-.hero h1 .name{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+/* =========================================================
+   HERO + SHIMMER HEADLINE
+   ========================================================= */
+.hero{padding:86px 0 28px}
+.hero h1{margin:0 0 10px; font-size:clamp(2.4rem, 6vw, 4.8rem); line-height:1.12; font-weight:900; letter-spacing:.2px}
+.hero h1 .name{
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3),var(--accent));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  background-size:200% 100%; animation:shimmer 6s linear infinite;
+  text-shadow: 0 8px 34px rgba(0,217,255,.18);
+}
+@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 .muted{color:var(--muted)}
 
-/* hero CTA buttons */
+/* HERO CTA */
 .btn{
   display:inline-block; border:none; cursor:pointer; user-select:none;
-  padding:14px 26px; border-radius:999px; font-weight:800; letter-spacing:.3px;
+  padding:14px 26px; border-radius:999px; font-weight:900; letter-spacing:.3px;
   background:linear-gradient(45deg,var(--accent),var(--accent2)); color:#09101f;
   box-shadow:0 0 0 0 transparent; transition:transform .15s ease, box-shadow .15s ease, filter .2s ease;
+  position:relative; isolation:isolate;
+}
+.btn::after{
+  /* glow trail */
+  content:""; position:absolute; inset:-2px; border-radius:inherit; z-index:-1;
+  background:radial-gradient(40px 40px at var(--x,50%) var(--y,50%), rgba(255,255,255,.55), rgba(255,255,255,0));
+  opacity:.0; transition:opacity .15s ease;
 }
 .btn:hover{transform:translateY(-4px) scale(1.06); box-shadow:0 0 28px var(--ring)}
+.btn:hover::after{opacity:.7}
 .btn.ghost{background:transparent; color:var(--text); border:1.5px solid var(--border)}
 .btn.ghost:hover{box-shadow:0 0 18px var(--ring); filter:brightness(1.15)}
 
-/* ------------- SECTION HEADINGS ------------- */
-.section{padding:26px 0}
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+.section{padding:32px 0}
 .section h2{
   margin:0 0 16px; font-size:clamp(1.4rem, 3.2vw, 2rem); letter-spacing:.3px;
   background: linear-gradient(90deg, var(--text), var(--accent), var(--accent2), var(--text));
   -webkit-background-clip:text; background-clip:text; color:transparent;
   background-size:200% 100%; animation:shimmer 6s linear infinite;
 }
-@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 
-/* ------------- CARDS, CHIPS, TIMELINE ------------- */
+/* =========================================================
+   CARDS + 3D Tilt + Neon borders
+   ========================================================= */
 .card{
   background:linear-gradient(135deg, rgba(0,217,255,.06), rgba(255,0,200,.06));
   border:1px solid var(--border); border-radius:var(--radius);
   padding:22px; 
-  box-shadow:0 0 8px rgba(0,217,255,.1); /* Subtle initial glow */
-  transition:transform .2s ease, box-shadow .2s ease;
+  box-shadow:0 0 8px rgba(0,217,255,.12);
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  transform-style:preserve-3d; perspective:900px;
+  position:relative;
 }
+.card::before{
+  /* animated border light sweep */
+  content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+  background:conic-gradient(from var(--ang,0deg), rgba(0,217,255,.25), rgba(255,0,200,.15), rgba(255,255,255,.05), rgba(0,217,255,.25));
+  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  padding:1px; animation:borderSpin 12s linear infinite;
+  opacity:.45;
+}
+@keyframes borderSpin{to{--ang:360deg}}
 .card:hover{
-  transform: translateY(-3px) scale(1.01); /* Removed the bending effect */
-  box-shadow:0 10px 28px var(--shadow), 0 0 24px rgba(0,217,255,.35); /* Increased glow on hover */
+  transform: translateY(-3px) scale(1.02) rotateX(1deg);
+  box-shadow:0 10px 28px var(--shadow), 0 0 26px rgba(0,217,255,.25);
 }
-.chip,.tag{
-  display:inline-block; padding:6px 12px; border-radius:999px; font-weight:700;
-  background:rgba(255,255,255,.06); border:1px solid var(--border);
-  transition:transform .18s ease, box-shadow .18s ease, background .2s ease;
-}
-.chip:hover,.tag:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 0 16px var(--ring); background:rgba(255,255,255,.09)}
 
+/* chips/tags */
+.chip,.tag{
+  display:inline-block; padding:6px 12px; border-radius:999px; font-weight:800;
+  background:rgba(255,255,255,.06); border:1px solid var(--border);
+  transition:transform .18s ease, box-shadow .18s ease, background .2s ease, letter-spacing .18s ease;
+}
+.chip:hover,.tag:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 0 16px var(--ring); background:rgba(255,255,255,.09); letter-spacing:.3px}
+
+/* timeline */
 .timeline{position:relative; padding-left:28px}
 .timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent), var(--accent2))}
 .timeline .t{position:relative; margin:0 0 18px}
@@ -141,82 +234,74 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   content:""; position:absolute; left:-22px; top:.2em; width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 10px var(--ring)
 }
 
-/* Collapsible styles */
-.collapsible-header {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.collapsible-header h3, .collapsible-header h4 {
-  margin: 0;
-  flex-grow: 1;
-}
+/* collapsible */
+.collapsible-header { cursor: pointer; display:flex; align-items:center; justify-content:space-between; gap:12px }
+.collapsible-header h3, .collapsible-header h4 { margin:0; flex-grow:1 }
+.toggle-icon{ font-size:1.2rem; line-height:1; transition: transform 0.3s ease; }
+.toggle-icon.rotate{ transform: rotate(90deg) }
+
 .collapsible-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out;
-  padding-top: 0;
+  max-height: 0; overflow: hidden; transition: max-height 0.45s ease, opacity .45s ease, filter .45s ease;
+  padding-top:0; opacity:0; filter:blur(2px)
 }
 .collapsible-details.show {
-  max-height: 1000px; /* A large value to accommodate content */
-  padding-top: 10px;
+  max-height: 1000px; padding-top: 10px; opacity:1; filter:blur(0)
 }
-.collapsible-details p, .collapsible-details ul {
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-.collapsible-details ul {
-  padding-left: 20px;
-  margin: 0;
-}
-.collapsible-details ul ul {
-  margin-top: 8px;
-}
-.collapsible-details li {
-  margin-bottom: 8px;
-}
-.collapsible-details li ul li {
-  list-style-type: square;
-}
-.collapsible-header .toggle-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-  transition: transform 0.3s ease;
-}
-.collapsible-header .toggle-icon.rotate {
-  transform: rotate(90deg);
-}
+.collapsible-details p, .collapsible-details ul { color: var(--muted); margin-bottom: 12px }
+.collapsible-details ul { padding-left: 20px; margin: 0 }
+.collapsible-details ul ul { margin-top: 8px }
+.collapsible-details li { margin-bottom: 8px }
+.collapsible-details li ul li { list-style-type: square }
 
-/* ------------- REVEAL ON SCROLL ------------- */
-.reveal{opacity:0; transform:translateY(24px) scale(.98); transition:opacity .8s ease, transform .8s ease}
-.reveal.show{opacity:1; transform:none}
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(24px) scale(.98); transition:opacity .9s ease, transform .9s ease, filter .9s ease; filter:blur(4px)}
+.reveal.show{opacity:1; transform:none; filter:none}
 
-/* ------------- FOOTER + BACK TO TOP ------------- */
+/* footer + back to top */
 .footer{padding:40px 0; text-align:center; color:var(--muted)}
 .footer .socials{display:flex; gap:12px; justify-content:center; margin-top:8px}
 .footer .socials a{width:36px; height:36px; display:grid; place-items:center; border-radius:10px;
   text-decoration:none; color:var(--text); background:rgba(255,255,255,.06); border:1px solid var(--border);
   transition:transform .18s ease, box-shadow .18s ease}
-.footer .socials a:hover{transform:translateY(-3px); box-shadow:0 0 14px var(--ring)}
-.top{position:fixed; right:18px; bottom:18px; z-index:25; width:40px; height:40px; display:grid; place-items:center;
-  border-radius:50%; text-decoration:none; color:#0b0f19; font-weight:800; background:linear-gradient(45deg,var(--accent),var(--accent2));
-  transform:translateY(80px); opacity:0; transition:transform .2s ease, opacity .2s ease}
+.footer .socials a:hover{transform:translateY(-3px) scale(1.06); box-shadow:0 0 14px var(--ring)}
+.top{position:fixed; right:18px; bottom:18px; z-index:25; width:44px; height:44px; display:grid; place-items:center;
+  border-radius:50%; text-decoration:none; color:#0b0f19; font-weight:900; background:linear-gradient(45deg,var(--accent),var(--accent2));
+  transform:translateY(80px); opacity:0; transition:transform .2s ease, opacity .2s ease; box-shadow:0 0 18px var(--ring)}
 .top.show{transform:translateY(0); opacity:1}
 
-/* ------------- ACCESSIBILITY / REDUCED MOTION ------------- */
+/* Contact links */
+.contact-links{ display:flex; justify-content:space-around; gap:12px; flex-wrap:wrap; margin-top:20px }
+.contact-link-item{ display:flex; flex-direction:column; align-items:center; text-decoration:none; color:var(--text);
+  transition: transform .2s ease, filter .2s ease }
+.contact-link-item:hover{ transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 10px var(--ring)) }
+.contact-link-item .icon-box{
+  width:60px; height:60px; display:grid; place-items:center; border-radius:var(--radius);
+  background: rgba(255, 255, 255, .08); margin-bottom:8px; transition: background .2s ease, box-shadow .2s ease;
+  box-shadow: 0 0 8px rgba(0, 217, 255, .1)
+}
+.contact-link-item:hover .icon-box{ background: linear-gradient(45deg, var(--accent), var(--accent2)); box-shadow: 0 10px 28px var(--shadow), 0 0 24px rgba(0, 217, 255, .35) }
+.contact-link-item .icon-box svg{ width:32px; height:32px; fill: var(--accent); transition: fill .2s ease }
+.contact-link-item:hover .icon-box svg{ fill:#0d1226 }
+.contact-link-item span{ font-weight:700; font-size:.92rem }
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{animation:none !important; transition:none !important}
-  .reveal{opacity:1 !important; transform:none !important}
+  .reveal{opacity:1 !important; transform:none !important; filter:none !important}
 }
 </style>
 </head>
 <body id="top">
-<canvas id="bg-stars"></canvas>
-<canvas id="bg-shapes"></canvas>
-<canvas id="bg-ribbons"></canvas>
+<!-- ==================== BACKGROUND LAYERS ==================== -->
+<div class="bg">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="starfield"></div>
+</div>
 <div class="noise" aria-hidden="true"></div>
 
+<!-- ==================== NAV ==================== -->
 <header class="nav">
   <div class="wrap bar">
     <div class="brand" aria-label="Brand">
@@ -233,6 +318,7 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </header>
 
+<!-- ==================== HERO ==================== -->
 <section class="hero wrap">
   <h1>Hey! I'm <span class="name">Lohitaksha Koppada</span></h1>
   <p class="muted reveal" style="max-width:840px; font-size:1.15rem;">
@@ -244,6 +330,7 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </section>
 
+<!-- ==================== ABOUT ==================== -->
 <section id="about" class="section wrap reveal">
   <h2>About Me</h2>
   <div class="card">
@@ -268,6 +355,7 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </section>
 
+<!-- ==================== PROJECTS ==================== -->
 <section id="projects" class="section wrap reveal">
   <h2>Projects</h2>
   <div class="grid cols-2">
@@ -501,54 +589,7 @@ nav.menu a:hover::after, nav.menu a.active::after{width:70%}
   </div>
 </section>
 
-<script>
-document.querySelectorAll('.collapsible-header').forEach(header => {
-  header.addEventListener('click', () => {
-    const allDetails = document.querySelectorAll('.collapsible-details');
-    const allIcons = document.querySelectorAll('.toggle-icon');
-
-    const currentDetails = header.nextElementSibling;
-    const currentIcon = header.querySelector('.toggle-icon');
-
-    // Auto-close others
-    allDetails.forEach(details => {
-      if (details !== currentDetails) {
-        details.classList.remove('show');
-        details.style.maxHeight = null;
-      }
-    });
-    allIcons.forEach(icon => {
-      if (icon !== currentIcon) icon.classList.remove('rotate');
-    });
-
-    // Toggle current
-    currentDetails.classList.toggle('show');
-    currentIcon.classList.toggle('rotate');
-
-    if (currentDetails.classList.contains('show')) {
-      currentDetails.style.maxHeight = currentDetails.scrollHeight + "px";
-      currentDetails.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      currentDetails.style.maxHeight = null;
-    }
-  });
-});
-</script>
-
-<style>
-.collapsible-details {
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-.toggle-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-.toggle-icon.rotate {
-  transform: rotate(90deg);
-}
-</style>
-  
+<!-- ==================== SKILLS ==================== -->
 <section id="skills" class="section wrap reveal">
   <h2>Skills</h2>
   <div class="grid cols-2">
@@ -694,53 +735,7 @@ document.querySelectorAll('.collapsible-header').forEach(header => {
   </div>
 </section>
 
-<script>
-document.querySelectorAll('#skills .collapsible-header').forEach(header => {
-  header.addEventListener('click', () => {
-    const allDetails = document.querySelectorAll('#skills .collapsible-details');
-    const allIcons = document.querySelectorAll('#skills .toggle-icon');
-
-    const currentDetails = header.nextElementSibling;
-    const currentIcon = header.querySelector('.toggle-icon');
-
-    // Auto-close others
-    allDetails.forEach(details => {
-      if (details !== currentDetails) {
-        details.classList.remove('show');
-        details.style.maxHeight = null;
-      }
-    });
-    allIcons.forEach(icon => {
-      if (icon !== currentIcon) icon.classList.remove('rotate');
-    });
-
-    // Toggle current
-    currentDetails.classList.toggle('show');
-    currentIcon.classList.toggle('rotate');
-
-    if (currentDetails.classList.contains('show')) {
-      currentDetails.style.maxHeight = currentDetails.scrollHeight + "px";
-      currentDetails.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      currentDetails.style.maxHeight = null;
-    }
-  });
-});
-</script>
-
-<style>
-.collapsible-details {
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-.toggle-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-.toggle-icon.rotate {
-  transform: rotate(90deg);
-}
-</style>
+<!-- ==================== ACHIEVEMENTS ==================== -->
 <section id="achievements" class="section wrap reveal">
   <h2>Achievements</h2>
   <div class="grid cols-2">
@@ -810,7 +805,8 @@ document.querySelectorAll('#skills .collapsible-header').forEach(header => {
   </div>
 </section>
 
-  <section id="certifications" class="section wrap reveal">
+<!-- ==================== CERTIFICATIONS ==================== -->
+<section id="certifications" class="section wrap reveal">
   <h2>Certifications</h2>
   <div class="grid cols-2">
 
@@ -845,7 +841,7 @@ document.querySelectorAll('#skills .collapsible-header').forEach(header => {
       </div>
     </article>
 
-    <!-- Supervised Machine Learning Course -->
+    <!-- Supervised Machine Learning -->
     <article class="card">
       <div class="collapsible-header">
         <h3>Supervised Machine Learning</h3>
@@ -876,7 +872,7 @@ document.querySelectorAll('#skills .collapsible-header').forEach(header => {
       </div>
     </article>
 
-    <!-- Unsupervised Machine Learning Course -->
+    <!-- Unsupervised Machine Learning -->
     <article class="card">
       <div class="collapsible-header">
         <h3>Unsupervised Machine Learning</h3>
@@ -910,55 +906,7 @@ document.querySelectorAll('#skills .collapsible-header').forEach(header => {
   </div>
 </section>
 
-<script>
-document.querySelectorAll('#certifications .collapsible-header').forEach(header => {
-  header.addEventListener('click', () => {
-    const allDetails = document.querySelectorAll('#certifications .collapsible-details');
-    const allIcons = document.querySelectorAll('#certifications .toggle-icon');
-
-    const currentDetails = header.nextElementSibling;
-    const currentIcon = header.querySelector('.toggle-icon');
-
-    // Auto-close others
-    allDetails.forEach(details => {
-      if (details !== currentDetails) {
-        details.classList.remove('show');
-        details.style.maxHeight = null;
-      }
-    });
-    allIcons.forEach(icon => {
-      if (icon !== currentIcon) icon.classList.remove('rotate');
-    });
-
-    // Toggle current
-    currentDetails.classList.toggle('show');
-    currentIcon.classList.toggle('rotate');
-
-    if (currentDetails.classList.contains('show')) {
-      currentDetails.style.maxHeight = currentDetails.scrollHeight + "px";
-      currentDetails.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      currentDetails.style.maxHeight = null;
-    }
-  });
-});
-</script>
-
-<style>
-.collapsible-details {
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-.toggle-icon {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-}
-.toggle-icon.rotate {
-  transform: rotate(90deg);
-}
-</style>
-
-
+<!-- ==================== EDUCATION ==================== -->
 <section id="education" class="section wrap reveal">
   <h2>Education</h2>
   <div class="timeline">
@@ -980,55 +928,7 @@ document.querySelectorAll('#certifications .collapsible-header').forEach(header 
   </div>
 </section>
 
-<style>
-/* New Contact Section styles */
-.contact-links {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-.contact-link-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text);
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-.contact-link-item:hover {
-  transform: translateY(-4px) scale(1.05);
-  filter: drop-shadow(0 0 10px var(--ring));
-}
-.contact-link-item .icon-box {
-  width: 60px;
-  height: 60px;
-  display: grid;
-  place-items: center;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .08);
-  margin-bottom: 8px;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 0 8px rgba(0, 217, 255, .1); /* Subtle initial glow */
-}
-.contact-link-item:hover .icon-box {
-  background: linear-gradient(45deg, var(--accent), var(--accent2));
-  box-shadow: 0 10px 28px var(--shadow), 0 0 24px rgba(0, 217, 255, .35); /* Increased glow on hover */
-}
-.contact-link-item .icon-box svg {
-  width: 32px;
-  height: 32px;
-  fill: var(--accent); /* Changed to a vibrant color */
-  transition: fill 0.2s ease;
-}
-.contact-link-item:hover .icon-box svg {
-  fill: #0d1226; /* Changed fill color on hover */
-}
-.contact-link-item span {
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-</style>
-
+<!-- ==================== CONTACT ==================== -->
 <section id="contact" class="section wrap reveal">
   <h2>Let's Connect</h2>
   <div class="grid cols-2">
@@ -1038,24 +938,25 @@ document.querySelectorAll('#certifications .collapsible-header').forEach(header 
       <div class="contact-links">
         <a class="contact-link-item" href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank" aria-label="LinkedIn Profile">
           <div class="icon-box">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </div>
           <span>LinkedIn</span>
         </a>
         <a class="contact-link-item" href="https://github.com/Lohitaksha-git" target="_blank" aria-label="GitHub Profile">
           <div class="icon-box">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.772.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.197-6.091 8.197-11.388 0-6.627-5.373-12-12-12z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.772.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.197-6.091 8.197-11.388 0-6.627-5.373-12-12-12z"/></svg>
           </div>
           <span>GitHub</span>
         </a>
         <a class="contact-link-item" href="mailto:lohitaksha.koppada123@gmail.com" aria-label="Primary Email">
           <div class="icon-box">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.328v14.015l6.575-8.687zm11.85 0l6.575 8.687v-14.015l-6.575 5.328zM12 14.504l-7.585-6.141-6.415 8.916v2.109h24v-2.109l-6.415-8.916-7.585 6.141z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.328v14.015l6.575-8.687zm11.85 0l6.575 8.687v-14.015l-6.575 5.328zM12 14.504l-7.585-6.141-6.415 8.916v2.109h24v-2.109l-6.415-8.916-7.585 6.141z"/></svg>
           </div>
           <span>Email</span>
         </a>
       </div>
     </div>
+
     <form class="card" onsubmit="event.preventDefault(); alert('Thanks! I will get back to you.');">
       <h3>Quick Message</h3>
       <p class="muted">Have a project in mind or just want to say hello? Let's talk!</p>
@@ -1069,41 +970,34 @@ document.querySelectorAll('#certifications .collapsible-header').forEach(header 
   </div>
 </section>
 
+<!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <p>© <span id="year"></span> Lohitaksha — Portfolio</p>
   <div class="socials">
     <a href="mailto:lohitaksha.koppada123@gmail.com" aria-label="Email 1">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.328v14.015l6.575-8.687zm11.85 0l6.575 8.687v-14.015l-6.575 5.328zM12 14.504l-7.585-6.141-6.415 8.916v2.109h24v-2.109l-6.415-8.916-7.585 6.141z"/>
-  </svg>
-</a>
-<a href="mailto:sitarama.lohitaksha@gmail.com" aria-label="Email 2">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.328v14.015l6.575-8.687zm11.85 0l6.575 8.687v-14.015l-6.575 5.328zM12 14.504l-7.585-6.141-6.415 8.916v2.109h24v-2.109l-6.415-8.916-7.585 6.141z"/>
-  </svg>
-</a>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.328v14.015l6.575-8.687zm11.85 0l6.575 8.687v-14.015l-6.575 5.328zM12 14.504l-7.585-6.141-6.415 8.916v2.109h24v-2.109l-6.415-8.916-7.585 6.141z"/></svg>
+    </a>
+    <a href="mailto:sitarama.lohitaksha@gmail.com" aria-label="Email 2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 12.713l-11.985-9.713h23.971l-11.986 9.713zm-5.425-1.822l-6.575-5.328v14.015l6.575-8.687zm11.85 0l6.575 8.687v-14.015l-6.575 5.328zM12 14.504l-7.585-6.141-6.415 8.916v2.109h24v-2.109l-6.415-8.916-7.585 6.141z"/></svg>
+    </a>
     <a href="https://github.com/Lohitaksha-git" target="_blank" aria-label="GitHub">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.772.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.197-6.091 8.197-11.388 0-6.627-5.373-12-12-12z"/>
-  </svg>
-</a>
-<a href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank" aria-label="LinkedIn">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-  </svg>
-</a>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.304.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.465-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.772.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.197-6.091 8.197-11.388 0-6.627-5.373-12-12-12z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lohitaksha-den/" target="_blank" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+    </a>
   </div>
 </footer>
 
 <a href="#top" class="top" id="backToTopBtn" aria-label="Back to top">↑</a>
 
+<!-- ==================== INTERACTIVITY ==================== -->
 <script>
-/* =============== UTIL =============== */
+/* small helpers */
 const $ = (q,root=document)=>root.querySelector(q);
 const $$ = (q,root=document)=>[...root.querySelectorAll(q)];
-const clamp = (n, min, max)=>Math.max(min, Math.min(max, n));
 
-/* =============== YEAR + ACTIVE NAV =============== */
+/* year + active nav underline sync */
 $('#year').textContent = new Date().getFullYear();
 (function(){
   const links = [...$$('header.nav .menu a')];
@@ -1117,118 +1011,16 @@ $('#year').textContent = new Date().getFullYear();
   window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
 })();
 
-/* =============== BACKGROUND: STARS =============== */
-const starCanvas = document.getElementById('bg-stars');
-const sctx = starCanvas.getContext('2d');
-let SW, SH;
-const STARS=[], STAR_COUNT=160, LINK_DIST=140;
-function sizeStars(){ SW = starCanvas.width = innerWidth; SH = starCanvas.height = innerHeight; }
-function initStars(){
-  STARS.length=0;
-  for(let i=0;i<STAR_COUNT;i++){
-    STARS.push({x:Math.random()*SW, y:Math.random()*SH, r:Math.random()*1.5+0.5, vx:(Math.random()-0.5)*0.35, vy:(Math.random()-0.5)*0.35});
-  }
-}
-function drawStars(){
-  sctx.clearRect(0,0,SW,SH);
-  for(const s of STARS){
-    s.x+=s.vx; s.y+=s.vy;
-    if(s.x<0) s.x=SW; if(s.x>SW) s.x=0;
-    if(s.y<0) s.y=SH; if(s.y>SH) s.y=0;
-    sctx.beginPath(); sctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    sctx.fillStyle='rgba(255,255,255,0.9)'; sctx.fill();
-  }
-  for(let i=0;i<STARS.length;i++){
-    for(let j=i+1;j<STARS.length;j++){
-      const dx=STARS[i].x-STARS[j].x, dy=STARS[i].y-STARS[j].y;
-      const d=Math.hypot(dx,dy);
-      if(d<LINK_DIST){
-        sctx.beginPath();
-        sctx.moveTo(STARS[i].x,STARS[i].y);
-        sctx.lineTo(STARS[j].x,STARS[j].y);
-        sctx.strokeStyle=`rgba(255,255,255,${1-d/LINK_DIST})`;
-        sctx.lineWidth=.6; sctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(drawStars);
-}
-sizeStars(); initStars(); drawStars();
-addEventListener('resize', ()=>{ sizeStars(); initStars(); });
+/* glow-trail on buttons (track cursor position) */
+$$('.btn').forEach(btn=>{
+  btn.addEventListener('pointermove', e=>{
+    const r = btn.getBoundingClientRect();
+    btn.style.setProperty('--x', `${e.clientX - r.left}px`);
+    btn.style.setProperty('--y', `${e.clientY - r.top}px`);
+  });
+});
 
-/* =============== BACKGROUND: FLOATING SHAPES =============== */
-const shapeCanvas = document.getElementById('bg-shapes');
-const hctx = shapeCanvas.getContext('2d');
-let HW, HH;
-const SHAPES=[], SHAPE_COUNT=60;
-function sizeShapes(){ HW=shapeCanvas.width=innerWidth; HH=shapeCanvas.height=innerHeight; }
-function initShapes(){
-  SHAPES.length=0;
-  for(let i=0;i<SHAPE_COUNT;i++){
-    SHAPES.push({x:Math.random()*HW, y:Math.random()*HH, s:Math.random()*12+6, a:Math.random()*Math.PI*2, va:(Math.random()-0.5)*0.01, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, sides:[3,4,6][Math.floor(Math.random()*3)]});
-  }
-}
-function poly(ctx,x,y,r,sides,rot=0){
-  ctx.beginPath();
-  for(let i=0;i<sides;i++){
-    const ang=rot+i*2*Math.PI/sides;
-    const px=x+Math.cos(ang)*r, py=y+Math.sin(ang)*r;
-    i?ctx.lineTo(px,py):ctx.moveTo(px,py);
-  }
-  ctx.closePath();
-}
-function drawShapes(){
-  hctx.clearRect(0,0,HW,HH);
-  for(const p of SHAPES){
-    p.x+=p.vx; p.y+=p.vy; p.a+=p.va;
-    if(p.x<-50)p.x=HW+50; if(p.x>HW+50)p.x=-50;
-    if(p.y<-50)p.y=HH+50; if(p.y>HH+50)p.y=-50;
-    hctx.save(); hctx.globalAlpha=.08; hctx.strokeStyle='#00d9ff';
-    poly(hctx,p.x,p.y,p.s,p.sides,p.a); hctx.stroke(); hctx.restore();
-  }
-  requestAnimationFrame(drawShapes);
-}
-sizeShapes(); initShapes(); drawShapes();
-addEventListener('resize', ()=>{ sizeShapes(); initShapes(); });
-
-/* =============== BACKGROUND: RIBBON FIELDS (bezier flow) =============== */
-const ribbon = document.getElementById('bg-ribbons');
-const rctx = ribbon.getContext('2d');
-let RW, RH; let t=0;
-function sizeRib(){ RW=ribbon.width=innerWidth; RH=ribbon.height=innerHeight; }
-function ribbonNoise(x,y,seed=0){ return Math.sin((x*0.002 + y*0.002) + seed) * 0.8; }
-function drawRibbons(){
-  rctx.clearRect(0,0,RW,RH);
-  rctx.globalAlpha = .12;
-  for(let i=0;i<6;i++){
-    const seed = t*0.002 + i*2.1;
-    rctx.beginPath();
-    for(let x=0; x<=RW; x+=12){
-      const y = RH*0.2 + i*RH*0.12 + Math.sin(x*0.004 + seed)*30 + ribbonNoise(x, i*120, seed)*28;
-      x===0 ? rctx.moveTo(x,y) : rctx.lineTo(x,y);
-    }
-    rctx.strokeStyle = i%2 ? '#ff00c8' : '#00d9ff';
-    rctx.lineWidth = 2;
-    rctx.stroke();
-  }
-  t+=1;
-  requestAnimationFrame(drawRibbons);
-}
-sizeRib(); drawRibbons();
-addEventListener('resize', sizeRib);
-
-/* =============== TYPEWRITER TAGLINE =============== */
-(function(){
-  const el = document.querySelector('.hero .muted');
-  if(!el) return;
-  const txt = el.textContent.trim();
-  el.dataset.fulltext = txt; el.textContent = '';
-  let i=0;
-  function type(){ if(i<=txt.length){ el.textContent = txt.slice(0,i++); setTimeout(type, 18);} }
-  type();
-})();
-
-/* =============== INTERSECTION REVEAL + STAGGER =============== */
+/* Intersection reveal + stagger */
 $$('.reveal').forEach(sec=>{
   const obs = new IntersectionObserver((entries,o)=>{
     entries.forEach(entry=>{
@@ -1243,7 +1035,7 @@ $$('.reveal').forEach(sec=>{
   obs.observe(sec);
 });
 
-/* =============== MAGNETIC HOVER (buttons + nav) =============== */
+/* Magnetic hover for buttons + nav */
 function magnetic(el, strength=0.25){
   const rect = ()=> el.getBoundingClientRect();
   el.addEventListener('mousemove', e=>{
@@ -1254,30 +1046,62 @@ function magnetic(el, strength=0.25){
   });
   el.addEventListener('mouseleave', ()=>{ el.style.transform = 'translate(0,0)'; });
 }
-$$('.btn, header.nav .menu a').forEach(el=>magnetic(el, .22));
+$$('.btn, header.nav .menu a').forEach(el=>magnetic(el, .18));
 
+/* 3D tilt for cards (safe + subtle) */
+$$('.card').forEach(card=>{
+  let raf; const damp=18;
+  function tilt(e){
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX - (r.left + r.width/2))/r.width;
+    const y=(e.clientY - (r.top + r.height/2))/r.height;
+    const rx = (y * -6); const ry = (x * 8);
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(()=>{ card.style.transform=`translateY(-3px) scale(1.02) rotateX(${rx}deg) rotateY(${ry}deg)`; });
+  }
+  function reset(){ cancelAnimationFrame(raf); card.style.transform=''; }
+  card.addEventListener('pointermove', tilt);
+  card.addEventListener('pointerleave', reset);
+});
 
-/* =============== BACK TO TOP VISIBILITY =============== */
+/* Back to top visibility */
 const backToTopBtn = document.getElementById('backToTopBtn');
 if(backToTopBtn){ addEventListener('scroll', ()=> backToTopBtn.classList.toggle('show', scrollY>300)); }
 
-/* =============== KEYBOARD FOCUS RINGS =============== */
+/* Collapsible sections (auto-close siblings within each group) */
+function setupCollapsibles(scope){
+  const headers = $$(scope+' .collapsible-header');
+  headers.forEach(header=>{
+    header.addEventListener('click', ()=>{
+      const currentDetails = header.nextElementSibling;
+      const currentIcon = header.querySelector('.toggle-icon');
+      /* close siblings in same scope */
+      $$(scope+' .collapsible-details').forEach(d=>{ if(d!==currentDetails){ d.classList.remove('show'); d.style.maxHeight=null; }});
+      $$(scope+' .toggle-icon').forEach(i=>{ if(i!==currentIcon) i.classList.remove('rotate'); });
+
+      currentDetails.classList.toggle('show');
+      currentIcon.classList.toggle('rotate');
+      if(currentDetails.classList.contains('show')){
+        currentDetails.style.maxHeight = currentDetails.scrollHeight + "px";
+        currentDetails.scrollIntoView({ behavior: "smooth", block: "start" });
+      }else{
+        currentDetails.style.maxHeight = null;
+      }
+    });
+  });
+}
+setupCollapsibles('#projects');
+setupCollapsibles('#skills');
+setupCollapsibles('#achievements');
+setupCollapsibles('#certifications');
+
+/* Keyboard focus ring helper */
 (() => {
   let mouse = false;
   addEventListener('mousedown', ()=> mouse=true);
   addEventListener('keydown', ()=> mouse=false);
   document.body.classList.toggle('no-mouse', mouse);
 })();
-
-/* =============== COLLAPSIBLE SECTIONS =============== */
-$$('.collapsible-header').forEach(header => {
-  header.addEventListener('click', () => {
-    const details = header.nextElementSibling;
-    const icon = header.querySelector('.toggle-icon');
-    details.classList.toggle('show');
-    icon.classList.toggle('rotate');
-  });
-});
 </script>
 </body>
 </html>
