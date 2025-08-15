@@ -810,6 +810,155 @@ document.querySelectorAll('#skills .collapsible-header').forEach(header => {
   </div>
 </section>
 
+  <section id="certifications" class="section wrap reveal">
+  <h2>Certifications</h2>
+  <div class="grid cols-2">
+
+    <!-- Machine Learning with Python -->
+    <article class="card">
+      <div class="collapsible-header">
+        <h3>Machine Learning with Python</h3>
+        <span class="toggle-icon">▶️</span>
+      </div>
+      <div class="collapsible-details">
+        <p class="muted">Powered by IBM Developer Skills Network | Issued by Cognitive Class | 6 May 2025</p>
+        <ul>
+          <li>Comprehensive hands-on training covering ML theory and Python implementation.</li>
+          <li>Proficient in data manipulation (NumPy, Pandas) and visualization (Matplotlib).</li>
+          <li>Built supervised models: Linear/Logistic Regression, KNN, Decision Trees, SVM.</li>
+          <li>Applied unsupervised models: K-Means, Hierarchical Clustering, DBSCAN.</li>
+          <li>Evaluated models using MSE, RMSE, R², Precision, Recall, F1-Score, ROC-AUC.</li>
+          <li>Implemented recommender systems (content-based & collaborative filtering).</li>
+          <li>Used cross-validation to reduce overfitting and improve generalization.</li>
+          <li>Completed capstone project executing full ML pipeline from preprocessing to optimization.</li>
+        </ul>
+        <div>
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Supervised Learning</span>
+          <span class="tag">Unsupervised Learning</span>
+          <span class="tag">Model Evaluation</span>
+          <span class="tag">Recommender Systems</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">NumPy</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Supervised Machine Learning Course -->
+    <article class="card">
+      <div class="collapsible-header">
+        <h3>Supervised Machine Learning</h3>
+        <span class="toggle-icon">▶️</span>
+      </div>
+      <div class="collapsible-details">
+        <p class="muted">Issued by Scaler | 20 May 2025</p>
+        <ul>
+          <li>Regression models with regularization, feature engineering, and interpretability.</li>
+          <li>Instance-based learning: KNN, distance metrics, kd-trees, LSH.</li>
+          <li>Probabilistic learning: Naive Bayes, Gaussian NB, Laplace smoothing.</li>
+          <li>Margin-based models: SVM with kernel methods and hinge loss.</li>
+          <li>Tree-based models: Decision Trees, Regression Trees.</li>
+          <li>Ensemble learning: Random Forest, AdaBoost, Gradient Boosting, XGBoost.</li>
+          <li>Model tuning via GridSearchCV, RandomizedSearchCV, cross-validation.</li>
+          <li>Strong foundation in probability, statistics, and objective function formulation.</li>
+        </ul>
+        <div>
+          <span class="tag">Supervised Learning</span>
+          <span class="tag">SVM</span>
+          <span class="tag">Ensemble Models</span>
+          <span class="tag">Naive Bayes</span>
+          <span class="tag">Feature Engineering</span>
+          <span class="tag">Decision Trees</span>
+          <span class="tag">Hyperparameter Tuning</span>
+          <span class="tag">Model Evaluation</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Unsupervised Machine Learning Course -->
+    <article class="card">
+      <div class="collapsible-header">
+        <h3>Unsupervised Machine Learning</h3>
+        <span class="toggle-icon">▶️</span>
+      </div>
+      <div class="collapsible-details">
+        <p class="muted">Issued by Scaler | 15 May 2025</p>
+        <ul>
+          <li>Implemented K-Means, K-Medoids, DBSCAN, and hierarchical clustering methods.</li>
+          <li>Mathematical understanding of centroid and density-based clustering.</li>
+          <li>Optimized K-Means with K-Means++ for improved convergence.</li>
+          <li>Analyzed failure cases and applied robust methods for varying densities.</li>
+          <li>Constructed dendrograms and applied proximity methods.</li>
+          <li>Evaluated models with Silhouette Score, Elbow Method, and Inertia.</li>
+          <li>Determined optimal cluster counts with diagnostic plots.</li>
+          <li>Compared strengths and limitations of clustering algorithms.</li>
+        </ul>
+        <div>
+          <span class="tag">Unsupervised Learning</span>
+          <span class="tag">K-Means</span>
+          <span class="tag">DBSCAN</span>
+          <span class="tag">Hierarchical Clustering</span>
+          <span class="tag">Cluster Evaluation</span>
+          <span class="tag">Silhouette Score</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Clustering</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('#certifications .collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const allDetails = document.querySelectorAll('#certifications .collapsible-details');
+    const allIcons = document.querySelectorAll('#certifications .toggle-icon');
+
+    const currentDetails = header.nextElementSibling;
+    const currentIcon = header.querySelector('.toggle-icon');
+
+    // Auto-close others
+    allDetails.forEach(details => {
+      if (details !== currentDetails) {
+        details.classList.remove('show');
+        details.style.maxHeight = null;
+      }
+    });
+    allIcons.forEach(icon => {
+      if (icon !== currentIcon) icon.classList.remove('rotate');
+    });
+
+    // Toggle current
+    currentDetails.classList.toggle('show');
+    currentIcon.classList.toggle('rotate');
+
+    if (currentDetails.classList.contains('show')) {
+      currentDetails.style.maxHeight = currentDetails.scrollHeight + "px";
+      currentDetails.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      currentDetails.style.maxHeight = null;
+    }
+  });
+});
+</script>
+
+<style>
+.collapsible-details {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.toggle-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+.toggle-icon.rotate {
+  transform: rotate(90deg);
+}
+</style>
+
+
 <section id="education" class="section wrap reveal">
   <h2>Education</h2>
   <div class="timeline">
