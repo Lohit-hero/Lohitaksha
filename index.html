@@ -85,6 +85,18 @@ ul{margin:0; padding-left:20px;}
   width:0%;
   transition:width 1.2s ease;
 }
+/* Collapsible */
+.collapsible{
+  cursor:pointer;
+  padding:10px 0;
+  font-weight:700;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.collapsible:hover{color:var(--accent);}
+.collapsible-content{
+  display:none;
+  padding-top:10px;
+}
 /* Starfield */
 #stars{
   position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;
@@ -128,17 +140,14 @@ ul{margin:0; padding-left:20px;}
     <a href="#projects">Projects</a>
   </nav>
 </header>
-<main id="content">
-  <!-- Injected by JS -->
-</main>
+<main id="content"></main>
 <div id="backToTop" title="Back to Top">↑</div>
 <script>
-// Profile data
+// Data
 const profile = {
   detailed: { intro: `Resolute and results-oriented researcher with expertise in quantum mechanics, computational modelling, nanoscience, and machine learning. Skilled in Python, ML algorithms, and scientific communication. Published peer-reviewed research and authored books in scientific and self-help domains.` },
   updated: { intro: `Innovative researcher blending materials science, computational physics, and machine learning. Founder of FIARD and host of Lohitaksha’s Den podcast, integrating leadership, growth, and science. Multiple publications and books; strong academic and entrepreneurial track record.` }
 };
-// Skills
 const skills = [
   {name:"Python",level:95},
   {name:"Machine Learning",level:90},
@@ -146,7 +155,6 @@ const skills = [
   {name:"Leadership & Communication",level:92},
   {name:"Innovation & Problem Solving",level:90}
 ];
-// Achievements
 const achievements = [
   "Author: Studies on Shell Confined Atoms (2025)",
   "Author: Brainwaves of The Bold (2025)",
@@ -155,7 +163,6 @@ const achievements = [
   "CSIR-NET-JRF AIR 37 (2025)",
   "IMSc Topper (Years 4 & 5)"
 ];
-// Projects
 const projects = {
   detailed: {
     underway: [
@@ -193,28 +200,42 @@ function render(mode){
     </section>
     <section id="achievements" class="card"><h2>Achievements</h2><ul>${achievements.map(a=>`<li>${a}</li>`).join("")}</ul></section>
     <section id="projects">
-      <h2>Underway</h2>
-      ${proj.underway.map(p=>`
-        <div class="card project">
-          <h3>${p.title}</h3>
-          <button onclick="toggleDetails(this)">Show Details</button>
-          <div class="details">${p.details}</div>
-        </div>
-      `).join("")}
-      <h2>Accomplished</h2>
-      ${proj.accomplished.map(p=>`
-        <div class="card project">
-          <h3>${p.title}</h3>
-          <button onclick="toggleDetails(this)">Show Details</button>
-          <div class="details">${p.details}</div>
-        </div>
-      `).join("")}
+      <div class="collapsible">Underway</div>
+      <div class="collapsible-content">
+        ${proj.underway.map(p=>`
+          <div class="card project">
+            <h3>${p.title}</h3>
+            <button onclick="toggleDetails(this)">Show Details</button>
+            <div class="details">${p.details}</div>
+          </div>
+        `).join("")}
+      </div>
+      <div class="collapsible">Accomplished</div>
+      <div class="collapsible-content">
+        ${proj.accomplished.map(p=>`
+          <div class="card project">
+            <h3>${p.title}</h3>
+            <button onclick="toggleDetails(this)">Show Details</button>
+            <div class="details">${p.details}</div>
+          </div>
+        `).join("")}
+      </div>
     </section>
   `;
+  initCollapsibles();
   observeSections();
   animateSkills();
 }
-// Toggle details
+// Collapsible toggle
+function initCollapsibles(){
+  document.querySelectorAll(".collapsible").forEach(col=>{
+    col.addEventListener("click", ()=>{
+      const content = col.nextElementSibling;
+      content.style.display = (content.style.display==="block") ? "none" : "block";
+    });
+  });
+}
+// Toggle project details
 function toggleDetails(btn){
   const d = btn.nextElementSibling;
   if(d.style.display==="block"){ d.style.display="none"; btn.textContent="Show Details"; }
@@ -239,7 +260,7 @@ function observeSections(){
   },{threshold:0.15});
   cards.forEach(card=>observer.observe(card));
 }
-// Skill bar animation
+// Skill bars
 function animateSkills(){
   const fills = document.querySelectorAll(".skill-fill");
   const observer = new IntersectionObserver(entries=>{
