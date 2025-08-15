@@ -2,303 +2,226 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Lohitaksha Koppada — Portfolio</title>
-<meta name="description" content="Portfolio of Lohitaksha Koppada — Materials Science, Computational/Quantum Modeling, Machine Learning, and Scientific Writing." />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lohitaksha Koppada — Cosmic Portfolio</title>
+<meta name="description" content="A cinematic, interactive portfolio for Lohitaksha Koppada with constellations, aurora, shooting stars, holographic UI, and silky micro-interactions." />
 <style>
-/* =========================================================
-   THEME TOKENS
-   ========================================================= */
+/* =========================
+   COSMIC ULTRA THEME
+   (single-file, no assets)
+   ========================= */
 :root{
-  --bg:#070b16;
-  --bg-2:#0b1022;
-  --panel:#0d1226;
-  --text:#e7edf7;
-  --muted:#a1abc0;
-  --accent:#00d9ff;
-  --accent2:#ff00c8;
-  --accent3:#69ff97;
+  --bg:#050711;
+  --bg-2:#0a0f24;
+  --text:#ecf2ff;
+  --muted:#9fb0d9;
+  --accent:#7ae2ff;     /* electric cyan */
+  --accent2:#c77dff;    /* neon violet  */
+  --accent3:#4df2b9;    /* mint         */
+  --ring:rgba(122,226,255,.35);
   --border:rgba(255,255,255,.10);
-  --ring:rgba(0,217,255,.35);
-  --shadow:rgba(0,0,0,.55);
-  --radius:18px;
+  --radius:20px;
+  --shadow: 0 10px 30px rgba(0,0,0,.55);
 }
-@media (prefers-color-scheme: light){
-  :root{ --text:#0d1324; --muted:#495168; --panel:#eef3ff; --bg:#f6f8ff; --bg-2:#eef3ff; --border:rgba(13,19,36,.10); --shadow:rgba(0,0,0,.12)}
-}
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0; color:var(--text); background:var(--bg);
-  font-family:'Outfit',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  margin:0; color:var(--text); background:radial-gradient(1200px 800px at 20% -10%,#0b1540 0%,#06091b 60%,#03040c 100%);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
   line-height:1.65; overflow-x:hidden;
 }
 
-/* =========================================================
-   CINEMATIC BACKGROUND (CSS + Canvas Constellations)
-   ========================================================= */
-.bg{
-  position:fixed; inset:0; z-index:-5; pointer-events:none; overflow:hidden;
-  background:
-    radial-gradient(1200px 600px at 10% 10%, rgba(0,217,255,.16), transparent 60%),
-    radial-gradient(1200px 600px at 90% 20%, rgba(255,0,200,.16), transparent 60%),
-    radial-gradient(1200px 700px at 50% 110%, rgba(105,255,151,.14), transparent 60%),
-    linear-gradient(180deg, var(--bg), var(--bg-2));
-  filter:saturate(110%);
-}
-.bg::before{
-  content:""; position:absolute; inset:-20%;
-  background:
-    conic-gradient(from 0deg,
-      rgba(255,255,255,.07),
-      rgba(255,255,255,0) 18%,
-      rgba(255,255,255,.05) 32%,
-      rgba(255,255,255,0) 60%,
-      rgba(255,255,255,.07));
-  animation:spin 40s linear infinite; mix-blend-mode:overlay;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* floating “glass” blobs */
-.blob{
-  position:absolute; width:44vmax; height:44vmax; border-radius:50%;
-  background: radial-gradient(circle at 30% 30%, rgba(0,217,255,.35), rgba(255,0,200,.18) 48%, rgba(255,255,255,.06) 60%, rgba(0,0,0,0) 72%);
-  filter: blur(48px);
-  animation: float 22s ease-in-out infinite alternate;
-  transform: translate3d(0,0,0);
-  will-change: transform, opacity, filter;
-}
-.blob.b2{ left:60%; top:10%; animation-duration:26s; opacity:.9 }
-.blob.b3{ left:-10%; top:60%; animation-duration:28s; opacity:.8 }
-@keyframes float{
-  0%{ transform:translate3d(-4%, -2%, 0) scale(1) }
-  50%{ transform:translate3d(6%, 4%, 0) scale(1.06) }
-  100%{ transform:translate3d(10%, -4%, 0) scale(1.03) }
-}
-
-/* subtle starfield */
-.starfield, .starfield:before, .starfield:after{
-  position:absolute; inset:-200px; content:"";
-  background: radial-gradient(2px 2px at 50% 50%, rgba(255,255,255,.9), rgba(255,255,255,0));
-  box-shadow:
-    100px 80px rgba(255,255,255,.9), 220px 240px rgba(255,255,255,.8),
-    480px 120px rgba(255,255,255,.7), 760px 280px rgba(255,255,255,.8),
-    1040px 40px rgba(255,255,255,.9), 1320px 320px rgba(255,255,255,.8),
-    1600px 180px rgba(255,255,255,.85), 1880px 260px rgba(255,255,255,.75);
-  opacity:.5; animation: driftStar 60s linear infinite;
-}
-.starfield:before{ filter:blur(1px); animation-duration:90s; opacity:.35 }
-.starfield:after{ filter:blur(2px); animation-duration:120s; opacity:.25 }
-@keyframes driftStar{from{ transform:translate3d(0,0,0) } to{ transform:translate3d(-200px,-120px,0) }}
-
-/* film-grain */
-.noise{
-  position:fixed; inset:-100px; z-index:-4; pointer-events:none; opacity:.04;
-  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
-  animation: drift 35s linear infinite;
-}
-@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-140px,-140px,0)}}
-
-/* Canvas that draws constellation links */
-canvas.constellations{
-  position:fixed; inset:0; z-index:-3; pointer-events:none; mix-blend-mode:screen; opacity:.8;
-}
-
-/* =========================================================
+/* =========================
    LAYOUT
-   ========================================================= */
+   ========================= */
 .wrap{max-width:1200px; margin:0 auto; padding:0 20px}
-.grid{display:grid; gap:20px}
+.section{padding:64px 0}
+.grid{display:grid; gap:22px}
 .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:980px){.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:720px){.cols-2,.cols-3{grid-template-columns:1fr}}
 
-/* =========================================================
-   NAVBAR with glass blur + underline reveal
-   ========================================================= */
+/* =========================
+   BACKGROUND LAYERS
+   ========================= */
+.layer{position:fixed; inset:0; pointer-events:none}
+.nebula{
+  z-index:-6; filter:blur(40px) saturate(130%);
+  background:
+    radial-gradient(700px 420px at 10% 20%, rgba(124,0,255,.25), transparent 60%),
+    radial-gradient(600px 400px at 85% 15%, rgba(0,210,255,.22), transparent 60%),
+    radial-gradient(600px 520px at 70% 90%, rgba(77,242,185,.2), transparent 65%);
+  animation: drift 60s ease-in-out infinite alternate;
+}
+@keyframes drift{0%{transform:translate3d(-3%,-2%,0) scale(1)}100%{transform:translate3d(3%,2%,0) scale(1.05)}}
+
+.aurora{
+  z-index:-5; mix-blend-mode:screen; opacity:.65;
+  background:
+    conic-gradient(from 180deg at 30% 70%, rgba(122,226,255,.10), transparent 35%, rgba(199,125,255,.12) 60%, transparent 90%),
+    conic-gradient(from 0deg at 75% 30%, rgba(77,242,185,.10), transparent 35%, rgba(122,226,255,.10) 55%, transparent 90%);
+  filter:blur(24px);
+  animation: aurora 35s ease-in-out infinite alternate;
+}
+@keyframes aurora{0%{transform:translateY(-2%) rotate(-2deg)}100%{transform:translateY(2%) rotate(4deg)}}
+
+/* starfield (canvas behind) */
+canvas.stars{position:fixed; inset:0; z-index:-4}
+
+/* shooting stars layer */
+.shoots{position:fixed; inset:0; z-index:-3; overflow:hidden}
+
+/* subtle film grain */
+.noise{
+  position:fixed; inset:-100px; z-index:-2; opacity:.04; mix-blend-mode:overlay;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+  animation: grain 28s linear infinite;
+}
+@keyframes grain{to{transform:translate3d(-120px,-120px,0)}}
+
+/* =========================
+   NAVBAR (glass + glow)
+   ========================= */
 header.nav{
-  position:sticky; top:0; z-index:20;
-  backdrop-filter: blur(12px);
-  background:linear-gradient(180deg, rgba(10,14,25,.55), rgba(10,14,25,.25) 60%, transparent);
+  position:sticky; top:0; z-index:10;
   border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(8,12,28,.6), rgba(8,12,28,.35) 60%, transparent);
+  backdrop-filter: blur(12px);
 }
-header.nav .bar{height:68px; display:flex; align-items:center; justify-content:space-between}
-.brand{font-weight:900; letter-spacing:.3px; display:flex; gap:6px; align-items:center}
+header .bar{height:70px; display:flex; align-items:center; justify-content:space-between}
+.brand{font-weight:900; letter-spacing:.2px; display:flex; align-items:center; gap:8px}
 .brand .dot{color:var(--accent)}
-nav.menu{display:flex; gap:18px}
-nav.menu a{
-  color:var(--text); text-decoration:none; font-weight:800; opacity:.9;
-  padding:10px 8px; position:relative; transition:opacity .2s ease, transform .2s ease;
+.menu{display:flex; gap:18px; flex-wrap:wrap}
+.menu a{
+  color:var(--text); text-decoration:none; font-weight:800; padding:10px 8px; position:relative;
+  opacity:.85; transition:opacity .2s ease, transform .2s ease;
 }
-nav.menu a:hover{opacity:1; transform:translateY(-1px)}
-nav.menu a::after{
+.menu a:hover{opacity:1; transform:translateY(-1px)}
+.menu a::after{
   content:""; position:absolute; left:50%; bottom:6px; height:2px; width:0;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:all .28s ease; transform:translateX(-50%);
-  box-shadow:0 0 12px var(--ring);
+  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));
+  transform:translateX(-50%); transition:width .25s ease; box-shadow:0 0 12px var(--ring)
 }
-nav.menu a:hover::after, nav.menu a.active::after{width:72%}
+.menu a:hover::after, .menu a.active::after{width:70%}
 
-/* =========================================================
-   HERO + SHIMMER HEADLINE + typewriter
-   ========================================================= */
-.hero{padding:86px 0 28px}
-.hero h1{margin:0 0 10px; font-size:clamp(2.4rem, 6vw, 4.8rem); line-height:1.12; font-weight:900; letter-spacing:.2px}
-.hero h1 .name{
-  background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3),var(--accent));
+/* =========================
+   HERO
+   ========================= */
+.hero{padding:92px 0 12px}
+.hero h1{
+  margin:0 0 10px; font-size:clamp(2.6rem, 6vw, 5rem); line-height:1.08; font-weight:900;
+  letter-spacing:.2px; text-wrap:balance;
+}
+.holo{
+  background: linear-gradient(90deg, #fff, var(--accent), var(--accent2), var(--accent3), #fff);
+  background-size: 240% 100%;
   -webkit-background-clip:text; background-clip:text; color:transparent;
-  background-size:200% 100%; animation:shimmer 6s linear infinite;
-  text-shadow: 0 8px 34px rgba(0,217,255,.18);
+  animation: holo 8s linear infinite;
+  text-shadow: 0 10px 40px rgba(122,226,255,.18);
 }
-@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes holo{to{background-position:240% 50%}}
 .muted{color:var(--muted)}
-.typing{display:inline-block; border-right:2px solid var(--accent); white-space:nowrap; overflow:hidden}
+.typer{display:inline-block; border-right:2px solid var(--accent); white-space:nowrap; overflow:hidden}
 
-/* HERO CTA */
+/* CTA Buttons */
+.actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
 .btn{
-  display:inline-block; border:none; cursor:pointer; user-select:none;
-  padding:14px 26px; border-radius:999px; font-weight:900; letter-spacing:.3px;
-  background:linear-gradient(45deg,var(--accent),var(--accent2)); color:#09101f;
-  box-shadow:0 0 0 0 transparent; transition:transform .15s ease, box-shadow .15s ease, filter .2s ease;
-  position:relative; isolation:isolate;
+  --glow: var(--ring);
+  display:inline-grid; place-items:center; padding:14px 26px; border-radius:999px; font-weight:900; letter-spacing:.3px;
+  text-decoration:none; color:#041023; background: radial-gradient(120px 80px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.9), rgba(255,255,255,0) 60%), linear-gradient(45deg,var(--accent),var(--accent2));
+  border:0; cursor:pointer; box-shadow:0 0 0 0 transparent; position:relative; isolation:isolate;
+  transition: transform .15s ease, box-shadow .15s ease, filter .25s ease;
 }
 .btn::after{
   content:""; position:absolute; inset:-2px; border-radius:inherit; z-index:-1;
-  background:radial-gradient(40px 40px at var(--x,50%) var(--y,50%), rgba(255,255,255,.55), rgba(255,255,255,0));
-  opacity:.0; transition:opacity .15s ease;
+  background: conic-gradient(from var(--d,0deg), rgba(122,226,255,.5), rgba(199,125,255,.4), rgba(77,242,185,.45), rgba(255,255,255,.25), rgba(122,226,255,.5));
+  filter: blur(18px); opacity:.45; transition:opacity .2s ease, transform .2s ease;
 }
-.btn:hover{transform:translateY(-4px) scale(1.06); box-shadow:0 0 28px var(--ring)}
-.btn:hover::after{opacity:.7}
+.btn:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 0 28px var(--glow)}
+.btn:hover::after{opacity:.8; --d:360deg}
 .btn.ghost{background:transparent; color:var(--text); border:1.5px solid var(--border)}
-.btn.ghost:hover{box-shadow:0 0 18px var(--ring); filter:brightness(1.15)}
+.btn.ghost::after{display:none}
 
-/* =========================================================
-   SECTION HEADINGS
-   ========================================================= */
-.section{padding:32px 0}
-.section h2{
-  margin:0 0 16px; font-size:clamp(1.4rem, 3.2vw, 2rem); letter-spacing:.3px;
-  background: linear-gradient(90deg, var(--text), var(--accent), var(--accent2), var(--text));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  background-size:200% 100%; animation:shimmer 6s linear infinite;
-}
-
-/* =========================================================
-   CARDS + 3D Tilt + Neon borders
-   ========================================================= */
+/* =========================
+   CARDS (glass + holo border)
+   ========================= */
 .card{
-  background:linear-gradient(135deg, rgba(0,217,255,.06), rgba(255,0,200,.06));
-  border:1px solid var(--border); border-radius:var(--radius);
-  padding:22px; 
-  box-shadow:0 0 8px rgba(0,217,255,.12);
-  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
-  transform-style:preserve-3d; perspective:900px;
-  position:relative;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px; box-shadow: var(--shadow);
+  position:relative; transform-style:preserve-3d; transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
 .card::before{
-  content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
-  background:conic-gradient(from var(--ang,0deg), rgba(0,217,255,.25), rgba(255,0,200,.15), rgba(255,255,255,.05), rgba(0,217,255,.25));
-  mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude;
-  padding:1px; animation:borderSpin 12s linear infinite;
-  opacity:.45;
+  content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
+  background: conic-gradient(from var(--a,0deg), rgba(122,226,255,.35), rgba(199,125,255,.25), rgba(77,242,185,.25), rgba(255,255,255,.12), rgba(122,226,255,.35));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  animation:borderSpin 18s linear infinite;
 }
-@keyframes borderSpin{to{--ang:360deg}}
-.card:hover{
-  transform: translateY(-3px) scale(1.02) rotateX(1deg);
-  box-shadow:0 10px 28px var(--shadow), 0 0 26px rgba(0,217,255,.25);
+@keyframes borderSpin{to{--a:360deg}}
+.card:hover{transform: translateY(-4px) scale(1.02); filter: brightness(1.06)}
+h2{
+  margin:0 0 16px; font-size:clamp(1.6rem, 3.2vw, 2.2rem);
+  background: linear-gradient(90deg, var(--text), var(--accent), var(--accent2), var(--text));
+  -webkit-background-clip:text; background-clip:text; color:transparent; background-size:220% 100%;
+  animation:holo 8s linear infinite;
 }
 
 /* chips/tags */
 .chip,.tag{
   display:inline-block; padding:6px 12px; border-radius:999px; font-weight:800;
   background:rgba(255,255,255,.06); border:1px solid var(--border);
-  transition:transform .18s ease, box-shadow .18s ease, background .2s ease, letter-spacing .18s ease;
+  transition: transform .18s ease, box-shadow .18s ease, background .2s ease, letter-spacing .18s ease;
 }
 .chip:hover,.tag:hover{transform:translateY(-2px) scale(1.03); box-shadow:0 0 16px var(--ring); background:rgba(255,255,255,.09); letter-spacing:.3px}
 
-/* timeline */
-.timeline{position:relative; padding-left:28px}
-.timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent), var(--accent2))}
-.timeline .t{position:relative; margin:0 0 18px}
-.timeline .t::before{
-  content:""; position:absolute; left:-22px; top:.2em; width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 10px var(--ring)
-}
-
 /* collapsible */
-.collapsible-header { cursor: pointer; display:flex; align-items:center; justify-content:space-between; gap:12px }
-.collapsible-header h3, .collapsible-header h4 { margin:0; flex-grow:1 }
-.toggle-icon{ font-size:1.2rem; line-height:1; transition: transform 0.3s ease; }
-.toggle-icon.rotate{ transform: rotate(90deg) }
-.collapsible-details { max-height: 0; overflow: hidden; transition: max-height 0.45s ease, opacity .45s ease, filter .45s ease; padding-top:0; opacity:0; filter:blur(2px)}
-.collapsible-details.show { max-height: 1000px; padding-top: 10px; opacity:1; filter:blur(0)}
-.collapsible-details p, .collapsible-details ul { color: var(--muted); margin-bottom: 12px }
-.collapsible-details ul { padding-left: 20px; margin: 0 }
-.collapsible-details ul ul { margin-top: 8px }
-.collapsible-details li { margin-bottom: 8px }
-.collapsible-details li ul li { list-style-type: square }
+.collapsible-header{cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px}
+.collapsible-header h3, .collapsible-header h4{margin:0; font-size:1.05rem}
+.toggle{transition:transform .3s ease}
+.toggle.open{transform:rotate(90deg)}
+.details{max-height:0; overflow:hidden; transition:max-height .45s ease, opacity .45s ease, filter .45s ease; opacity:0; filter:blur(2px)}
+.details.show{max-height:1000px; opacity:1; filter:blur(0); margin-top:8px}
+.details p, .details ul{color:var(--muted); margin:0 0 10px}
+.details ul{padding-left:18px}
 
 /* reveal on scroll */
-.reveal{opacity:0; transform:translateY(24px) scale(.98); transition:opacity .9s ease, transform .9s ease, filter .9s ease; filter:blur(4px)}
+.reveal{opacity:0; transform:translateY(26px) scale(.98); filter:blur(4px); transition: opacity .9s ease, transform .9s ease, filter .9s ease}
 .reveal.show{opacity:1; transform:none; filter:none}
 
-/* footer + back to top */
-.footer{padding:40px 0; text-align:center; color:var(--muted)}
-.footer .socials{display:flex; gap:12px; justify-content:center; margin-top:8px}
-.footer .socials a{width:36px; height:36px; display:grid; place-items:center; border-radius:10px;
-  text-decoration:none; color:var(--text); background:rgba(255,255,255,.06); border:1px solid var(--border);
-  transition:transform .18s ease, box-shadow .18s ease}
-.footer .socials a:hover{transform:translateY(-3px) scale(1.06); box-shadow:0 0 14px var(--ring)}
-.top{position:fixed; right:18px; bottom:18px; z-index:25; width:44px; height:44px; display:grid; place-items:center; border-radius:50%; text-decoration:none; color:#0b0f19; font-weight:900; background:linear-gradient(45deg,var(--accent),var(--accent2)); transform:translateY(80px); opacity:0; transition:transform .2s ease, opacity .2s ease; box-shadow:0 0 18px var(--ring)}
+/* footer + top */
+.footer{padding:44px 0; text-align:center; color:var(--muted)}
+.top{
+  position:fixed; right:18px; bottom:18px; width:46px; height:46px; border-radius:50%;
+  display:grid; place-items:center; text-decoration:none; color:#071125; font-weight:900;
+  background:linear-gradient(45deg,var(--accent),var(--accent2),var(--accent3));
+  transform:translateY(80px); opacity:0; transition:transform .25s ease, opacity .25s ease; box-shadow:0 0 18px var(--ring); z-index:20;
+}
 .top.show{transform:translateY(0); opacity:1}
 
-/* Contact links */
-.contact-links{ display:flex; justify-content:space-around; gap:12px; flex-wrap:wrap; margin-top:20px }
-.contact-link-item{ display:flex; flex-direction:column; align-items:center; text-decoration:none; color:var(--text);
-  transition: transform .2s ease, filter .2s ease }
-.contact-link-item:hover{ transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 0 10px var(--ring)) }
-.contact-link-item .icon-box{
-  width:60px; height:60px; display:grid; place-items:center; border-radius:var(--radius);
-  background: rgba(255, 255, 255, .08); margin-bottom:8px; transition: background .2s ease, box-shadow .2s ease;
-  box-shadow: 0 0 8px rgba(0, 217, 255, .1)
-}
-.contact-link-item:hover .icon-box{ background: linear-gradient(45deg, var(--accent), var(--accent2)); box-shadow: 0 10px 28px var(--shadow), 0 0 24px rgba(0, 217, 255, .35) }
-.contact-link-item .icon-box svg{ width:32px; height:32px; fill: var(--accent); transition: fill .2s ease }
-.contact-link-item:hover .icon-box svg{ fill:#0d1226 }
-.contact-link-item span{ font-weight:700; font-size:.92rem }
-
-/* Accessibility */
+/* accessibility */
 @media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{animation:none !important; transition:none !important}
+  *,*::before,*::after{animation:none !important; transition:none !important}
   .reveal{opacity:1 !important; transform:none !important; filter:none !important}
-  .typing{border:none}
+  .typer{border:none}
 }
 </style>
 </head>
 <body id="top">
-<!-- ==================== BACKGROUND LAYERS ==================== -->
-<div class="bg" aria-hidden="true">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="starfield"></div>
-</div>
-<canvas class="constellations" aria-hidden="true"></canvas>
+
+<!-- ======= BACKGROUND ======= -->
+<div class="layer nebula" aria-hidden="true"></div>
+<div class="layer aurora" aria-hidden="true"></div>
+<canvas class="stars" aria-hidden="true"></canvas>
+<div class="layer shoots" aria-hidden="true"></div>
 <div class="noise" aria-hidden="true"></div>
 
-<!-- ==================== NAV ==================== -->
+<!-- ======= NAV ======= -->
 <header class="nav">
   <div class="wrap bar">
-    <div class="brand" aria-label="Brand">
-      <span>Lohitaksha</span><span class="dot">•</span>
-    </div>
-    <nav class="menu" id="menu" aria-label="Primary">
+    <div class="brand">Lohitaksha <span class="dot">•</span></div>
+    <nav class="menu" aria-label="Primary">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
@@ -310,28 +233,27 @@ nav.menu a:hover::after, nav.menu a.active::after{width:72%}
   </div>
 </header>
 
-<!-- ==================== HERO ==================== -->
+<!-- ======= HERO ======= -->
 <section class="hero wrap">
-  <h1>Hey! I'm <span class="name">Lohitaksha Koppada</span></h1>
-  <p class="muted reveal" style="max-width:940px; font-size:1.2rem;">
-    <span class="typing" id="typewriter" aria-live="polite"></span>
+  <h1 class="holo">Hey! I’m Lohitaksha Koppada</h1>
+  <p class="muted reveal" style="max-width:980px; font-size:1.15rem;">
+    <span id="typer" class="typer" aria-live="polite"></span>
   </p>
-  <div class="reveal" style="margin:22px 0 6px">
-    <!-- Place your PDF in the same folder and name it exactly as below (or change href) -->
-    <a class="btn" href="Sita's final cv.pdf" download aria-label="Download CV">⬇️ Download CV</a>
-    <a class="btn ghost" href="#projects" style="margin-left:12px">Explore My Work</a>
+  <div class="actions reveal">
+    <a class="btn" id="cvBtn" href="Sita's final cv.pdf" download>⬇️ Download CV</a>
+    <a class="btn ghost" href="#projects">Explore My Work</a>
   </div>
 </section>
 
-<!-- ==================== ABOUT ==================== -->
+<!-- ======= ABOUT ======= -->
 <section id="about" class="section wrap reveal">
   <h2>About Me</h2>
   <div class="card">
     <p>
-      I’m an Integrated Master’s graduate (Chemical Sciences) from the University of Hyderabad with a cross-disciplinary bend: computational/theoretical chemistry & physics, machine learning, and scientific communication. I love building clear mental models, writing precisely, and turning complex ideas into systems people can actually use.
+      I’m an Integrated Master’s graduate (Chemical Sciences, University of Hyderabad) with a cross-disciplinary bend: computational/theoretical chemistry & physics, machine learning, and scientific communication. I love building clear mental models, writing precisely, and turning complex ideas into systems people actually use.
     </p>
     <p>
-      I founded <strong>FIARD</strong>—a leadership and mindset coaching platform—host the <strong>“Lohitaksha’s Den”</strong> podcast, and I’ve authored books on personal growth and leadership. On the research side, I’ve led a peer-reviewed review article on eicosanoids in Alzheimer’s disease and completed a two-phase Master’s project on screened Coulomb potentials and confined hydrogen atoms (information-theoretic measures, plasma environments).
+      I founded <strong>FIARD</strong>—a leadership and mindset coaching platform—host the <strong>“Lohitaksha’s Den”</strong> podcast, and authored books on personal growth and leadership. On the research side, I led a peer-reviewed review article on eicosanoids in Alzheimer’s disease and completed a two-phase Master’s project on screened Coulomb potentials and confined hydrogen atoms (information-theoretic measures, plasma environments).
     </p>
     <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
       <span class="chip">Computational Modeling</span>
@@ -344,276 +266,180 @@ nav.menu a:hover::after, nav.menu a.active::after{width:72%}
   </div>
 </section>
 
-<!-- ==================== PROJECTS ==================== -->
+<!-- ======= PROJECTS ======= -->
 <section id="projects" class="section wrap reveal">
   <h2>Projects</h2>
   <div class="grid cols-2">
 
-    <!-- Underway -->
     <div>
-      <h3>Underway</h3>
+      <h3 style="margin:0 0 10px">Underway</h3>
 
-      <!-- M.Tech Project -->
       <article class="card">
         <div class="collapsible-header">
           <h3>M.Tech Project — Fe-30Mn-8Al-1C Steel & Hydrogen Embrittlement</h3>
-          <span class="toggle-icon">▶️</span>
+          <span class="toggle">▶</span>
         </div>
-        <div class="collapsible-details">
+        <div class="details">
           <p class="muted">IIT Kanpur (Dec 2025 – Present)</p>
           <ul>
-            <li>Investigating mechanical & microstructural changes of advanced steel under hydrogen exposure.</li>
-            <li>Fracture toughness tests & hydrogen charging to study embrittlement mechanisms.</li>
-            <li>XRF, SEM, TEM for microstructural characterization; computational models for damage evolution.</li>
+            <li>Investigating mechanical & microstructural changes under hydrogen exposure.</li>
+            <li>Fracture toughness tests & hydrogen charging for embrittlement mechanisms.</li>
+            <li>XRF, SEM, TEM; computational models for damage evolution.</li>
             <li>Mitigation strategies for hydrogen energy systems.</li>
           </ul>
-          <div>
-            <span class="tag">Materials Science</span>
-            <span class="tag">Hydrogen Embrittlement</span>
-            <span class="tag">Fracture Mechanics</span>
-            <span class="tag">Computational Modeling</span>
-          </div>
+          <div><span class="tag">Materials</span> <span class="tag">Hydrogen</span> <span class="tag">Fracture</span> <span class="tag">Modeling</span></div>
         </div>
       </article>
 
-      <!-- Book Project -->
       <article class="card">
         <div class="collapsible-header">
-          <h3>Book Project — The Quantum Revolution (2 Volumes)</h3>
-          <span class="toggle-icon">▶️</span>
+          <h3>Book — The Quantum Revolution (2 Volumes)</h3>
+          <span class="toggle">▶</span>
         </div>
-        <div class="collapsible-details">
+        <div class="details">
           <p class="muted">CRC Press — In Press • with Dr. Caio Firme</p>
           <ul>
-            <li>Advanced quantum mechanics for graduates, bridging rigorous math with computation.</li>
+            <li>Advanced quantum mechanics bridging rigorous math with computation.</li>
             <li>Problem-solving strategies, real-world applications, visual explanations.</li>
           </ul>
-          <div>
-            <span class="tag">Quantum Mechanics</span>
-            <span class="tag">Academic Publishing</span>
-            <span class="tag">Scientific Writing</span>
-          </div>
+          <div><span class="tag">Quantum</span> <span class="tag">Publishing</span> <span class="tag">Writing</span></div>
         </div>
       </article>
     </div>
 
-    <!-- Accomplished -->
     <div>
-      <h3>Accomplished</h3>
+      <h3 style="margin:0 0 10px">Accomplished</h3>
 
-      <!-- FIARD Founder -->
       <article class="card">
         <div class="collapsible-header">
           <h3>F.I.A.R.D. — Founder</h3>
-          <span class="toggle-icon">▶️</span>
+          <span class="toggle">▶</span>
         </div>
-        <div class="collapsible-details">
+        <div class="details">
           <p class="muted">July 2022 – Sept 2023</p>
           <ul>
-            <li>Leadership & mindset coaching programs grounded in neuroscience & systems thinking.</li>
+            <li>Leadership & mindset coaching grounded in neuroscience & systems thinking.</li>
             <li>Hosted “Lohitaksha’s Den” featuring leaders & innovators worldwide.</li>
-            <li>Authored two self-development books catalyzing practical transformation.</li>
+            <li>Authored two self-development books.</li>
           </ul>
-          <div>
-            <span class="tag">Entrepreneurship</span>
-            <span class="tag">Coaching</span>
-            <span class="tag">Podcasting</span>
-          </div>
+          <div><span class="tag">Entrepreneurship</span> <span class="tag">Coaching</span> <span class="tag">Podcast</span></div>
         </div>
       </article>
 
-      <!-- Master’s Project Phase II -->
       <article class="card">
         <div class="collapsible-header">
           <h3>Master’s Project (Phase II) — Plasma & Confined Hydrogen Atom</h3>
-          <span class="toggle-icon">▶️</span>
+          <span class="toggle">▶</span>
         </div>
-        <div class="collapsible-details">
+        <div class="details">
           <p class="muted">University of Hyderabad (Dec 2024 – Mar 2025)</p>
           <ul>
             <li>Energy spectra via variational/numerical methods under screening & confinement.</li>
             <li>Shannon entropy, disequilibrium & statistical complexity for quantum states.</li>
-            <li>Applications to nanoscience & high-pressure physics.</li>
           </ul>
-          <div>
-            <span class="tag">Quantum Mechanics</span>
-            <span class="tag">Plasma Physics</span>
-            <span class="tag">Information Theory</span>
-          </div>
+          <div><span class="tag">Quantum</span> <span class="tag">Plasma</span> <span class="tag">Info Theory</span></div>
         </div>
       </article>
 
-      <!-- Master’s Project Phase I -->
       <article class="card">
         <div class="collapsible-header">
           <h3>Master’s Project (Phase I) — Screened Coulomb Potentials</h3>
-          <span class="toggle-icon">▶️</span>
+          <span class="toggle">▶</span>
         </div>
-        <div class="collapsible-details">
+        <div class="details">
           <p class="muted">University of Hyderabad (Aug – Dec 2024)</p>
           <ul>
-            <li>Yukawa & Hulthén potentials for confined systems; effects on energy & reactivity.</li>
-            <li>Set foundations for Phase II computations.</li>
+            <li>Yukawa & Hulthén potentials; effects on energy & reactivity.</li>
           </ul>
-          <div>
-            <span class="tag">Theoretical Physics</span>
-            <span class="tag">Quantum Confinement</span>
-          </div>
+          <div><span class="tag">Theoretical Physics</span> <span class="tag">Confinement</span></div>
         </div>
       </article>
 
-      <!-- Review Article -->
       <article class="card">
         <div class="collapsible-header">
           <h3>Review — Eicosanoid Signaling in Alzheimer’s Disease</h3>
-          <span class="toggle-icon">▶️</span>
+          <span class="toggle">▶</span>
         </div>
-        <div class="collapsible-details">
+        <div class="details">
           <p class="muted">European Journal of Pharmacology • May 2024 • DOI: 10.1016/j.ejphar.2024.176694</p>
-          <ul>
-            <li>Biochemical pathways linking eicosanoids to neuroinflammation; therapeutic perspective.</li>
-            <li>Interdisciplinary synthesis with rigorous standards through publication.</li>
-          </ul>
-          <div>
-            <span class="tag">Neuroinflammation</span>
-            <span class="tag">Biochemistry</span>
-            <span class="tag">Scientific Writing</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Summer Project -->
-      <article class="card">
-        <div class="collapsible-header">
-          <h3>Summer Project — Eicosanoids & Bio-signaling</h3>
-          <span class="toggle-icon">▶️</span>
-        </div>
-        <div class="collapsible-details">
-          <p class="muted">University of Hyderabad (Apr – Aug 2021)</p>
-          <ul>
-            <li>Lipid mediator pathways influencing inflammation & immunity; links to neurodegeneration.</li>
-          </ul>
-          <div>
-            <span class="tag">Neuroscience</span>
-            <span class="tag">Molecular Biology</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Internship -->
-      <article class="card">
-        <div class="collapsible-header">
-          <h3>Summer Internship — Bio-signaling Pathways</h3>
-          <span class="toggle-icon">▶️</span>
-        </div>
-        <div class="collapsible-details">
-          <p class="muted">Kakatiya University (May – Jul 2022)</p>
-          <ul>
-            <li>Cellular communication, signal transduction, and implications in disease.</li>
-          </ul>
-          <div>
-            <span class="tag">Immunology</span>
-            <span class="tag">Signal Transduction</span>
-          </div>
+          <ul><li>Interdisciplinary synthesis linking eicosanoids to neuroinflammation; therapeutic perspectives.</li></ul>
+          <div><span class="tag">Neuro</span> <span class="tag">Biochemistry</span> <span class="tag">Writing</span></div>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ==================== SKILLS ==================== -->
+<!-- ======= SKILLS ======= -->
 <section id="skills" class="section wrap reveal">
   <h2>Skills</h2>
   <div class="grid cols-2">
-
-    <!-- Python & Data Science -->
     <article class="card">
       <div class="collapsible-header">
-        <h3>Python Programming & Data Science</h3>
-        <span class="toggle-icon">▶️</span>
+        <h3>Python Programming & Data Science</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <ul>
-          <li><strong>Core:</strong> Python syntax, data structures, clean code.</li>
+          <li><strong>Core:</strong> Python, data structures, clean code.</li>
           <li><strong>Data:</strong> NumPy, Pandas; preprocessing & wrangling.</li>
-          <li><strong>Viz:</strong> Matplotlib; analytical plotting.</li>
-          <li><strong>ML Foundations:</strong> algorithms, workflows, pipelines.</li>
-          <li><strong>Models:</strong> Linear/Logistic/Polynomial/Non-linear regression; k-NN, SVM, Naive Bayes, Decision Trees.</li>
-          <li><strong>DL:</strong> TensorFlow, Keras (CNNs, RNNs, optimization).</li>
+          <li><strong>Viz:</strong> Matplotlib; analytical plots.</li>
+          <li><strong>ML:</strong> workflows, pipelines, metrics.</li>
+          <li><strong>DL:</strong> TensorFlow, Keras (CNNs, RNNs).</li>
         </ul>
-        <div>
-          <span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Pandas</span>
-          <span class="tag">Matplotlib</span><span class="tag">scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">Keras</span>
-        </div>
+        <div><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">Keras</span></div>
       </div>
     </article>
 
-    <!-- Applied ML & AI -->
     <article class="card">
       <div class="collapsible-header">
-        <h3>Applied Machine Learning & AI</h3>
-        <span class="toggle-icon">▶️</span>
+        <h3>Applied Machine Learning & AI</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <ul>
           <li><strong>Supervised:</strong> regression, classification, ensembles (RF, AdaBoost, XGBoost).</li>
           <li><strong>Unsupervised:</strong> K-Means, K-Medoids, DBSCAN, hierarchical.</li>
-          <li><strong>Optimization:</strong> cross-validation, Grid/RandomizedSearch.</li>
-          <li><strong>Metrics:</strong> RMSE, R², Precision, Recall, F1, ROC-AUC.</li>
+          <li><strong>Optimization:</strong> CV, Grid/RandomizedSearch.</li>
+          <li><strong>Metrics:</strong> RMSE, R², Precision/Recall, F1, ROC-AUC.</li>
           <li><strong>Recsys:</strong> content-based & collaborative filtering.</li>
         </ul>
-        <div>
-          <span class="tag">Clustering</span><span class="tag">SVM</span><span class="tag">Ensembles</span>
-          <span class="tag">Model Eval</span><span class="tag">Recommenders</span>
-        </div>
+        <div><span class="tag">Clustering</span><span class="tag">SVM</span><span class="tag">Ensembles</span><span class="tag">Recommenders</span></div>
       </div>
     </article>
 
-    <!-- Leadership -->
     <article class="card">
       <div class="collapsible-header">
-        <h3>Leadership & Project Management</h3>
-        <span class="toggle-icon">▶️</span>
+        <h3>Leadership & Project Management</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
-        <ul>
-          <li>Led cross-disciplinary author team to Elsevier publication.</li>
-          <li>Timeline management, delegation, scientific rigor.</li>
-        </ul>
-        <div>
-          <span class="tag">Leadership</span><span class="tag">Teamwork</span><span class="tag">Publishing</span>
-        </div>
+      <div class="details">
+        <ul><li>Led cross-disciplinary author team to Elsevier publication; timelines, delegation, rigor.</li></ul>
+        <div><span class="tag">Leadership</span><span class="tag">Teamwork</span><span class="tag">Publishing</span></div>
       </div>
     </article>
 
-    <!-- Communication -->
     <article class="card">
       <div class="collapsible-header">
-        <h3>Presentation & Scientific Communication</h3>
-        <span class="toggle-icon">▶️</span>
+        <h3>Presentation & Scientific Communication</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <ul>
           <li>Talks to global experts; therapeutic strategy proposals.</li>
           <li>Modified Langevin equation for electrophoretic effects.</li>
         </ul>
-        <div>
-          <span class="tag">Public Speaking</span><span class="tag">Theory</span><span class="tag">Science Comms</span>
-        </div>
+        <div><span class="tag">Speaking</span><span class="tag">Theory</span><span class="tag">Science Comms</span></div>
       </div>
     </article>
   </div>
 </section>
 
-<!-- ==================== ACHIEVEMENTS ==================== -->
+<!-- ======= ACHIEVEMENTS ======= -->
 <section id="achievements" class="section wrap reveal">
   <h2>Achievements</h2>
   <div class="grid cols-2">
     <article class="card">
       <div class="collapsible-header">
-        <h3>Publications & Books</h3><span class="toggle-icon">▶️</span>
+        <h3>Publications & Books</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <ul>
           <li><strong>Master’s Research Thesis — Published:</strong> Energy spectra + information-theoretic measures (Shannon entropy, disequilibrium, statistical complexity) for confined systems.</li>
           <li><strong>Lead Review (Elsevier, May 2024):</strong> Eicosanoid signaling in neuroinflammation (DOI: 10.1016/j.ejphar.2024.176694).</li>
@@ -625,9 +451,9 @@ nav.menu a:hover::after, nav.menu a.active::after{width:72%}
     </article>
     <article class="card">
       <div class="collapsible-header">
-        <h3>Academic Highlights</h3><span class="toggle-icon">▶️</span>
+        <h3>Academic Highlights</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <ul>
           <li>IMSc (UoH) — 1st rank holder in Years 4 & 5; 2nd overall among combined Master’s & IMSc in Year 5.</li>
           <li>GATE 2025 — AIR 727.</li>
@@ -639,32 +465,30 @@ nav.menu a:hover::after, nav.menu a.active::after{width:72%}
   </div>
 </section>
 
-<!-- ==================== CERTIFICATIONS ==================== -->
+<!-- ======= CERTIFICATIONS ======= -->
 <section id="certifications" class="section wrap reveal">
   <h2>Certifications</h2>
   <div class="grid cols-2">
-
     <article class="card">
       <div class="collapsible-header">
-        <h3>Machine Learning with Python</h3><span class="toggle-icon">▶️</span>
+        <h3>Machine Learning with Python</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <p class="muted">IBM Developer Skills Network • Cognitive Class • 6 May 2025</p>
         <ul>
           <li>Hands-on ML, Python, NumPy, Pandas, Matplotlib.</li>
           <li>Supervised: Linear/Logistic, KNN, Trees, SVM.</li>
           <li>Unsupervised: K-Means, Hierarchical, DBSCAN.</li>
           <li>Metrics: MSE, RMSE, R², Precision/Recall/F1, ROC-AUC.</li>
-          <li>Recommenders; cross-validation; capstone pipeline.</li>
         </ul>
       </div>
     </article>
 
     <article class="card">
       <div class="collapsible-header">
-        <h3>Supervised Machine Learning</h3><span class="toggle-icon">▶️</span>
+        <h3>Supervised Machine Learning</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <p class="muted">Scaler • 20 May 2025</p>
         <ul>
           <li>Regularized regression, feature engineering, interpretability.</li>
@@ -676,9 +500,9 @@ nav.menu a:hover::after, nav.menu a.active::after{width:72%}
 
     <article class="card">
       <div class="collapsible-header">
-        <h3>Unsupervised Machine Learning</h3><span class="toggle-icon">▶️</span>
+        <h3>Unsupervised Machine Learning</h3><span class="toggle">▶</span>
       </div>
-      <div class="collapsible-details">
+      <div class="details">
         <p class="muted">Scaler • 15 May 2025</p>
         <ul>
           <li>K-Means (+K-Means++), K-Medoids; DBSCAN (Eps/MinPts).</li>
@@ -687,262 +511,244 @@ nav.menu a:hover::after, nav.menu a.active::after{width:72%}
         </ul>
       </div>
     </article>
-
   </div>
 </section>
 
-<!-- ==================== EDUCATION ==================== -->
+<!-- ======= EDUCATION ======= -->
 <section id="education" class="section wrap reveal">
   <h2>Education</h2>
-  <div class="timeline">
-    <div class="t card">
-      <h3>Integrated Master’s (IMSc) in Chemical Sciences — University of Hyderabad</h3>
-      <p class="muted">Top of class in Years 4 & 5 • Research focus: screened Coulomb potentials, confined atoms, information-theoretic measures.</p>
-    </div>
+  <div class="card">
+    <h3>Integrated Master’s (IMSc) in Chemical Sciences — University of Hyderabad</h3>
+    <p class="muted">Top of class in Years 4 & 5 • Research focus: screened Coulomb potentials, confined atoms, information-theoretic measures.</p>
   </div>
 </section>
 
-<!-- ==================== CONTACT ==================== -->
+<!-- ======= CONTACT ======= -->
 <section id="contact" class="section wrap reveal">
   <h2>Contact</h2>
-  <div class="card">
-    <div class="grid cols-3">
-      <div>
-        <h3>Get in touch</h3>
-        <p class="muted">I’m open to research collaborations, ML projects, and writing/speaking invites.</p>
-        <div class="contact-links">
-          <a class="contact-link-item" href="mailto:lohitaksha.koppada123@gmail.com" target="_blank" rel="noreferrer">
-            <span class="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5z"/></svg>
-            </span><span>Email</span>
-          </a>
-          <a class="contact-link-item" href="mailto:sitarama.lohitaksha@gmail.com" target="_blank" rel="noreferrer">
-            <span class="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5z"/></svg>
-            </span><span>Alternate Email</span>
-          </a>
-          <a class="contact-link-item" href="tel:+919989927436">
-            <span class="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.1-.2 1.2.4 2.5.7 3.8.7.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3.5 3 2.9 3.4 2.5 4 2.5H7c.6 0 1 .4 1 1 0 1.3.2 2.6.7 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>
-            </span><span>Call</span>
-          </a>
-        </div>
+  <div class="grid cols-3">
+    <div class="card">
+      <h3>Get in touch</h3>
+      <p class="muted">Open to research collaborations, ML projects, and writing/speaking invites.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="chip" href="mailto:lohitaksha.koppada123@gmail.com">Email</a>
+        <a class="chip" href="mailto:sitarama.lohitaksha@gmail.com">Alt Email</a>
+        <a class="chip" href="tel:+919989927436">Call</a>
       </div>
-      <div>
-        <h3>Profiles</h3>
-        <p class="muted">Find my work, updates, and projects here:</p>
-        <div class="contact-links">
-          <a class="contact-link-item" href="https://lohitakshakoppada.wixsite.com/lohitakshaden" target="_blank" rel="noreferrer">
-            <span class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 3l9.5 7.1-3.6 10.9H6.1L2.5 10.1 12 3z"/></svg></span><span>Website</span>
-          </a>
-          <a class="contact-link-item" href="https://lohitakshakoppada.wixsite.com/lohitaksha-fiard" target="_blank" rel="noreferrer">
-            <span class="icon-box"><svg viewBox="0 0 24 24"><path d="M12 3l9.5 7.1-3.6 10.9H6.1L2.5 10.1 12 3z"/></svg></span><span>FIARD</span>
-          </a>
-          <a class="contact-link-item" href="https://www.linkedin.com" target="_blank" rel="noreferrer">
-            <span class="icon-box"><svg viewBox="0 0 24 24"><path d="M6.94 6.94A1.94 1.94 0 1 1 3.06 6.94 1.94 1.94 0 0 1 6.94 6.94zM4 8.88h3.88V20H4zM10.06 8.88H14v1.53h.06c.55-1.04 1.88-2.13 3.88-2.13 4.15 0 4.91 2.73 4.91 6.29V20h-3.88v-4.95c0-1.18-.02-2.71-1.65-2.71-1.65 0-1.9 1.29-1.9 2.62V20H10.06z"/></svg></span><span>LinkedIn</span>
-          </a>
-        </div>
+    </div>
+    <div class="card">
+      <h3>Profiles</h3>
+      <p class="muted">Find my work, updates, and projects here:</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="chip" href="https://lohitakshakoppada.wixsite.com/lohitakshaden" target="_blank" rel="noreferrer">Website</a>
+        <a class="chip" href="https://lohitakshakoppada.wixsite.com/lohitaksha-fiard" target="_blank" rel="noreferrer">FIARD</a>
+        <a class="chip" href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
       </div>
-      <div>
-        <h3>Quick Info</h3>
-        <ul class="muted">
-          <li><strong>Email:</strong> lohitaksha.koppada123@gmail.com</li>
-          <li><strong>Alt:</strong> sitarama.lohitaksha@gmail.com</li>
-          <li><strong>Phone:</strong> +91 99899 27436</li>
-          <li><strong>Location:</strong> India</li>
-        </ul>
-      </div>
+    </div>
+    <div class="card">
+      <h3>Quick Info</h3>
+      <ul class="muted" style="padding-left:18px; margin:0">
+        <li><strong>Email:</strong> lohitaksha.koppada123@gmail.com</li>
+        <li><strong>Alt:</strong> sitarama.lohitaksha@gmail.com</li>
+        <li><strong>Phone:</strong> +91 99899 27436</li>
+        <li><strong>Location:</strong> India</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
 <footer class="footer">
-  <div class="wrap">
-    <div>© <span id="year"></span> Lohitaksha Koppada. Crafted with stardust ✨</div>
-    <div class="socials">
-      <a href="#top" class="chip">Back to top</a>
-    </div>
-  </div>
+  <div class="wrap">© <span id="year"></span> Lohitaksha Koppada — Crafted with stardust ✨</div>
 </footer>
-
 <a href="#top" class="top" id="toTop" aria-label="Back to top">↑</a>
 
-<!-- ==================== SCRIPTS ==================== -->
+<!-- ======= SCRIPTS ======= -->
 <script>
-/* ============ Helper: pointer glow on buttons ============ */
-document.querySelectorAll('.btn').forEach(btn=>{
-  btn.addEventListener('pointermove', e=>{
-    const rect = btn.getBoundingClientRect();
-    btn.style.setProperty('--x', (e.clientX-rect.left)+'px');
-    btn.style.setProperty('--y', (e.clientY-rect.top)+'px');
-  });
-});
+/* ---------------------------
+   Utility: clamp & throttle
+----------------------------*/
+const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+const throttle=(fn,wait=16)=>{let t=0;return (...a)=>{const n=Date.now();if(n-t>=wait){t=n;fn(...a)}}};
 
-/* ============ Collapsibles ============ */
-document.querySelectorAll('.collapsible-header').forEach(h=>{
-  h.addEventListener('click', ()=>{
-    const d = h.nextElementSibling;
-    const ic = h.querySelector('.toggle-icon');
-    d.classList.toggle('show');
-    ic.classList.toggle('rotate');
-  });
-});
+/* ---------------------------
+   Active nav & back-to-top
+----------------------------*/
+const links=[...document.querySelectorAll('.menu a')];
+const sections=[...document.querySelectorAll('section[id]')];
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll', throttle(()=>{
+  const y=scrollY+120;
+  let current=sections[0]?.id;
+  for(const s of sections){ if(y>=s.offsetTop) current = s.id; }
+  links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+current));
+  toTop.classList.toggle('show', scrollY>360);
+}, 100));
 
-/* ============ Reveal on Scroll ============ */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{
-    if(en.isIntersecting){
-      en.target.classList.add('show');
-      io.unobserve(en.target);
-    }
-  });
-},{threshold:.12});
+/* ---------------------------
+   Reveal on scroll
+----------------------------*/
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ============ Back-to-top visibility ============ */
-const toTop = document.getElementById('toTop');
-window.addEventListener('scroll', ()=>{
-  if(window.scrollY>300){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
+/* ---------------------------
+   Collapsibles
+----------------------------*/
+document.querySelectorAll('.collapsible-header').forEach(h=>{
+  const d=h.nextElementSibling, t=h.querySelector('.toggle');
+  h.addEventListener('click', ()=>{
+    const open=d.classList.toggle('show');
+    d.style.maxHeight=open? d.scrollHeight+'px' : 0;
+    t.classList.toggle('open', open);
+  });
 });
 
-/* ============ Typewriter headline ============ */
-const lines = [
+/* ---------------------------
+   Typer
+----------------------------*/
+const lines=[
   "Integrated Master's (Chemical Sciences) — University of Hyderabad",
   "Computational Chemistry • Theoretical/Quantum Modeling",
-  "Machine Learning with Python — NumPy • Pandas • scikit-learn • TensorFlow",
-  "Published Review: Eicosanoid Signaling in Alzheimer’s Disease (Elsevier, 2024)",
+  "Machine Learning: NumPy • Pandas • scikit-learn • TensorFlow",
+  "Lead Review: Eicosanoid Signaling in Alzheimer’s (Elsevier, 2024)",
   "Books: It’s Your Life (2025) • Brainwaves of the Bold (2025)"
 ];
-let li=0, ci=0, dir=1;
-const tw = document.getElementById('typewriter');
-function tick(){
-  const target = lines[li];
-  ci += dir;
-  tw.textContent = target.slice(0, ci);
-  tw.style.borderRightColor = ci%2 ? 'transparent' : getComputedStyle(document.documentElement).getPropertyValue('--accent');
-  if(ci === target.length){ dir = -1; setTimeout(tick, 1200); return; }
-  if(ci === 0){ dir = 1; li = (li+1)%lines.length; }
-  setTimeout(tick, dir>0 ? 22 : 12);
-}
-tick();
+let li=0, ci=0, dir=1, hold=0;
+const typer=document.getElementById('typer');
+(function typeLoop(){
+  const s=lines[li];
+  if(dir>0 && ci<=s.length){ typer.textContent=s.slice(0,ci++); }
+  else if(dir<0 && ci>=0){ typer.textContent=s.slice(0,ci--); }
+  if(ci===s.length){ if(++hold>25){ dir=-1; hold=0; } }
+  if(ci===0 && dir<0){ dir=1; li=(li+1)%lines.length; }
+  setTimeout(typeLoop, dir>0?22:12);
+})();
 
-/* ============ Card tilt (3D) ============ */
-document.querySelectorAll('.card').forEach(card=>{
-  let rAF = null;
-  function onMove(e){
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width * 2 - 1;
-    const y = (e.clientY - rect.top) / rect.height * 2 - 1;
-    cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{
-      card.style.transform = `rotateX(${-y*4}deg) rotateY(${x*4}deg) translateY(-3px)`;
-    });
-  }
-  function reset(){ card.style.transform = ''; }
-  card.addEventListener('pointermove', onMove);
-  card.addEventListener('pointerleave', reset);
+/* ---------------------------
+   Magnetic buttons (glow)
+----------------------------*/
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('pointermove', e=>{
+    const r=btn.getBoundingClientRect();
+    btn.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    btn.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
 });
 
-/* ============ Year ============ */
-document.getElementById('year').textContent = new Date().getFullYear();
+/* ---------------------------
+   Card tilt (3D)
+----------------------------*/
+document.querySelectorAll('.card').forEach(card=>{
+  let raf=null;
+  card.addEventListener('pointermove', e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width*2-1;
+    const y=(e.clientY-r.top)/r.height*2-1;
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(()=>{
+      card.style.transform=`rotateX(${-y*5}deg) rotateY(${x*6}deg) translateY(-2px)`;
+    });
+  });
+  card.addEventListener('pointerleave', ()=>{card.style.transform='';});
+});
 
-/* ============ Canvas Constellations (particles + linking) ============ */
+/* ---------------------------
+   Year + CV filename nicety
+----------------------------*/
+document.getElementById('year').textContent=new Date().getFullYear();
+const cv=document.getElementById('cvBtn'); if(cv) cv.setAttribute('download','Sita_final_CV.pdf');
+
+/* ---------------------------
+   STARFIELD (Canvas)
+----------------------------*/
 (function(){
-  const canvas = document.querySelector('canvas.constellations');
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr, particles, mouse = {x:0, y:0, active:false};
-  const MAX = 120;            // number of stars
-  const LINK_DIST = 140;      // px to connect stars
-  const MOUSE_PULL = 0.12;    // attraction to mouse
-  const SPEED = 0.25;
-
+  const canvas=document.querySelector('canvas.stars'), ctx=canvas.getContext('2d');
+  let DPR=1, W=innerWidth, H=innerHeight, N=180, stars=[], mouse={x:W/2,y:H/2,active:false};
   function resize(){
-    dpr = Math.min(2, window.devicePixelRatio || 1);
-    w = canvas.width = innerWidth * dpr;
-    h = canvas.height = innerHeight * dpr;
-    canvas.style.width = innerWidth + 'px';
-    canvas.style.height = innerHeight + 'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(!particles){ spawn(); }
-  }
-
-  function spawn(){
-    particles = new Array(MAX).fill(0).map(()=>({
-      x: Math.random()*innerWidth,
-      y: Math.random()*innerHeight,
-      vx: (Math.random()*2-1)*SPEED,
-      vy: (Math.random()*2-1)*SPEED,
-      r: Math.random()*1.4+0.3,
-      tw: Math.random()*Math.PI*2
+    DPR=Math.min(2, devicePixelRatio||1);
+    W=canvas.width=innerWidth*DPR; H=canvas.height=innerHeight*DPR;
+    canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    stars=[...Array(N)].map(()=>({
+      x:Math.random()*innerWidth, y:Math.random()*innerHeight,
+      vx:(Math.random()*2-1)*.15, vy:(Math.random()*2-1)*.15,
+      r:Math.random()*1.4+.4, t:Math.random()*Math.PI*2
     }));
   }
-
-  function step(){
+  function draw(){
     ctx.clearRect(0,0,innerWidth,innerHeight);
     ctx.globalCompositeOperation='lighter';
-    // move & draw points
-    for(const p of particles){
-      // mouse gravitation
+    for(const s of stars){
+      s.x+=s.vx; s.y+=s.vy; s.t+=.02;
+      if(s.x<-10)s.x=innerWidth+10; if(s.x>innerWidth+10)s.x=-10;
+      if(s.y<-10)s.y=innerHeight+10; if(s.y>innerHeight+10)s.y=-10;
+      // gentle parallax toward mouse
       if(mouse.active){
-        const dx = p.x - mouse.x, dy = p.y - mouse.y;
-        const dist2 = dx*dx + dy*dy + 0.001;
-        p.vx -= (dx/Math.sqrt(dist2))*MOUSE_PULL*0.02;
-        p.vy -= (dy/Math.sqrt(dist2))*MOUSE_PULL*0.02;
+        s.x += (mouse.x - s.x)*0.0005;
+        s.y += (mouse.y - s.y)*0.0005;
       }
-      p.x += p.vx; p.y += p.vy;
-      if(p.x<-10) p.x = innerWidth+10; if(p.x>innerWidth+10) p.x=-10;
-      if(p.y<-10) p.y = innerHeight+10; if(p.y>innerHeight+10) p.y=-10;
-
-      // star
+      const p=(Math.sin(s.t)+1)/2;
       ctx.beginPath();
-      const pulse = (Math.sin(p.tw+=0.02)+1)/2;
-      ctx.fillStyle = `rgba(255,255,255,${0.4+0.6*pulse})`;
-      ctx.arc(p.x, p.y, p.r + pulse*0.8, 0, Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${0.35+0.65*p})`;
+      ctx.arc(s.x, s.y, s.r + p*.6, 0, Math.PI*2);
       ctx.fill();
     }
-
-    // links
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const a = particles[i], b = particles[j];
-        const dx=a.x-b.x, dy=a.y-b.y; const dist = Math.hypot(dx,dy);
-        if(dist<LINK_DIST){
-          const alpha = 1 - dist/LINK_DIST;
-          ctx.strokeStyle = `rgba(0,217,255,${alpha*0.35})`;
-          ctx.lineWidth = 1;
+    // constellation links
+    for(let i=0;i<stars.length;i++){
+      for(let j=i+1;j<stars.length;j++){
+        const a=stars[i], b=stars[j];
+        const dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
+        if(dist<120){
+          const alpha=1-dist/120;
+          ctx.strokeStyle=`rgba(122,226,255,${alpha*.35})`;
+          ctx.lineWidth=1;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
     }
-    requestAnimationFrame(step);
+    requestAnimationFrame(draw);
   }
-
-  window.addEventListener('resize', resize);
-  window.addEventListener('pointermove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; });
-  window.addEventListener('pointerenter', ()=>mouse.active=true);
-  window.addEventListener('pointerleave', ()=>mouse.active=false);
-
-  resize(); step();
+  resize(); draw();
+  addEventListener('resize', resize);
+  addEventListener('pointermove', e=>{mouse.x=e.clientX; mouse.y=e.clientY});
+  addEventListener('pointerenter', ()=>mouse.active=true);
+  addEventListener('pointerleave', ()=>mouse.active=false);
 })();
 
-/* ============ Fancy cursor sparkles (lightweight) ============ */
+/* ---------------------------
+   SHOOTING STARS (DOM)
+----------------------------*/
 (function(){
-  const trail = [];
-  window.addEventListener('pointermove', e=>{
-    const s = document.createElement('span');
-    const size = 6 + Math.random()*6;
-    s.style.cssText = `
-      position:fixed; width:${size}px; height:${size}px; left:${e.clientX-size/2}px; top:${e.clientY-size/2}px;
-      background: radial-gradient(circle, rgba(255,255,255,.9), rgba(0,217,255,.2));
-      border-radius:50%; pointer-events:none; mix-blend-mode:screen; filter:blur(.5px);
-      transition: transform .6s ease, opacity .6s ease; transform:translateY(-6px) scale(.9); opacity:1; z-index:9999;`;
-    document.body.appendChild(s);
-    requestAnimationFrame(()=>{ s.style.transform='translateY(-16px) scale(0)'; s.style.opacity='0'; });
-    setTimeout(()=>s.remove(), 650);
-    trail.push(s); if(trail.length>40){ const x=trail.shift(); if(x) x.remove(); }
-  }, {passive:true});
+  const host=document.querySelector('.shoots');
+  function spawn(){
+    const el=document.createElement('div');
+    const y = Math.random()*innerHeight*0.7 + 30;
+    const x = -100 - Math.random()*200;
+    const dx = innerWidth + 300;
+    const dur= 1400 + Math.random()*1200;
+
+    el.style.cssText = `
+      position:absolute; top:${y}px; left:${x}px; width:2px; height:2px; border-radius:50%;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.95), 0 0 10px 3px rgba(122,226,255,.7), 0 0 22px 10px rgba(199,125,255,.45);
+      transform: translate3d(0,0,0) rotate(-18deg); opacity:0;`;
+    const tail=document.createElement('span');
+    tail.style.cssText=`
+      position:absolute; left:-240px; top:50%; transform:translateY(-50%); height:2px; width:240px;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9));
+      filter: drop-shadow(0 0 8px rgba(122,226,255,.6));`;
+    el.appendChild(tail);
+    host.appendChild(el);
+
+    // animate
+    el.animate([
+      {opacity:0, transform:`translate3d(0,0,0) rotate(-18deg)`},
+      {opacity:1, offset:.08},
+      {opacity:0, transform:`translate3d(${dx}px, -260px, 0) rotate(-18deg)`}
+    ], {duration:dur, easing:'cubic-bezier(.22,.61,.36,1)'});
+    setTimeout(()=>el.remove(), dur+40);
+  }
+  setInterval(()=>{ const n=Math.random()<.25?2:1; for(let i=0;i<n;i++) setTimeout(spawn,i*180); }, 1600);
 })();
+
 </script>
 </body>
 </html>
